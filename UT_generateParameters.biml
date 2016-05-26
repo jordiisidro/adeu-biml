@@ -1,0 +1,63 @@
+ <Projects>
+    <PackageProject Name="PRJ_GENERIC_BIML">
+      <Parameters>
+     	<Parameter Name="<#= _sa_cs_name #>" DataType="String"><#= _sa_cs_name #></Parameter>
+	  <!-- definir totes les connection strings segons el tipus -->
+	<#  
+		DataTable _sourcesC = new DataTable();
+		SqlDataAdapter _sourcesC_da = new SqlDataAdapter(_sources_sql, _config_con_string);
+		_sourcesC_da.Fill(_sourcesC);  
+     	foreach(DataRow _table in _sourcesC.Rows) {    
+			string _tName = _table["source_type_name"]+"";
+			string _dbSources_sql = "select connectionString from biml.source_database ";
+			if ( _tName=="SQL Server database" ){ 
+				_dbSources_sql = "select connectionString, '' as sufix from biml.source_database where source_id="+_table["source_id"];
+			}
+			if ( _tName=="Excel sheet" ){ 
+				_dbSources_sql = "select 'Provider='+provider_name+';Data Source='+ file_connection_string+';Extended Properties=&quot;'+ version_provider+'&quot;;' as connectionString, '' as sufix from biml.source_excel where source_id="+_table["source_id"];
+			}
+			if ( _tName=="Flat file" ){ 
+				_dbSources_sql = "select f.path as connectionString, '_Path' as sufix from biml.source_flatFile f  where source_id="+_table["source_id"] +
+				" union select f.name as connectionString, '_File' as sufix from biml.source_flatFile f  where source_id="+_table["source_id"];
+			}
+			DataTable _dbsources = new DataTable();
+			SqlDataAdapter _dbsources_da = new SqlDataAdapter(_dbSources_sql, _config_con_string);
+			_dbsources_da.Fill(_dbsources); 
+			foreach(DataRow _dbtable in _dbsources.Rows) {   
+			#>   
+				<Parameter Name="<#= _table["source_name"] #><#=  _dbtable["sufix"]  #>" DataType="String"><#=  _dbtable["connectionString"]  #></Parameter>
+		<# }   #>
+			
+	<# }   #>
+	  
+	  </Parameters>
+		<Packages>
+			<# 
+			DataTable _sourcesSub = new DataTable();
+			SqlDataAdapter _sourcesSub_da = new SqlDataAdapter(_sources_sql, _config_con_string);
+			_sourcesSub_da.Fill(_sourcesSub);  
+			foreach(DataRow _table in _sourcesSub.Rows) {       
+				string _tName = _table["source_type_name"].ToString();
+				string _sourceId = _table["source_id"].ToString();
+				string _bdcx = _table["source_name"].ToString();
+			#>
+				<!-- Genrate SPKG -->
+				<Package PackageName="SPKG_<#=_packageName#>_<#= _table["source_id"] #>_<#= _table["source_name"] #>"></Package>
+						
+				<!-- Genrate SPKG TBL-->
+				<# if (_packageName =="LoadData") { #> 
+					<# if ( _tName=="SQL Server database" ){ 	#>	
+						  <#@ include file="UT_generateParametersDatabase.biml" #> 
+					<# } #>
+					<# if ( _tName=="Excel sheet" ){ 	#>	
+						  <#@ include file="UT_generateParametersExcelSheet.biml" #>  
+					<# } #>
+					<# if ( _tName=="Flat file" ){ 	#>	
+						  <#@ include file="UT_generateParametersFlatFile.biml" #>  
+					<# } #>
+				 <# } #>	
+		
+		<# }   #>
+		</Packages>
+    </PackageProject>
+  </Projects>

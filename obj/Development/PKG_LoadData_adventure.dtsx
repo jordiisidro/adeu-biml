@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:10 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{76AD81D1-133F-4E65-B56C-FFE9FBE37887}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="PKG_LoadData_adventure"
+  DTS:VersionGUID="{97700C0D-2F48-4A45-882D-B64C13DE14EA}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\EP_LoadData_1_OLEDB_AdventureWorks2014"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{99A7FEE6-9F00-4EBB-B20A-69E2CCD942E9}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EP_LoadData_1_OLEDB_AdventureWorks2014"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>SPKG_LoadData_1_OLEDB_AdventureWorks2014.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EP_LoadData_3_EXCEL_budget2"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{1A4FE64E-5014-42F0-ABEC-D491F236F09D}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EP_LoadData_3_EXCEL_budget2"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>SPKG_LoadData_3_EXCEL_budget2.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EP_LoadData_4_FF_company1_CSV"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{AF7000B3-65EB-44D0-B563-376FD4753E3B}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EP_LoadData_4_FF_company1_CSV"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>SPKG_LoadData_4_FF_company1_CSV.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EP_LoadData_5_OLEDB_Test"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{5F63585B-757A-4630-A685-EF6A26764BD9}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EP_LoadData_5_OLEDB_Test"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>SPKG_LoadData_5_OLEDB_Test.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+</DTS:Executable>

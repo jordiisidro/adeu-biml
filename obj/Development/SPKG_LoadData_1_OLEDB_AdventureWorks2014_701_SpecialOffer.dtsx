@@ -1,0 +1,752 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{26B5B267-DF80-4D8E-8491-3445B91C35A2}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_701_SpecialOffer"
+  DTS:VersionGUID="{1858B177-78D5-4C58-8CF7-A3EDBB5D6E1A}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9AD5F3ED-DCE0-4722-82B3-415927D13CC1}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4D283600-0096-4B55-A57E-DC37A8433C80}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{84F293A2-7103-47CB-BD2B-43E03E6A94CB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DBC57BAF-47C0-462A-BECC-FCACD474EB7F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9DBD6A90-A968-498F-91C9-187FEFD7BFE6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Sales_SpecialOffer"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{B8663A7D-F38A-4F0C-A171-82C015FA900D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Sales_SpecialOffer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Sales_SpecialOffer\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Sales_SpecialOffer\CNT rows.Inputs[SRC_Sales_SpecialOffer_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Sales_SpecialOffer_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_SpecialOffer\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Sales_SpecialOffer\CNT rows.Inputs[SRC_Sales_SpecialOffer_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Sales_SpecialOffer"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Sales_SpecialOffer</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Sales_SpecialOffer">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[SpecialOfferID]"
+                      cachedDataType="i4"
+                      cachedName="SpecialOfferID"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[SpecialOfferID]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[SpecialOfferID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[Description]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Description"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[Description]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[DiscountPct]"
+                      cachedDataType="cy"
+                      cachedName="DiscountPct"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[DiscountPct]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[DiscountPct]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[Type]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Type"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[Type]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[Type]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[Category]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Category"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[Category]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[Category]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[StartDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StartDate"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[StartDate]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[StartDate]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[EndDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EndDate"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[EndDate]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[EndDate]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[MinQty]"
+                      cachedDataType="i4"
+                      cachedName="MinQty"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[MinQty]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[MinQty]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[MaxQty]"
+                      cachedDataType="i4"
+                      cachedName="MaxQty"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[MaxQty]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[MaxQty]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[rowguid]"
+                      cachedDataType="guid"
+                      cachedName="rowguid"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[rowguid]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[SpecialOfferID]"
+                      dataType="i4"
+                      name="SpecialOfferID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[DiscountPct]"
+                      dataType="cy"
+                      name="DiscountPct" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[Type]"
+                      dataType="wstr"
+                      length="50"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="50"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[StartDate]"
+                      dataType="dbTimeStamp"
+                      name="StartDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[EndDate]"
+                      dataType="dbTimeStamp"
+                      name="EndDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[MinQty]"
+                      dataType="i4"
+                      name="MinQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[MaxQty]"
+                      dataType="i4"
+                      name="MaxQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Sales_SpecialOffer"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[SpecialOfferID]
+, [Description]
+, [DiscountPct]
+, [Type]
+, [Category]
+, [StartDate]
+, [EndDate]
+, [MinQty]
+, [MaxQty]
+, [rowguid]
+, [ModifiedDate]
+					from [Sales].[SpecialOffer]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[SpecialOfferID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[SpecialOfferID]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[SpecialOfferID]"
+                      name="SpecialOfferID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[Description]"
+                      length="255"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[DiscountPct]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[DiscountPct]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[DiscountPct]"
+                      name="DiscountPct"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[Type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[Type]"
+                      length="50"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[Type]"
+                      name="Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[Category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[Category]"
+                      length="50"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[Category]"
+                      name="Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[StartDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[StartDate]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[StartDate]"
+                      name="StartDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[EndDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[EndDate]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[EndDate]"
+                      name="EndDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[MinQty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[MinQty]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[MinQty]"
+                      name="MinQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[MaxQty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[MaxQty]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[MaxQty]"
+                      name="MaxQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[rowguid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[rowguid]"
+                      name="rowguid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[SpecialOfferID]"
+                      dataType="i4"
+                      name="SpecialOfferID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[DiscountPct]"
+                      dataType="cy"
+                      name="DiscountPct" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[Type]"
+                      dataType="wstr"
+                      length="50"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="50"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[StartDate]"
+                      dataType="dbTimeStamp"
+                      name="StartDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[EndDate]"
+                      dataType="dbTimeStamp"
+                      name="EndDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[MinQty]"
+                      dataType="i4"
+                      name="MinQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[MaxQty]"
+                      dataType="i4"
+                      name="MaxQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[SpecialOfferID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[SpecialOfferID]"
+                      name="SpecialOfferID" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[Description]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[DiscountPct]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[DiscountPct]"
+                      name="DiscountPct" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[Type]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[Type]"
+                      name="Type" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[Category]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[Category]"
+                      name="Category" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[StartDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[StartDate]"
+                      name="StartDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[EndDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[EndDate]"
+                      name="EndDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[MinQty]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[MinQty]"
+                      name="MinQty" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[MaxQty]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[MaxQty]"
+                      name="MaxQty" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[rowguid]"
+                      dataType="guid"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[rowguid]"
+                      name="rowguid" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Sales_SpecialOffer.Paths[CNT rows_Output_DST_Sales_SpecialOffer]"
+              endId="Package\DF_Load Sales_SpecialOffer\DST_Sales_SpecialOffer.Inputs[CNT rows_Output_DST_Sales_SpecialOffer]"
+              name="CNT rows_Output_DST_Sales_SpecialOffer"
+              startId="Package\DF_Load Sales_SpecialOffer\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Sales_SpecialOffer.Paths[SRC_Sales_SpecialOffer_Output_CNT rows]"
+              endId="Package\DF_Load Sales_SpecialOffer\CNT rows.Inputs[SRC_Sales_SpecialOffer_Output_CNT rows]"
+              name="SRC_Sales_SpecialOffer_Output_CNT rows"
+              startId="Package\DF_Load Sales_SpecialOffer\SRC_Sales_SpecialOffer.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{22DA2E20-E6AE-40F9-87A0-01436F20E172}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4D283600-0096-4B55-A57E-DC37A8433C80}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{055C74CD-CC6E-4E81-84DB-56C05CEB8B10}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4D283600-0096-4B55-A57E-DC37A8433C80}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Sales_SpecialOffer', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Sales_SpecialOffer"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{A1F56135-D792-4148-BDDC-98A5282BA7A7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Sales_SpecialOffer"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4D283600-0096-4B55-A57E-DC37A8433C80}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Sales_SpecialOffer&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Sales_SpecialOffer_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{165F916B-486E-4C8A-9EE2-CA3EF8D4B043}"
+      DTS:From="Package\DF_Load Sales_SpecialOffer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Sales_SpecialOffer_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Sales_SpecialOffer]"
+      DTS:CreationName=""
+      DTS:DTSID="{D533680D-C569-4CD9-BFA6-0FF8426496B2}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Sales_SpecialOffer"
+      DTS:To="Package\ET_truncate_Sales_SpecialOffer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Sales_SpecialOffer_To_DF_Load Sales_SpecialOffer]"
+      DTS:CreationName=""
+      DTS:DTSID="{466C4A6C-6BF3-43BE-8458-82924B2F821A}"
+      DTS:From="Package\ET_truncate_Sales_SpecialOffer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Sales_SpecialOffer_To_DF_Load Sales_SpecialOffer"
+      DTS:To="Package\DF_Load Sales_SpecialOffer" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

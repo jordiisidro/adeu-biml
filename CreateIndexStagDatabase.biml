@@ -1,0 +1,52 @@
+<Tasks>
+	
+	<# string _ix_sql = "select ix.index_name, ix.database_table_index_id, t.table_name, t.schema_name, d.short_name"+
+		" from biml.source_database_table t "+
+		" join biml.source_detail de on t.database_table_id=de.source_detail_id "+
+		" join biml.source d on t.database_id=d.source_id "+
+		" join biml.project p on d.project_id=p.project_id  "+
+		" join biml.source_type st on st.id_source_type=d.source_type"+
+		" join biml.source_database_table_index ix on ix.database_table_id=t.database_table_id "+
+		" where is_unique='UNIQUE' "+
+		"  and index_type='CLUSTERED' "+
+		" and de.extract_type is not null "+
+		" and de.extract_type is not null and project_name='"+_project+"'"+
+		" and d.source_name='"+_bdcx+"'";
+
+	DataTable _sourcesIX = new DataTable();
+	SqlDataAdapter _sourcesIX_da = new SqlDataAdapter(_ix_sql, _config_con_string);
+	_sourcesIX_da.Fill(_sourcesIX);
+
+	foreach(DataRow _tableIX in _sourcesIX.Rows) {    #>
+	<ExecuteSQL Name="create_pk_index_<#= _tableIX["schema_name"] #>_<#= _tableIX["table_name"] #>" ConnectionName="<#= _sa_cs_name #>">
+		<DirectInput>
+			create unique clustered index pk_ix_<#= _tableIX["short_name"] #>_<#= _tableIX["schema_name"] #>_<#= _tableIX["table_name"] #> on
+			<#= _tableIX["short_name"] #>.<#= _tableIX["schema_name"] #>_<#= _tableIX["table_name"] #> (
+			
+			 <#
+                             
+                            string _col_name_sql = "select column_name "+
+							"from biml.source_database_table_index_column ic "+
+							"join biml.source_column c on ic.column_id=c.source_column_id "+
+							"where database_table_index_id="+_tableIX["database_table_index_id"]+
+							" order by column_ordinal";
+
+                            DataTable _col_names = new DataTable();
+                            SqlDataAdapter _col_names_da = new SqlDataAdapter(_col_name_sql, _config_con_string);
+                            _col_names_da.Fill(_col_names);
+ 
+                            for (int _i=0; _i<_col_names.Rows.Count ; _i++  )
+                            {
+                                DataRow _r = _col_names.Rows[_i];
+                                if (_i == 0)
+                                    WriteLine("["+ _r["COLUMN_NAME"].ToString() + "]");
+        						else
+                                    WriteLine(", [" + _r["COLUMN_NAME"].ToString()+ "]");                                
+                            }
+                        #>
+			)
+		</DirectInput>
+
+	</ExecuteSQL>
+		<# } #>
+</Tasks>

@@ -1,0 +1,23 @@
+<#@ code file="UT_SQLServer_datatype.cs" #>
+	
+<!-- Aconseguir el project name -->
+<#@ include file="UT_getProject.biml" #>
+<!-- name of package -->
+<# string _packageName = "CreateIndexStag"; #>
+
+	<!-- Connection Strings -->	
+<#@ include file="UT_connections.biml" #>
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<!-- connections -->
+	<#@ include file="UT_generateConnections.biml" #>
+	<!-- Parameters & packages -->	
+	<#@ include file="UT_generateParameters.biml" #>
+	
+		<Packages>
+		<!-- generate package with subpackages -->
+		<#@ include file="UT_generatePackages.biml" #>	
+		<!-- Implementació dels subpackages-->
+		<#@ include file="UT_generateSubPackages.biml" #>		
+	</Packages>
+</Biml>

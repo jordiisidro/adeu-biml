@@ -1,0 +1,493 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:03 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{2BE60601-483E-409D-8B3D-5F19441C9DFB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_656_Department"
+  DTS:VersionGUID="{FFAC8FA3-4737-4044-BD08-CD01BBD48C19}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DA98BBC4-8821-400F-8FCB-29BD2CD76C93}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{811F71FC-5A6C-4F9F-B5C6-3469EBB961D4}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{06373553-0140-49BE-9FD3-FD574DF83762}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load HumanResources_Department"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{9F5ADE59-0278-4E8B-A450-725A55B732FB}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load HumanResources_Department"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load HumanResources_Department\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load HumanResources_Department\CNT rows.Inputs[SRC_HumanResources_Department_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_HumanResources_Department_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load HumanResources_Department\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load HumanResources_Department\CNT rows.Inputs[SRC_HumanResources_Department_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_HumanResources_Department"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.HumanResources_Department</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_HumanResources_Department">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].Columns[DepartmentID]"
+                      cachedDataType="i2"
+                      cachedName="DepartmentID"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].ExternalColumns[DepartmentID]"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[DepartmentID]" />
+                    <inputColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].ExternalColumns[Name]"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].Columns[GroupName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="GroupName"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].ExternalColumns[GroupName]"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[GroupName]" />
+                    <inputColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].ExternalColumns[DepartmentID]"
+                      dataType="i2"
+                      name="DepartmentID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].ExternalColumns[GroupName]"
+                      dataType="wstr"
+                      length="50"
+                      name="GroupName" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_HumanResources_Department"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[DepartmentID]
+, [Name]
+, [GroupName]
+, [ModifiedDate]
+					from [HumanResources].[Department]
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[DepartmentID]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].ExternalColumns[DepartmentID]"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[DepartmentID]"
+                      name="DepartmentID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].ExternalColumns[Name]"
+                      length="50"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[GroupName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].ExternalColumns[GroupName]"
+                      length="50"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[GroupName]"
+                      name="GroupName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].ExternalColumns[DepartmentID]"
+                      dataType="i2"
+                      name="DepartmentID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].ExternalColumns[GroupName]"
+                      dataType="wstr"
+                      length="50"
+                      name="GroupName" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[DepartmentID]"
+                      dataType="i2"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[DepartmentID]"
+                      name="DepartmentID" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[GroupName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[GroupName]"
+                      name="GroupName" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load HumanResources_Department.Paths[CNT rows_Output_DST_HumanResources_Department]"
+              endId="Package\DF_Load HumanResources_Department\DST_HumanResources_Department.Inputs[CNT rows_Output_DST_HumanResources_Department]"
+              name="CNT rows_Output_DST_HumanResources_Department"
+              startId="Package\DF_Load HumanResources_Department\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load HumanResources_Department.Paths[SRC_HumanResources_Department_Output_CNT rows]"
+              endId="Package\DF_Load HumanResources_Department\CNT rows.Inputs[SRC_HumanResources_Department_Output_CNT rows]"
+              name="SRC_HumanResources_Department_Output_CNT rows"
+              startId="Package\DF_Load HumanResources_Department\SRC_HumanResources_Department.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{021DE0C7-E10F-4946-A78E-D5A3345E2213}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{811F71FC-5A6C-4F9F-B5C6-3469EBB961D4}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'HumanResources_Department', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_HumanResources_Department"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{48489F40-C796-4D1E-BD78-193C5FAFB3D6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_HumanResources_Department"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{811F71FC-5A6C-4F9F-B5C6-3469EBB961D4}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.HumanResources_Department&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load HumanResources_Department_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{00836075-B8B3-4649-B375-E4C9735D5E42}"
+      DTS:From="Package\DF_Load HumanResources_Department"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load HumanResources_Department_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_HumanResources_Department_To_DF_Load HumanResources_Department]"
+      DTS:CreationName=""
+      DTS:DTSID="{1474ADFB-2811-422C-91B5-9495738989EC}"
+      DTS:From="Package\ET_truncate_HumanResources_Department"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_HumanResources_Department_To_DF_Load HumanResources_Department"
+      DTS:To="Package\DF_Load HumanResources_Department" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

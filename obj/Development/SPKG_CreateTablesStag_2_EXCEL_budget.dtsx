@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/6/2016 11:51:51 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{966314C8-0155-4066-B128-04D23F655845}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_CreateTablesStag_2_EXCEL_budget"
+  DTS:VersionGUID="{D8FAB5CC-ADD0-40A6-8933-258647727826}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C63AB408-23F0-4661-A6EE-250A77DFCA1B}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\create_EXCEL_budget_Budget"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{47CF432C-6151-4996-8F30-251124261BDE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_EXCEL_budget_Budget"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C63AB408-23F0-4661-A6EE-250A77DFCA1B}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='bu')&#xA;   exec sp_executesql N'create schema bu'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='bu'&#xA;   and table_name='EXCEL_budget_Budget')&#xA;    create table bu.EXCEL_budget_Budget(&#xA;    &#xA;    [year] float(53)&#xA;, [budget] nvarchar(255)&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+</DTS:Executable>

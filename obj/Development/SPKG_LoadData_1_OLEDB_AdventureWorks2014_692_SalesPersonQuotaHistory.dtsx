@@ -1,0 +1,563 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:06 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{DB5B2685-0063-4563-9EA8-701263835DF3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_692_SalesPersonQuotaHistory"
+  DTS:VersionGUID="{C0856782-2229-45ED-9471-489576740515}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{74E13DCB-C710-4963-905F-7BBA917A3D7A}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F6EE97D4-C1F1-4713-9733-A864C7802610}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{59FEA170-E8EC-44BF-976B-2F7186BC6304}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{353ABC52-759C-4F64-8C68-6634FD364FBB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{26880295-29D6-444C-B08B-6519729C89E9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Sales_SalesPersonQuotaHistory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{662D6D3B-BD42-4ED6-B9E4-96A5CF361DFE}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Sales_SalesPersonQuotaHistory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Sales_SalesPersonQuotaHistory\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Sales_SalesPersonQuotaHistory\CNT rows.Inputs[SRC_Sales_SalesPersonQuotaHistory_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Sales_SalesPersonQuotaHistory_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_SalesPersonQuotaHistory\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Sales_SalesPersonQuotaHistory\CNT rows.Inputs[SRC_Sales_SalesPersonQuotaHistory_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Sales_SalesPersonQuotaHistory"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Sales_SalesPersonQuotaHistory</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Sales_SalesPersonQuotaHistory">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].Columns[BusinessEntityID]"
+                      cachedDataType="i4"
+                      cachedName="BusinessEntityID"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[BusinessEntityID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].Columns[QuotaDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="QuotaDate"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[QuotaDate]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[QuotaDate]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].Columns[SalesQuota]"
+                      cachedDataType="cy"
+                      cachedName="SalesQuota"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[SalesQuota]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[SalesQuota]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].Columns[rowguid]"
+                      cachedDataType="guid"
+                      cachedName="rowguid"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[rowguid]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[QuotaDate]"
+                      dataType="dbTimeStamp"
+                      name="QuotaDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[SalesQuota]"
+                      dataType="cy"
+                      name="SalesQuota" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Sales_SalesPersonQuotaHistory"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[BusinessEntityID]
+, [QuotaDate]
+, [SalesQuota]
+, [rowguid]
+, [ModifiedDate]
+					from [Sales].[SalesPersonQuotaHistory]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[BusinessEntityID]"
+                      name="BusinessEntityID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[QuotaDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[QuotaDate]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[QuotaDate]"
+                      name="QuotaDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[SalesQuota]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[SalesQuota]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[SalesQuota]"
+                      name="SalesQuota"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[rowguid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[rowguid]"
+                      name="rowguid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[QuotaDate]"
+                      dataType="dbTimeStamp"
+                      name="QuotaDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[SalesQuota]"
+                      dataType="cy"
+                      name="SalesQuota" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[BusinessEntityID]"
+                      name="BusinessEntityID" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[QuotaDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[QuotaDate]"
+                      name="QuotaDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[SalesQuota]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[SalesQuota]"
+                      name="SalesQuota" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[rowguid]"
+                      dataType="guid"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[rowguid]"
+                      name="rowguid" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Sales_SalesPersonQuotaHistory.Paths[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory]"
+              endId="Package\DF_Load Sales_SalesPersonQuotaHistory\DST_Sales_SalesPersonQuotaHistory.Inputs[CNT rows_Output_DST_Sales_SalesPersonQuotaHistory]"
+              name="CNT rows_Output_DST_Sales_SalesPersonQuotaHistory"
+              startId="Package\DF_Load Sales_SalesPersonQuotaHistory\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Sales_SalesPersonQuotaHistory.Paths[SRC_Sales_SalesPersonQuotaHistory_Output_CNT rows]"
+              endId="Package\DF_Load Sales_SalesPersonQuotaHistory\CNT rows.Inputs[SRC_Sales_SalesPersonQuotaHistory_Output_CNT rows]"
+              name="SRC_Sales_SalesPersonQuotaHistory_Output_CNT rows"
+              startId="Package\DF_Load Sales_SalesPersonQuotaHistory\SRC_Sales_SalesPersonQuotaHistory.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{D66E7BB7-4384-48A7-811A-475271966C5D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F6EE97D4-C1F1-4713-9733-A864C7802610}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{09D843B6-72D3-4C32-9920-D2AC819D23DC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F6EE97D4-C1F1-4713-9733-A864C7802610}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Sales_SalesPersonQuotaHistory', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Sales_SalesPersonQuotaHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C3E45B7F-29F5-4A29-97D5-DC59C60BFE85}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Sales_SalesPersonQuotaHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F6EE97D4-C1F1-4713-9733-A864C7802610}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Sales_SalesPersonQuotaHistory&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Sales_SalesPersonQuotaHistory_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{44F2E291-AF69-4D61-8388-097B1727881D}"
+      DTS:From="Package\DF_Load Sales_SalesPersonQuotaHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Sales_SalesPersonQuotaHistory_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Sales_SalesPersonQuotaHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{BA2B9428-3DE5-45E6-B28A-CBBB3F82F0B6}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Sales_SalesPersonQuotaHistory"
+      DTS:To="Package\ET_truncate_Sales_SalesPersonQuotaHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Sales_SalesPersonQuotaHistory_To_DF_Load Sales_SalesPersonQuotaHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{D61190C3-7A30-4671-9CAA-1500046C2D49}"
+      DTS:From="Package\ET_truncate_Sales_SalesPersonQuotaHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Sales_SalesPersonQuotaHistory_To_DF_Load Sales_SalesPersonQuotaHistory"
+      DTS:To="Package\DF_Load Sales_SalesPersonQuotaHistory" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

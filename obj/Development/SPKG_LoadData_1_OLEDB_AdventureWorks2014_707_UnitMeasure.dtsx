@@ -1,0 +1,515 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{8DC4198C-948F-49C7-A2F4-84E4A53066C6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_707_UnitMeasure"
+  DTS:VersionGUID="{5FA3D329-115A-464A-9A5C-05E46A0631F5}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9DC94739-D57F-4449-AF13-B55F238C15A1}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{ED43B474-7269-4293-A43E-DA27F1935135}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AC9ABB08-30D2-4550-94F5-64D362FAE33B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8CCF6212-F9F8-4CFB-9958-C9519A658313}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EE1A3687-4835-4E3B-A02E-9E39C5446C91}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Production_UnitMeasure"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{75E6E926-8A64-4870-A7DA-6297178D728D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Production_UnitMeasure"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Production_UnitMeasure\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Production_UnitMeasure\CNT rows.Inputs[SRC_Production_UnitMeasure_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Production_UnitMeasure_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Production_UnitMeasure\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Production_UnitMeasure\CNT rows.Inputs[SRC_Production_UnitMeasure_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Production_UnitMeasure"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Production_UnitMeasure</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Production_UnitMeasure">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].Columns[UnitMeasureCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="UnitMeasureCode"
+                      externalMetadataColumnId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].ExternalColumns[UnitMeasureCode]"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].Columns[UnitMeasureCode]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].ExternalColumns[Name]"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].ExternalColumns[UnitMeasureCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="UnitMeasureCode" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Production_UnitMeasure"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[UnitMeasureCode]
+, [Name]
+, [ModifiedDate]
+					from [Production].[UnitMeasure]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].Columns[UnitMeasureCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].ExternalColumns[UnitMeasureCode]"
+                      length="3"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].Columns[UnitMeasureCode]"
+                      name="UnitMeasureCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].ExternalColumns[Name]"
+                      length="50"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].ExternalColumns[UnitMeasureCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="UnitMeasureCode" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[UnitMeasureCode]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[UnitMeasureCode]"
+                      name="UnitMeasureCode" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Production_UnitMeasure.Paths[CNT rows_Output_DST_Production_UnitMeasure]"
+              endId="Package\DF_Load Production_UnitMeasure\DST_Production_UnitMeasure.Inputs[CNT rows_Output_DST_Production_UnitMeasure]"
+              name="CNT rows_Output_DST_Production_UnitMeasure"
+              startId="Package\DF_Load Production_UnitMeasure\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Production_UnitMeasure.Paths[SRC_Production_UnitMeasure_Output_CNT rows]"
+              endId="Package\DF_Load Production_UnitMeasure\CNT rows.Inputs[SRC_Production_UnitMeasure_Output_CNT rows]"
+              name="SRC_Production_UnitMeasure_Output_CNT rows"
+              startId="Package\DF_Load Production_UnitMeasure\SRC_Production_UnitMeasure.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{DAA8F90B-E4E0-47BA-B9B3-22F1BF861E2C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ED43B474-7269-4293-A43E-DA27F1935135}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{AE4ABE7B-D1C8-4B41-8B52-7BEE0B878539}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ED43B474-7269-4293-A43E-DA27F1935135}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Production_UnitMeasure', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Production_UnitMeasure"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{BDBBE38F-CE81-4CA4-B1ED-2DC4FB9AEA59}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Production_UnitMeasure"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ED43B474-7269-4293-A43E-DA27F1935135}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Production_UnitMeasure&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Production_UnitMeasure_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{19594CB9-E8FA-4AD0-9962-884E4E24710B}"
+      DTS:From="Package\DF_Load Production_UnitMeasure"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Production_UnitMeasure_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Production_UnitMeasure]"
+      DTS:CreationName=""
+      DTS:DTSID="{073DB783-F699-494D-9C88-554A84B7822F}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Production_UnitMeasure"
+      DTS:To="Package\ET_truncate_Production_UnitMeasure" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Production_UnitMeasure_To_DF_Load Production_UnitMeasure]"
+      DTS:CreationName=""
+      DTS:DTSID="{2C8FF499-2DBC-4EF7-A448-F4B89B234C18}"
+      DTS:From="Package\ET_truncate_Production_UnitMeasure"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Production_UnitMeasure_To_DF_Load Production_UnitMeasure"
+      DTS:To="Package\DF_Load Production_UnitMeasure" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

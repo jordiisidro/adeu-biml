@@ -1,0 +1,5 @@
+<# if (_param) { #>
+	<Expressions>
+		<Expression ExternalProperty="ConnectionString">@[$Project::<#= _table["source_name"] #>]</Expression>
+	</Expressions> 
+<# } #>

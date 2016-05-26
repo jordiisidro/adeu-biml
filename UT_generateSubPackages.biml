@@ -1,0 +1,56 @@
+<#
+
+DataTable _sourcesSubP = new DataTable();
+SqlDataAdapter _sourcesSubP_da = new SqlDataAdapter(_sources_sql, _config_con_string);
+_sourcesSubP_da.Fill(_sourcesSubP);  
+foreach(DataRow _table in _sourcesSubP.Rows) {    #>   
+	<!-- Genrate SPKG -->
+	<Package Name="SPKG_<#=_packageName#>_<#= _table["source_id"] #>_<#= _table["source_name"] #>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+		
+           
+       
+		<# string _tName = _table["source_type_name"].ToString();
+		string _sourceId = _table["source_id"].ToString();
+		string _bdcx = _table["source_name"].ToString();
+			
+	if ( _tName=="SQL Server database" ){ 
+#>	
+			<# if (_packageName =="GenerateMetadata"){ #>  <#@ include file="GenerateMetadataDatabase.biml" #> <# } #>
+			<# if (_packageName =="DropTablesStag") { #>   <#@ include file="DropTablesStagDatabase.biml" #>   <# } #>
+			<# if (_packageName =="CreateTablesStag") { #>   <#@ include file="CreateTablesStagDatabase.biml" #>   <# } #>
+		    <# if (_packageName =="CreateIndexStag") { #>   <#@ include file="CreateIndexStagDatabase.biml" #>   <# } #>
+			<# if (_packageName =="LoadData") { #>   <#@ include file="LoadDataDatabase.biml" #>   <# } #>	
+	<# } #>
+		
+	<# if ( _tName=="Excel sheet" ){ 
+	#>	
+			<# if (_packageName =="GenerateMetadata"){ #>  <#@ include file="GenerateMetadataExcelSheet.biml" #> <# } #>
+			<# if (_packageName =="CreateTablesStag") { #>   <#@ include file="CreateTablesStagExcelSheet.biml" #>   <# } #>
+			<# if (_packageName =="DropTablesStag") { #>   <#@ include file="DropTablesStagExcelSheet.biml" #>   <# } #>
+			<# if (_packageName =="LoadData") { #>   <#@ include file="LoadDataExcelSheet.biml" #>   <# } #>	
+				
+	<# } #>
+
+	<# if ( _tName=="Flat file" ){ 
+	#>	
+			<# if (_packageName =="GenerateMetadata"){ #>  <#@ include file="GenerateMetadataFlatFile.biml" #> <# } #>
+			<# if (_packageName =="CreateTablesStag") { #>   <#@ include file="CreateTablesStagFlatFile.biml" #>   <# } #>
+			<# if (_packageName =="DropTablesStag") { #>   <#@ include file="DropTablesStagFlatFile.biml" #>   <# } #>
+			<# if (_packageName =="LoadData") { #>   <#@ include file="LoadDataFlatFile.biml" #>   <# } #>	
+	<# } #>
+	
+	</Package>
+	
+	<# if (_packageName =="LoadData") { #> 
+		<#	if ( _tName=="SQL Server database" ){ #>	
+				  <#@ include file="LoadDataDatabaseTables.biml" #>  	
+		<# } #>
+		<#	if ( _tName=="Excel sheet" ){ #>	
+			 <#@ include file="LoadDataExcelSheetTables.biml" #>  
+		<# } #>
+		<#	if ( _tName=="Flat file" ){ #>	
+			 <#@ include file="LoadDataFlatFiles.biml" #>  
+		<# } #>
+	 <# } #>
+	
+<# }   #>	

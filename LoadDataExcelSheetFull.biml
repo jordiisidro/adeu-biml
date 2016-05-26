@@ -1,0 +1,56 @@
+ <Variables>
+    <Variable DataType="Int32" Name="RowCountSource">0</Variable>
+</Variables>
+<Tasks>
+	<ExecuteSQL Name="ET_truncate_<#= _tableTD["sheet_name"]#>" ConnectionName="<#= _sa_cs_name #>">
+		<DirectInput>
+			truncate table <#= _tableTD["short_name"]#>.<#= _tableTD["sheet_name"]#>
+		</DirectInput>
+	</ExecuteSQL>
+	
+	<Dataflow Name="DF_Load <#= _tableTD["sheet_name"]#>">
+		<Transformations>
+			<ExcelSource Name="SRC_<#= _tableTD["sheet_name"]#>" ConnectionName="<#= _bdcx #>">
+				<DirectInput>
+					select 
+						<#
+                           
+                     string _col_name_sql = "select sc.column_name " +
+					"from biml.source_column sc " +
+					" where sc.source_detail_id="+_tableTD["excel_table_id"];
+
+					DataTable _col_names = new DataTable();
+					SqlDataAdapter _col_names_da = new SqlDataAdapter(_col_name_sql, _config_con_string);
+					_col_names_da.Fill(_col_names);
+
+					for (int _i=0; _i<_col_names.Rows.Count ; _i++  )
+                    {
+                        DataRow _r = _col_names.Rows[_i];
+                        if (_i == 0)
+                            WriteLine("["+_r["column_name"].ToString()+"]");
+                        else
+                            WriteLine(", [" +_r["column_name"].ToString()+"]");                                
+                    }
+                            
+                   #>
+					from [<#= _tableTD["sheet_name"] #>$]
+				</DirectInput>
+			</ExcelSource>
+			<RowCount VariableName="User.RowCountSource" Name="CNT rows">
+				 <InputPath OutputPathName="SRC_<#= _tableTD["sheet_name"]#>.Output" />
+			</RowCount>
+			<OleDbDestination Name="DST_<#= _tableTD["sheet_name"]#>" ConnectionName="<#= _sa_cs_name #>">
+				<ExternalTableOutput Table="<#= _tableTD["short_name"]#>.<#= _tableTD["sheet_name"]#>" />
+			</OleDbDestination>
+
+		</Transformations>
+	</Dataflow>
+	<ExecuteSQL Name="ET_ins_log" ConnectionName="<#= _sa_cs_name #>">
+		<DirectInput>
+			insert into log.load_data values ( '<#= _tableTD["short_name"]#>', '<#= _tableTD["sheet_name"]#>', getdate(), ?)
+		</DirectInput>
+		<Parameters>
+            <Parameter Name="0" VariableName="User.RowCountSource" DataType="Int32" />
+		</Parameters>
+	</ExecuteSQL>
+</Tasks>

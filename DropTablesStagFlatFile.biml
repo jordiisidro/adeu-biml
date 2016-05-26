@@ -1,0 +1,25 @@
+<Tasks>
+	<#  string _table_sql = "select d.source_name, d.source_id, d.short_name, sd.source_detail_id "+
+		"from biml.project p join biml.source d on p.project_id=d.project_id "+
+		"join biml.source_type st on st.id_source_type=d.source_type "+
+		" join biml.source_detail sd on sd.source_id=d.source_id "+
+		" where sd.extract_type is not null and project_name='"+_project+"' "+
+		" and d.source_name='"+_bdcx+"'";
+
+	DataTable _sourcesTD = new DataTable();
+	SqlDataAdapter _sourcesTD_da = new SqlDataAdapter(_table_sql, _config_con_string);
+	_sourcesTD_da.Fill(_sourcesTD);
+
+	foreach(DataRow _tableTD in _sourcesTD.Rows) {    #>
+
+	<ExecuteSQL Name="drop_<#= _tableTD["source_name"] #>" ConnectionName="<#= _sa_cs_name #>">
+	<DirectInput>
+	if  exists (select  table_name 
+		from INFORMATION_SCHEMA.TABLES
+		where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='<#= _tableTD["short_name"] #>'
+			and table_name='<#= _tableTD["source_name"] #>')
+				drop table <#= _tableTD["short_name"] #>.<#= _tableTD["source_name"] #>
+		</DirectInput>
+	</ExecuteSQL>
+	<# } #>
+</Tasks>

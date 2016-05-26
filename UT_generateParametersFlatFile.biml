@@ -1,0 +1,16 @@
+<# string _table_sql = "select  d.source_name, de.source_detail_id, d.source_id, d.short_name "+
+		"from biml.source_detail de "+
+		"join biml.source d on de.source_id=d.source_id  "+
+		"join biml.project p on d.project_id=p.project_id  "+
+		"join biml.source_type st on st.id_source_type=d.source_type "+
+		"where de.extract_type is not null and project_name='"+_project+"' "+
+		" and d.source_name='"+_bdcx+"'";
+	DataTable _sourcesTD = new DataTable();
+	SqlDataAdapter _sourcesTD_da = new SqlDataAdapter(_table_sql, _config_con_string);
+	_sourcesTD_da.Fill(_sourcesTD);
+
+	foreach(DataRow _tableTD in _sourcesTD.Rows) {    #>
+		<Package PackageName="SPKG_<#=_packageName#>_<#= _tableTD["source_id"] #>_<#= _tableTD["source_name"]#>_sub">
+		</Package>
+	<# } #>
+	

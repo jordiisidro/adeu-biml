@@ -1,0 +1,742 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:06 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{D5D7FC5F-9B8F-4AC7-9BA4-C320EF38000F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_685_ProductVendor"
+  DTS:VersionGUID="{C215CB40-EE8C-4199-87B6-CDF7C660AF1F}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{95571D54-8AA3-46AD-830B-40514A79F01C}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4B4ED0CE-708B-4325-BD0E-6757CD3FAED1}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A3B75C48-C197-46D5-893F-A0FF0B486CB8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7E9213B3-812E-43D8-8C1C-57E4346EC7A4}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BAAB3700-FA81-48AF-91BC-0E547620295B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Purchasing_ProductVendor"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{70901D48-DD45-431A-B108-78BD156A4AA7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Purchasing_ProductVendor"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Purchasing_ProductVendor\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Purchasing_ProductVendor\CNT rows.Inputs[SRC_Purchasing_ProductVendor_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Purchasing_ProductVendor_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Purchasing_ProductVendor\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Purchasing_ProductVendor\CNT rows.Inputs[SRC_Purchasing_ProductVendor_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Purchasing_ProductVendor"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Purchasing_ProductVendor</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Purchasing_ProductVendor">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[ProductID]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[BusinessEntityID]"
+                      cachedDataType="i4"
+                      cachedName="BusinessEntityID"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[BusinessEntityID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[AverageLeadTime]"
+                      cachedDataType="i4"
+                      cachedName="AverageLeadTime"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[AverageLeadTime]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[AverageLeadTime]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[StandardPrice]"
+                      cachedDataType="cy"
+                      cachedName="StandardPrice"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[StandardPrice]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[StandardPrice]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[LastReceiptCost]"
+                      cachedDataType="cy"
+                      cachedName="LastReceiptCost"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[LastReceiptCost]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[LastReceiptCost]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[LastReceiptDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LastReceiptDate"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[LastReceiptDate]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[LastReceiptDate]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[MinOrderQty]"
+                      cachedDataType="i4"
+                      cachedName="MinOrderQty"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[MinOrderQty]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[MinOrderQty]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[MaxOrderQty]"
+                      cachedDataType="i4"
+                      cachedName="MaxOrderQty"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[MaxOrderQty]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[MaxOrderQty]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[OnOrderQty]"
+                      cachedDataType="i4"
+                      cachedName="OnOrderQty"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[OnOrderQty]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[OnOrderQty]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[UnitMeasureCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="UnitMeasureCode"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[UnitMeasureCode]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[UnitMeasureCode]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[AverageLeadTime]"
+                      dataType="i4"
+                      name="AverageLeadTime" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[StandardPrice]"
+                      dataType="cy"
+                      name="StandardPrice" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[LastReceiptCost]"
+                      dataType="cy"
+                      name="LastReceiptCost" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[LastReceiptDate]"
+                      dataType="dbTimeStamp"
+                      name="LastReceiptDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[MinOrderQty]"
+                      dataType="i4"
+                      name="MinOrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[MaxOrderQty]"
+                      dataType="i4"
+                      name="MaxOrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[OnOrderQty]"
+                      dataType="i4"
+                      name="OnOrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[UnitMeasureCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="UnitMeasureCode" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Purchasing_ProductVendor"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[ProductID]
+, [BusinessEntityID]
+, [AverageLeadTime]
+, [StandardPrice]
+, [LastReceiptCost]
+, [LastReceiptDate]
+, [MinOrderQty]
+, [MaxOrderQty]
+, [OnOrderQty]
+, [UnitMeasureCode]
+, [ModifiedDate]
+					from [Purchasing].[ProductVendor]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[ProductID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[ProductID]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[BusinessEntityID]"
+                      name="BusinessEntityID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[AverageLeadTime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[AverageLeadTime]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[AverageLeadTime]"
+                      name="AverageLeadTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[StandardPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[StandardPrice]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[StandardPrice]"
+                      name="StandardPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[LastReceiptCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[LastReceiptCost]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[LastReceiptCost]"
+                      name="LastReceiptCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[LastReceiptDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[LastReceiptDate]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[LastReceiptDate]"
+                      name="LastReceiptDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[MinOrderQty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[MinOrderQty]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[MinOrderQty]"
+                      name="MinOrderQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[MaxOrderQty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[MaxOrderQty]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[MaxOrderQty]"
+                      name="MaxOrderQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[OnOrderQty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[OnOrderQty]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[OnOrderQty]"
+                      name="OnOrderQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[UnitMeasureCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[UnitMeasureCode]"
+                      length="3"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[UnitMeasureCode]"
+                      name="UnitMeasureCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[AverageLeadTime]"
+                      dataType="i4"
+                      name="AverageLeadTime" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[StandardPrice]"
+                      dataType="cy"
+                      name="StandardPrice" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[LastReceiptCost]"
+                      dataType="cy"
+                      name="LastReceiptCost" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[LastReceiptDate]"
+                      dataType="dbTimeStamp"
+                      name="LastReceiptDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[MinOrderQty]"
+                      dataType="i4"
+                      name="MinOrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[MaxOrderQty]"
+                      dataType="i4"
+                      name="MaxOrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[OnOrderQty]"
+                      dataType="i4"
+                      name="OnOrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[UnitMeasureCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="UnitMeasureCode" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[BusinessEntityID]"
+                      name="BusinessEntityID" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[AverageLeadTime]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[AverageLeadTime]"
+                      name="AverageLeadTime" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[StandardPrice]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[StandardPrice]"
+                      name="StandardPrice" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[LastReceiptCost]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[LastReceiptCost]"
+                      name="LastReceiptCost" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[LastReceiptDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[LastReceiptDate]"
+                      name="LastReceiptDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[MinOrderQty]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[MinOrderQty]"
+                      name="MinOrderQty" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[MaxOrderQty]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[MaxOrderQty]"
+                      name="MaxOrderQty" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[OnOrderQty]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[OnOrderQty]"
+                      name="OnOrderQty" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[UnitMeasureCode]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[UnitMeasureCode]"
+                      name="UnitMeasureCode" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Purchasing_ProductVendor.Paths[CNT rows_Output_DST_Purchasing_ProductVendor]"
+              endId="Package\DF_Load Purchasing_ProductVendor\DST_Purchasing_ProductVendor.Inputs[CNT rows_Output_DST_Purchasing_ProductVendor]"
+              name="CNT rows_Output_DST_Purchasing_ProductVendor"
+              startId="Package\DF_Load Purchasing_ProductVendor\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Purchasing_ProductVendor.Paths[SRC_Purchasing_ProductVendor_Output_CNT rows]"
+              endId="Package\DF_Load Purchasing_ProductVendor\CNT rows.Inputs[SRC_Purchasing_ProductVendor_Output_CNT rows]"
+              name="SRC_Purchasing_ProductVendor_Output_CNT rows"
+              startId="Package\DF_Load Purchasing_ProductVendor\SRC_Purchasing_ProductVendor.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{EDD13785-3DFE-467F-B005-55861F4EBB26}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4B4ED0CE-708B-4325-BD0E-6757CD3FAED1}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{910505C0-2EC7-4FE1-A2DE-FF034BCC157E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4B4ED0CE-708B-4325-BD0E-6757CD3FAED1}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Purchasing_ProductVendor', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Purchasing_ProductVendor"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{2FA5DF2A-485B-48CE-A310-248382466D24}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Purchasing_ProductVendor"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4B4ED0CE-708B-4325-BD0E-6757CD3FAED1}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Purchasing_ProductVendor&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Purchasing_ProductVendor_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{D75FC72C-92EB-41DC-9DF7-CD5E78D6C6C6}"
+      DTS:From="Package\DF_Load Purchasing_ProductVendor"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Purchasing_ProductVendor_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Purchasing_ProductVendor]"
+      DTS:CreationName=""
+      DTS:DTSID="{FC7FB097-7B6E-428D-96D3-C6653F3D1171}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Purchasing_ProductVendor"
+      DTS:To="Package\ET_truncate_Purchasing_ProductVendor" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Purchasing_ProductVendor_To_DF_Load Purchasing_ProductVendor]"
+      DTS:CreationName=""
+      DTS:DTSID="{0143687E-8D4B-425D-B407-8AF601C37E14}"
+      DTS:From="Package\ET_truncate_Purchasing_ProductVendor"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Purchasing_ProductVendor_To_DF_Load Purchasing_ProductVendor"
+      DTS:To="Package\DF_Load Purchasing_ProductVendor" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

@@ -1,0 +1,15 @@
+<Package Name="PKG_<#=_packageName#>_<#= _prj_short #>" ConstraintMode="Parallel" ProtectionLevel="EncryptSensitiveWithUserKey">
+	<Tasks>
+		<#
+		DataTable _sourcesPackage = new DataTable();
+		SqlDataAdapter _sourcesPackage_da = new SqlDataAdapter(_sources_sql, _config_con_string);
+		_sourcesPackage_da.Fill(_sourcesPackage);
+
+		foreach(DataRow _table in _sourcesPackage.Rows) {    #>
+			<ExecutePackage Name="EP_<#=_packageName#>_<#= _table["source_id"] #>_<#= _table["source_name"] #>" DelayValidation="true">
+				<ExternalProjectPackage Package="SPKG_<#=_packageName#>_<#= _table["source_id"] #>_<#= _table["source_name"]#>.dtsx">
+				</ExternalProjectPackage>
+			</ExecutePackage>
+		<# }   #>
+	</Tasks>
+</Package>

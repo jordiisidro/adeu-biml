@@ -1,0 +1,597 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:05 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{7EAE2D73-85D5-49CC-9B1C-08AE2739DFA7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_678_ProductModel"
+  DTS:VersionGUID="{E36A1275-CC16-412E-B562-35EBC51BEFFD}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{54835E8E-687C-4580-839E-0F5BEAA3621F}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{40E5AF04-8681-4AC4-BD3D-E6C2D2E6D0FD}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7FC77D0B-64AC-4A53-897C-F4844789F4D1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6134D6C9-9E46-4693-A222-E14EB61D70DA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{376E1834-95EA-4F46-BF27-44F99D25CF00}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Production_ProductModel"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{43561811-14A4-4024-A521-2F53AEDCF2D3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Production_ProductModel"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Production_ProductModel\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Production_ProductModel\CNT rows.Inputs[SRC_Production_ProductModel_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Production_ProductModel_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Production_ProductModel\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Production_ProductModel\CNT rows.Inputs[SRC_Production_ProductModel_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Production_ProductModel"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Production_ProductModel</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Production_ProductModel">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].Columns[ProductModelID]"
+                      cachedDataType="i4"
+                      cachedName="ProductModelID"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[ProductModelID]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[ProductModelID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[Name]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].Columns[CatalogDescription]"
+                      cachedDataType="nText"
+                      cachedName="CatalogDescription"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[CatalogDescription]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[CatalogDescription]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].Columns[Instructions]"
+                      cachedDataType="nText"
+                      cachedName="Instructions"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[Instructions]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[Instructions]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].Columns[rowguid]"
+                      cachedDataType="guid"
+                      cachedName="rowguid"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[rowguid]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[ProductModelID]"
+                      dataType="i4"
+                      name="ProductModelID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[CatalogDescription]"
+                      dataType="nText"
+                      name="CatalogDescription" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[Instructions]"
+                      dataType="nText"
+                      name="Instructions" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Production_ProductModel"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[ProductModelID]
+, [Name]
+, [CatalogDescription]
+, [Instructions]
+, [rowguid]
+, [ModifiedDate]
+					from [Production].[ProductModel]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[ProductModelID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[ProductModelID]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[ProductModelID]"
+                      name="ProductModelID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[Name]"
+                      length="50"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[CatalogDescription]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[CatalogDescription]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[CatalogDescription]"
+                      name="CatalogDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[Instructions]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[Instructions]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[Instructions]"
+                      name="Instructions"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[rowguid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[rowguid]"
+                      name="rowguid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[ProductModelID]"
+                      dataType="i4"
+                      name="ProductModelID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[CatalogDescription]"
+                      dataType="nText"
+                      name="CatalogDescription" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[Instructions]"
+                      dataType="nText"
+                      name="Instructions" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[ProductModelID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[ProductModelID]"
+                      name="ProductModelID" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[CatalogDescription]"
+                      dataType="nText"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[CatalogDescription]"
+                      name="CatalogDescription" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[Instructions]"
+                      dataType="nText"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[Instructions]"
+                      name="Instructions" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[rowguid]"
+                      dataType="guid"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[rowguid]"
+                      name="rowguid" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Production_ProductModel.Paths[CNT rows_Output_DST_Production_ProductModel]"
+              endId="Package\DF_Load Production_ProductModel\DST_Production_ProductModel.Inputs[CNT rows_Output_DST_Production_ProductModel]"
+              name="CNT rows_Output_DST_Production_ProductModel"
+              startId="Package\DF_Load Production_ProductModel\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Production_ProductModel.Paths[SRC_Production_ProductModel_Output_CNT rows]"
+              endId="Package\DF_Load Production_ProductModel\CNT rows.Inputs[SRC_Production_ProductModel_Output_CNT rows]"
+              name="SRC_Production_ProductModel_Output_CNT rows"
+              startId="Package\DF_Load Production_ProductModel\SRC_Production_ProductModel.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{8D3D9D67-30FB-433C-BE43-CD26B061B2D6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{40E5AF04-8681-4AC4-BD3D-E6C2D2E6D0FD}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{D77162D7-66CE-4BE9-B4B4-ACF074B04BFB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{40E5AF04-8681-4AC4-BD3D-E6C2D2E6D0FD}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Production_ProductModel', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Production_ProductModel"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{4C8EF583-5D42-4C8C-992D-7C66E37570B9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Production_ProductModel"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{40E5AF04-8681-4AC4-BD3D-E6C2D2E6D0FD}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Production_ProductModel&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Production_ProductModel_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{5C21FF14-FC95-4D93-8C72-E4B6159F159B}"
+      DTS:From="Package\DF_Load Production_ProductModel"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Production_ProductModel_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Production_ProductModel]"
+      DTS:CreationName=""
+      DTS:DTSID="{93B0D991-3D3A-408C-A262-2FD109BCF0D1}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Production_ProductModel"
+      DTS:To="Package\ET_truncate_Production_ProductModel" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Production_ProductModel_To_DF_Load Production_ProductModel]"
+      DTS:CreationName=""
+      DTS:DTSID="{3437208F-42DD-40BC-BB1A-0484C27C5286}"
+      DTS:From="Package\ET_truncate_Production_ProductModel"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Production_ProductModel_To_DF_Load Production_ProductModel"
+      DTS:To="Package\DF_Load Production_ProductModel" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

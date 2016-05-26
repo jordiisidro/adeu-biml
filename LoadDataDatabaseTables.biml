@@ -1,0 +1,26 @@
+<# string _table_sql = "select t.table_name, t.schema_name, d.source_name, t.database_table_id, d.source_id, d.short_name, se.source_extract_type_name  "+
+		"from biml.source_database_table t "+
+		"join biml.source_detail de on t.database_table_id=de.source_detail_id "+
+		"join biml.source d on t.database_id=d.source_id "+
+		"join biml.project p on d.project_id=p.project_id  "+
+		"join biml.source_type st on st.id_source_type=d.source_type "+
+		"join biml.source_extract_type se on de.extract_type=se.id_source_extract_type "+
+		"where project_name='"+_project+"' "+
+		" and d.source_name='"+_bdcx+"'";
+	DataTable _sourcesTD = new DataTable();
+	SqlDataAdapter _sourcesTD_da = new SqlDataAdapter(_table_sql, _config_con_string);
+	_sourcesTD_da.Fill(_sourcesTD);
+
+	foreach(DataRow _tableTD in _sourcesTD.Rows) {    #>
+		<Package Name="SPKG_<#=_packageName#>_<#= _tableTD["source_id"] #>_<#= _tableTD["source_name"]#>_<#= _tableTD["database_table_id"]#>_<#= _tableTD["table_name"]#>"
+			ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+			
+			<# string _extractType = _tableTD["source_extract_type_name"].ToString(); #>
+			<#if (_extractType=="Full"){ #>   <#@ include file="LoadDataDatabaseFull.biml" #>   <# } #>	
+			<#if (_extractType=="Incremental"){ #>   <#@ include file="LoadDataDatabaseIncremental.biml" #>   <# } #>	
+	
+		</Package>
+	
+	
+	
+	<# } #>

@@ -1,0 +1,99 @@
+<# string _table_sql =  "select  d.source_name, d.source_id, d.short_name, isnull(ff.source_id,0) as isFolder, f.path, ff.pattern, "+
+		"case when ff.traverse_subfolders =0 then 'false' else 'true' end as traverse_subfolders , d.hasParameter "+
+		"from biml.source_detail de "+
+		"join biml.source d on de.source_id=d.source_id  "+
+		"join biml.project p on d.project_id=p.project_id  "+
+		"join biml.source_type st on st.id_source_type=d.source_type "+
+		" join biml.source_flatFile f on f.source_id=d.source_id "+
+		"left join biml.source_FlatFile_folder ff on ff.source_id=d.source_id " +
+		"where de.extract_type is not null and project_name='"+_project+"' "+
+		" and d.source_name='"+_bdcx+"'";
+	DataTable _sourcesTD = new DataTable();
+	SqlDataAdapter _sourcesTD_da = new SqlDataAdapter(_table_sql, _config_con_string);
+	_sourcesTD_da.Fill(_sourcesTD);
+
+	foreach(DataRow _tableTD in _sourcesTD.Rows) {    #>
+		<Package Name="SPKG_<#=_packageName#>_<#= _tableTD["source_id"] #>_<#= _tableTD["source_name"]#>_sub"
+			ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+			
+			 <Variables>
+				<Variable DataType="Int32" Name="RowCountSource">0</Variable>
+				<# if (Convert.ToInt32( _tableTD["isFolder"]) !=0 ){ #>
+				 <Variable DataType="String" Name="File">aaa.csv</Variable>
+				<# } #>
+			</Variables>
+			<Tasks>
+				<ExecuteSQL Name="ET_truncate_<#= _tableTD["source_name"]#>" ConnectionName="<#= _sa_cs_name #>">
+					<DirectInput>
+						truncate table <#= _tableTD["short_name"]#>.<#= _tableTD["source_name"]#>
+					</DirectInput>
+				</ExecuteSQL>
+			  
+				
+				<# if (Convert.ToInt32( _tableTD["isFolder"]) !=0 ){ #>
+						<ForEachFileLoop Name="FL_file_loop" ConstraintMode="Linear" Folder="<#= _tableTD["path"] #>" FileSpecification="<#= _tableTD["pattern"] #>" 
+							ProcessSubfolders="<#= _tableTD["traverse_subfolders"] #>" RetrieveFileNameFormat="FullyQualified">					
+							<Expressions>
+								 <Expression PropertyName="Directory">
+									  <# if ( Convert.ToBoolean(_tableTD["hasParameter"]) ){ #>
+										@[$Project::<#= _tableTD["source_name"] #>_Path]
+										 
+									 <# }  else {#>
+											 <#= Convert.ToString(_tableTD["path"]).Replace("\\","\\\\")#>
+									<# } #>
+								</Expression>
+							</Expressions>
+							<Variables>
+								<Variable Name="File" DataType="String"></Variable>
+							</Variables>
+							<VariableMappings>
+								<VariableMapping Name="0" VariableName="User.File"  />
+							</VariableMappings>
+								<Tasks>								
+				<#  } #>
+				  
+				  <Dataflow Name="DF_Load <#= _tableTD["source_name"]#>">
+					<Transformations>
+						<FlatFileSource Name="SRC_<#= _tableTD["source_name"]#>" ConnectionName="<#= _bdcx #>">
+						
+						</FlatFileSource>
+						<RowCount VariableName="User.RowCountSource" Name="CNT rows">
+							 <InputPath OutputPathName="SRC_<#= _tableTD["source_name"]#>.Output" />
+						</RowCount>
+						<# if (Convert.ToInt32( _tableTD["isFolder"]) !=0 ){ #>
+						<DerivedColumns Name="DC_Filename">
+                            <Columns>
+                                <Column Name="file_name" DataType="AnsiString" Length="200">@File</Column>
+                            </Columns>
+                        </DerivedColumns>
+						<#  } #>
+						<OleDbDestination Name="DST_<#= _tableTD["source_name"]#>" ConnectionName="<#= _sa_cs_name #>">
+							<ExternalTableOutput Table="<#= _tableTD["short_name"]#>.<#= _tableTD["source_name"]#>" />
+						</OleDbDestination>
+
+					</Transformations>
+				</Dataflow>
+				<ExecuteSQL Name="ET_ins_log" ConnectionName="<#= _sa_cs_name #>">
+					<DirectInput>
+						insert into log.load_data values ( '<#= _tableTD["short_name"]#>', '<#= _tableTD["source_name"]#>', getdate(), ?)
+					</DirectInput>
+					<Parameters>
+						<Parameter Name="0" VariableName="User.RowCountSource" DataType="Int32" />
+					</Parameters>
+				</ExecuteSQL>
+				
+			<# if (Convert.ToInt32( _tableTD["isFolder"]) !=0 ){ #>
+						</Tasks>	
+
+					</ForEachFileLoop>					
+				<#  } #>
+				
+				
+						
+			</Tasks>
+			
+			
+		</Package>
+	<# } #>
+		
+	

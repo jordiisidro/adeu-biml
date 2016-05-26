@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:09 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{C4DF59D5-F7C5-49F2-B07C-8BE5F207CB5C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_5_OLEDB_Test"
+  DTS:VersionGUID="{AE2FE62E-8B33-43BA-91F8-F4EFE7891E21}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\EP_LoadData_5_OLEDB_Test_715_a"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{0929DFF7-67BA-4B6C-A5BB-399FFA963318}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EP_LoadData_5_OLEDB_Test_715_a"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>SPKG_LoadData_5_OLEDB_Test_715_a.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EP_LoadData_5_OLEDB_Test_716_d"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{CBBD0806-892D-4747-86C8-509CE68167EF}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EP_LoadData_5_OLEDB_Test_716_d"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>SPKG_LoadData_5_OLEDB_Test_716_d.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_EP_LoadData_5_OLEDB_Test_715_a_To_EP_LoadData_5_OLEDB_Test_716_d]"
+      DTS:CreationName=""
+      DTS:DTSID="{C19078C5-6CC6-493D-9D8B-99B29987FBFF}"
+      DTS:From="Package\EP_LoadData_5_OLEDB_Test_715_a"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_EP_LoadData_5_OLEDB_Test_715_a_To_EP_LoadData_5_OLEDB_Test_716_d"
+      DTS:To="Package\EP_LoadData_5_OLEDB_Test_716_d" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

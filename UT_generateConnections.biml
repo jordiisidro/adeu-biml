@@ -1,0 +1,149 @@
+<#
+string _sources_sql = "select s.source_id, s.source_name, t.source_type_name, s.hasParameter "+
+	   "from biml.source s "+
+		"join biml.project p on p.project_id=s.project_id "+
+		"join biml.source_type t on s.source_type=t.id_source_type "+
+		"where project_name='"+_project+"' and s.source_id <>2"+
+		"order by source_id"; 
+	
+#>
+
+
+<Connections>
+    <OleDbConnection Name="OLEDB_Config" ConnectionString="<#= _config_con_string_provider #>" />
+	<OleDbConnection Name="<#= _sa_cs_name #>" ConnectionString="<#= _sa_cs #>" >
+		<# if (_sa_param) { #>
+			<Expressions>
+				<Expression ExternalProperty="ConnectionString">@[$Project::<#= _sa_cs_name #>]</Expression>
+			</Expressions>
+		<# } #>
+			
+	</OleDbConnection>
+	<!-- definir totes les connection strings segons el tipus -->
+	<# 	DataTable _sources = new DataTable();
+		SqlDataAdapter _sources_da = new SqlDataAdapter(_sources_sql, _config_con_string);
+		_sources_da.Fill(_sources);  
+     	foreach(DataRow _table in _sources.Rows) {    
+			bool _param =   Convert.ToBoolean(_table["hasParameter"]);
+			string _tName = _table["source_type_name"]+"";
+			if ( _tName=="SQL Server database" ){ 
+				string _dbSources_sql = "select connectionString from biml.source_database where source_id="+_table["source_id"];
+				DataTable _dbsources = new DataTable();
+				SqlDataAdapter _dbsources_da = new SqlDataAdapter(_dbSources_sql, _config_con_string);
+				_dbsources_da.Fill(_dbsources); 
+				foreach(DataRow _dbtable in _dbsources.Rows) {   
+			#>   
+					<OleDbConnection Name="<#= _table["source_name"] #>" ConnectionString="<#=  _dbtable["connectionString"]  #>" >
+						<#@ include file="UT_paramExpression.biml" #>
+					</OleDbConnection>	
+			<# }   #> <!-- end foreach -->
+		<# }   #>	<!-- end if -->	
+			
+		<# if ( _tName=="Excel sheet" ){ 
+				string _dbSources_sql = "select 'Provider='+provider_name+';Data Source='+ file_connection_string+';Extended Properties=&quot;'+ version_provider+';HDR=YES&quot;' as connectionString from biml.source_excel where source_id="+_table["source_id"];
+				DataTable _dbsources = new DataTable();
+				SqlDataAdapter _dbsources_da = new SqlDataAdapter(_dbSources_sql, _config_con_string);
+				_dbsources_da.Fill(_dbsources); 
+				foreach(DataRow _dbtable in _dbsources.Rows) {   
+			#>   
+					<ExcelConnection Name="<#= _table["source_name"] #>" ConnectionString="<#=  _dbtable["connectionString"]  #>" >
+						<#@ include file="UT_paramExpression.biml" #>
+					</ExcelConnection>
+				<# }   #>	<!-- end foreach -->
+			<# }   #>	<!-- end if -->	
+				
+		<# if ( _tName=="Flat file" ){ 
+				string _dbSources_sql = "select f.path+f.name as connectionString, f.path as path, isnull(ff.source_id,0) as isFolder "+
+				" from  biml.source_flatFile f "+
+				"  left join biml.source_FlatFile_folder ff on f.source_id=ff.source_id "+
+				" where f.source_id="+_table["source_id"];
+				DataTable _dbsources = new DataTable();
+				SqlDataAdapter _dbsources_da = new SqlDataAdapter(_dbSources_sql, _config_con_string);
+				_dbsources_da.Fill(_dbsources); 
+				foreach(DataRow _dbtable in _dbsources.Rows) {   
+			#>   
+					<FlatFileConnection Name="<#= _table["source_name"] #>" FileFormat="<#= _table["source_name"] #>" FilePath="<#=  _dbtable["connectionString"]  #>" >
+						<# if (_param &&  (_packageName!="LoadData" || Convert.ToInt32( _dbtable["isFolder"]) ==0)) { #> <!-- o no és folder -->
+							<Expressions>
+								<Expression ExternalProperty="ConnectionString">@[$Project::<#= _table["source_name"] #>_Path]+@[$Project::<#= _table["source_name"] #>_File]</Expression>
+							</Expressions> 
+						<# } #>
+						<# if (_packageName=="LoadData" && Convert.ToInt32( _dbtable["isFolder"]) !=0) { #> <!-- i és folder -->
+							<Expressions>
+								<Expression ExternalProperty="ConnectionString">@[User::File]</Expression>
+							</Expressions> 
+						<# } #>
+						
+					</FlatFileConnection>
+				<# }   #>	<!-- end foreach -->
+			<# }   #>	<!-- end if -->	
+	
+	<# }   #> <!-- end foreach -->
+ </Connections>
+
+
+<FileFormats>
+	<# 
+		DataTable _sourcesF = new DataTable();
+		SqlDataAdapter _sources_daF = new SqlDataAdapter(_sources_sql, _config_con_string);
+		_sources_daF.Fill(_sourcesF);  
+     	foreach(DataRow _table in _sourcesF.Rows) {    
+			string _tName = _table["source_type_name"]+"";
+			if ( _tName=="Flat file" ){ 
+				string _dbSources_sql = "select  f.path+f.name as connectionString, text_qualifier, header_rows_to_skip, "+
+				" case row_delimiter when '{CR}{LF}' then 'CRLF' when '{CR}' then 'CR' when '{LF}' then 'LF' when ';' then 'Semicolon' when ',' then 'Comma' when 'tab' then 'Tab' when '|' then 'VerticalBar' else row_delimiter end as row_delimiter, "+
+				" case when is_column_names_first_row=0 then 'false' else 'true' end as is_column_names_first_row, separator, "+
+				" case when is_unicode=0 then 'false' else 'true' end as is_unicode, "+
+				"case when is_unicode=0 then 'Ansi' else '' end as ansi, type "+
+				" from  biml.source_flatFile f  where source_id="+_table["source_id"];
+				DataTable _dbsources = new DataTable();
+				SqlDataAdapter _dbsources_da = new SqlDataAdapter(_dbSources_sql, _config_con_string);
+				_dbsources_da.Fill(_dbsources); 
+				foreach(DataRow _dbtable in _dbsources.Rows) {
+			#>   
+					
+						
+							<# if (_packageName != "LoadData"){  #>	 <!-- nom´s s'utilitza en el generatemetadata però fa falta a la resta per la definició de connexió -->
+								<FlatFileFormat Name="<#= _table["source_name"] #>" RowDelimiter="<#= _dbtable["row_delimiter"] #>" 
+									ColumnNamesInFirstDataRow="false" FlatFileType="<#= _dbtable["type"] #>"
+									IsUnicode="<#= _dbtable["is_unicode"] #>" DataRowsToSkip="<#= _dbtable["header_rows_to_skip"] #>" 
+								>
+									 <Columns>
+										<Column Name="C1" DataType="AnsiString" Length="8000" Delimiter="<#= _dbtable["row_delimiter"] #>"  />
+									</Columns>
+								</FlatFileFormat>	
+							<# }   #>	<!-- end if -->	
+							
+							<# if (_packageName == "LoadData"){ #> 
+								<FlatFileFormat Name="<#= _table["source_name"] #>" RowDelimiter="<#= _dbtable["row_delimiter"] #>" 
+									ColumnNamesInFirstDataRow="<#= _dbtable["is_column_names_first_row"] #>" FlatFileType="<#= _dbtable["type"] #>"
+									IsUnicode="<#= _dbtable["is_unicode"] #>" DataRowsToSkip="<#= _dbtable["header_rows_to_skip"] #>" 
+								>
+								 <Columns>
+									<# string _cols_sql = "select sc.column_name, sc.data_type, isnull(sc.character_maximum_length,0) as character_maximum_length , "+
+									"isnull(sc.numeric_precision,0) as numeric_precision, isnull(sc.numeric_scale,0) as numeric_scale, "+
+									"replace(replace(case when sc.ordinal_position= max(sc1.ordinal_position) then f.row_delimiter else f.separator end, '{',''),'}','') as separator "+
+									"from biml.source_column sc join biml.source_detail sd on sd.source_detail_id=sc.source_detail_id "+
+									"join  biml.source_column sc1 on sd.source_detail_id=sc1.source_detail_id "+
+									"join biml.source_flatFile f on f.source_id=sd.source_id "+
+									" where sd.source_id="+_table["source_id"]+
+									" group by sc.column_name, sc.data_type, sc.character_maximum_length, sc.numeric_precision, sc.numeric_scale, sc.ordinal_position,f.row_delimiter, f.separator "+
+									" order by sc.ordinal_position ";
+									DataTable _cols = new DataTable();
+									SqlDataAdapter _cols_da = new SqlDataAdapter(_cols_sql, _config_con_string);
+									_cols_da.Fill(_cols); 
+									foreach(DataRow _col in _cols.Rows) {
+										string _datatype=_col["data_type"]+"";
+									#>
+										<Column Name="<#= _col["column_name"] #>" DataType="<#= UT_SQLServer_datatype.SQLServerToBimlDatatype(_datatype )#>" Length="<#= _col["character_maximum_length"] #>"
+										Precision="<#= _col["numeric_precision"] #>" Scale="<#= _col["numeric_scale"] #>"
+										Delimiter="<#= _col["separator"] #>"  />
+									<# }   #>	<!-- end foreach -->
+									</Columns>
+								</FlatFileFormat>	
+							<# }   #>	<!-- end if -->	
+					
+				<# }   #>	<!-- end foreach -->
+			<# }   #>	<!-- end if -->	
+	<# }   #> <!-- end foreach -->
+</FileFormats>

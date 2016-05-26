@@ -1,0 +1,6 @@
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ template language="C#" tier="2" #>
+<#
+	String _project = "ADVENTURE PROJECT";
+#>

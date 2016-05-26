@@ -1,0 +1,50 @@
+<Connections>
+	<Connection ConnectionName="OLEDB_Config"/>
+</Connections>
+<Tasks>
+	<Container Name="CT_source_flatFile_<#= _bdcx #>" ConstraintMode="Linear">
+		<Tasks>
+			<ExecuteSQL Name="ET_delete_source_column" ConnectionName="OLEDB_Config">
+				<DirectInput>
+					delete from biml.source_column 
+					where exists (
+						select * 
+						from biml.source_detail t 
+						where t.source_detail_id=source_column.source_detail_id and t.source_id=<#= _sourceId #>
+						)
+				</DirectInput>
+			</ExecuteSQL>
+
+			<ExecuteSQL Name="ET_truncate_trash" ConnectionName="OLEDB_Config">
+				<DirectInput>
+					truncate table trash.flatFile
+				</DirectInput>
+			</ExecuteSQL>
+
+			<Dataflow Name="DF_Load trash_flatfile">
+				<Transformations>
+					<FlatFileSource ConnectionName="<#= _bdcx #>" Name="SRC_<#= _bdcx #>" />
+					<OleDbDestination Name="DST_trash_flatFile" ConnectionName="OLEDB_Config">
+						<ExternalTableOutput Table="trash.FlatFile" />
+					</OleDbDestination>
+				</Transformations>
+			</Dataflow>
+			
+			<ExecuteSQL Name="ET_generateMetadata" ConnectionName="OLEDB_Config">
+				<DirectInput>
+			<#		string _dbSources_sql = "select row_delimiter,  "+
+				" is_column_names_first_row, separator, d.source_detail_id "+
+				" from  biml.source_flatFile f join biml.source_detail d on d.source_id=f.source_id  where f.source_id="+_table["source_id"];
+				DataTable _dbsources = new DataTable();
+				SqlDataAdapter _dbsources_da = new SqlDataAdapter(_dbSources_sql, _config_con_string);
+				_dbsources_da.Fill(_dbsources); 
+				foreach(DataRow _dbtable in _dbsources.Rows) {
+			#>   
+					exec fn_generateColumnsFF '<#= _dbtable["separator"] #>' , '<#= _dbtable["row_delimiter"] #>' , '<#= _dbtable["is_column_names_first_row"] #>' , <#= _dbtable["source_detail_id"] #> 	
+				<# }   #>	<!-- end foreach -->
+				
+				</DirectInput>
+			</ExecuteSQL>
+		</Tasks>
+	</Container>
+</Tasks>

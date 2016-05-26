@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/22/2016 12:58:27 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{D961D793-BE9F-4657-9F23-30A6599F6412}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_CreateTablesStag_3_EXCEL_budget2"
+  DTS:VersionGUID="{CA61F92E-CC01-4B91-8D7B-340ACBFF10FB}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{16D90F99-4E6E-4A22-9ECB-E06518197BB6}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\create_EXCEL_budget2_Budget"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{01C3AF2B-BDBB-4100-9551-C7B38EDF4778}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_EXCEL_budget2_Budget"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{16D90F99-4E6E-4A22-9ECB-E06518197BB6}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='bu2')&#xA;   exec sp_executesql N'create schema bu2'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='bu2'&#xA;   and table_name='Budget')&#xA;    create table bu2.Budget(&#xA;    &#xA;    [year] float(53)&#xA;, [budget] nvarchar(255)&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+</DTS:Executable>

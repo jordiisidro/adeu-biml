@@ -1,0 +1,563 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:03 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{1FB5DB46-9FD1-49A8-9D73-54A66502D2D3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_661_EmployeePayHistory"
+  DTS:VersionGUID="{3AE3EC4C-6390-4E82-9F00-E1AA80546A8D}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A7F2528F-5147-467D-8AC9-969C5A83B2E7}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1F80BDE2-3400-4E03-BE11-9ACBC4D24744}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{070A97D4-99FF-4126-9F56-5A64729B2411}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F469F5C6-6B97-47C8-A77E-7938C5B0E29A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{609A93AD-8C5F-40E8-B4F9-975FC9F446CA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load HumanResources_EmployeePayHistory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{4D6FB3CC-116E-43C5-B3C6-B24DBF3CF1A5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load HumanResources_EmployeePayHistory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load HumanResources_EmployeePayHistory\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load HumanResources_EmployeePayHistory\CNT rows.Inputs[SRC_HumanResources_EmployeePayHistory_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_HumanResources_EmployeePayHistory_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load HumanResources_EmployeePayHistory\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load HumanResources_EmployeePayHistory\CNT rows.Inputs[SRC_HumanResources_EmployeePayHistory_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_HumanResources_EmployeePayHistory"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.HumanResources_EmployeePayHistory</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_HumanResources_EmployeePayHistory">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].Columns[BusinessEntityID]"
+                      cachedDataType="i4"
+                      cachedName="BusinessEntityID"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[BusinessEntityID]" />
+                    <inputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].Columns[RateChangeDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RateChangeDate"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[RateChangeDate]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[RateChangeDate]" />
+                    <inputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].Columns[Rate]"
+                      cachedDataType="cy"
+                      cachedName="Rate"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[Rate]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[Rate]" />
+                    <inputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].Columns[PayFrequency]"
+                      cachedDataType="ui1"
+                      cachedName="PayFrequency"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[PayFrequency]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[PayFrequency]" />
+                    <inputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[RateChangeDate]"
+                      dataType="dbTimeStamp"
+                      name="RateChangeDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[Rate]"
+                      dataType="cy"
+                      name="Rate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[PayFrequency]"
+                      dataType="ui1"
+                      name="PayFrequency" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_HumanResources_EmployeePayHistory"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[BusinessEntityID]
+, [RateChangeDate]
+, [Rate]
+, [PayFrequency]
+, [ModifiedDate]
+					from [HumanResources].[EmployeePayHistory]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[BusinessEntityID]"
+                      name="BusinessEntityID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[RateChangeDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[RateChangeDate]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[RateChangeDate]"
+                      name="RateChangeDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[Rate]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[Rate]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[Rate]"
+                      name="Rate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[PayFrequency]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[PayFrequency]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[PayFrequency]"
+                      name="PayFrequency"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[RateChangeDate]"
+                      dataType="dbTimeStamp"
+                      name="RateChangeDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[Rate]"
+                      dataType="cy"
+                      name="Rate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[PayFrequency]"
+                      dataType="ui1"
+                      name="PayFrequency" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[BusinessEntityID]"
+                      name="BusinessEntityID" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[RateChangeDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[RateChangeDate]"
+                      name="RateChangeDate" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[Rate]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[Rate]"
+                      name="Rate" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[PayFrequency]"
+                      dataType="ui1"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[PayFrequency]"
+                      name="PayFrequency" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load HumanResources_EmployeePayHistory.Paths[CNT rows_Output_DST_HumanResources_EmployeePayHistory]"
+              endId="Package\DF_Load HumanResources_EmployeePayHistory\DST_HumanResources_EmployeePayHistory.Inputs[CNT rows_Output_DST_HumanResources_EmployeePayHistory]"
+              name="CNT rows_Output_DST_HumanResources_EmployeePayHistory"
+              startId="Package\DF_Load HumanResources_EmployeePayHistory\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load HumanResources_EmployeePayHistory.Paths[SRC_HumanResources_EmployeePayHistory_Output_CNT rows]"
+              endId="Package\DF_Load HumanResources_EmployeePayHistory\CNT rows.Inputs[SRC_HumanResources_EmployeePayHistory_Output_CNT rows]"
+              name="SRC_HumanResources_EmployeePayHistory_Output_CNT rows"
+              startId="Package\DF_Load HumanResources_EmployeePayHistory\SRC_HumanResources_EmployeePayHistory.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{006213FF-EBA7-48EC-8AD6-3C0C00049D1C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1F80BDE2-3400-4E03-BE11-9ACBC4D24744}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E9CED2E8-B6B7-4DED-A103-616AEED5200C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1F80BDE2-3400-4E03-BE11-9ACBC4D24744}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'HumanResources_EmployeePayHistory', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_HumanResources_EmployeePayHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{46F2AEDA-4C54-4C17-ACE3-FA2050688392}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_HumanResources_EmployeePayHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1F80BDE2-3400-4E03-BE11-9ACBC4D24744}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.HumanResources_EmployeePayHistory&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load HumanResources_EmployeePayHistory_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{F10B218D-C59B-45A6-B6E7-F4FAB353E43B}"
+      DTS:From="Package\DF_Load HumanResources_EmployeePayHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load HumanResources_EmployeePayHistory_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_HumanResources_EmployeePayHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{8924C5CF-5298-465E-B0BB-24A654A811AA}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_HumanResources_EmployeePayHistory"
+      DTS:To="Package\ET_truncate_HumanResources_EmployeePayHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_HumanResources_EmployeePayHistory_To_DF_Load HumanResources_EmployeePayHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{50811124-92F1-4B55-927E-65D7BC85D2A8}"
+      DTS:From="Package\ET_truncate_HumanResources_EmployeePayHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_HumanResources_EmployeePayHistory_To_DF_Load HumanResources_EmployeePayHistory"
+      DTS:To="Package\DF_Load HumanResources_EmployeePayHistory" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

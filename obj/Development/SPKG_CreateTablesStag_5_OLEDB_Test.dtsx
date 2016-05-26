@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/22/2016 12:58:27 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{0692ABE1-214E-4F80-B7D6-405D42EA6016}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_CreateTablesStag_5_OLEDB_Test"
+  DTS:VersionGUID="{AB819F39-8973-4F96-AE2F-5DA8C0D8F1C6}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{38700D52-A1DF-4EFE-8449-2EB0E11A9471}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\create_dbo_a"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C0C12A34-7DC5-427B-898F-3B085D0EA4C1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_dbo_a"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{38700D52-A1DF-4EFE-8449-2EB0E11A9471}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='ts')&#xA;   exec sp_executesql N'create schema ts'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='ts'&#xA;   and table_name='dbo_a')&#xA;    create table ts.dbo_a(&#xA;    &#xA;    [b] int&#xA;, [c] varchar(50)&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_dbo_d"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F19A4D59-8251-47B4-9EBD-A8DA090DFE72}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_dbo_d"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{38700D52-A1DF-4EFE-8449-2EB0E11A9471}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='ts')&#xA;   exec sp_executesql N'create schema ts'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='ts'&#xA;   and table_name='dbo_d')&#xA;    create table ts.dbo_d(&#xA;    &#xA;    [e] int&#xA;, [f] varchar(50)&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_dbo_a_To_create_dbo_d]"
+      DTS:CreationName=""
+      DTS:DTSID="{63938BF1-5DF8-4714-9483-2093CB2A295A}"
+      DTS:From="Package\create_dbo_a"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_dbo_a_To_create_dbo_d"
+      DTS:To="Package\create_dbo_d" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

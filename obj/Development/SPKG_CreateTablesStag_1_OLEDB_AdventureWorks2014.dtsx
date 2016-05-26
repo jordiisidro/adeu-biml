@@ -1,0 +1,1730 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/22/2016 12:58:27 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{208EF166-1D2E-4CDF-9C77-0BC77F97B6B8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_CreateTablesStag_1_OLEDB_AdventureWorks2014"
+  DTS:VersionGUID="{F82774E4-89CA-4238-91F7-C8EEFD93F1B5}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\create_dbo_AWBuildVersion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{7A66010E-C5DB-41CF-B794-0B119449C1ED}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_dbo_AWBuildVersion"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='dbo_AWBuildVersion')&#xA;    create table aw.dbo_AWBuildVersion(&#xA;    &#xA;    [SystemInformationID] tinyint&#xA;, [Database Version] nvarchar(25)&#xA;, [VersionDate] datetime&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_dbo_DatabaseLog"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{9993AB50-E5C4-4E7C-BF24-6BF5849DC778}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_dbo_DatabaseLog"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='dbo_DatabaseLog')&#xA;    create table aw.dbo_DatabaseLog(&#xA;    &#xA;    [DatabaseLogID] int&#xA;, [PostTime] datetime&#xA;, [DatabaseUser] nvarchar(128)&#xA;, [Event] nvarchar(128)&#xA;, [Schema] nvarchar(128)&#xA;, [Object] nvarchar(128)&#xA;, [TSQL] nvarchar(max)&#xA;, [XmlEvent] xml&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_dbo_ErrorLog"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F974C992-7810-4AFB-82B0-D86D460E4401}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_dbo_ErrorLog"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='dbo_ErrorLog')&#xA;    create table aw.dbo_ErrorLog(&#xA;    &#xA;    [ErrorLogID] int&#xA;, [ErrorTime] datetime&#xA;, [UserName] nvarchar(128)&#xA;, [ErrorNumber] int&#xA;, [ErrorSeverity] int&#xA;, [ErrorState] int&#xA;, [ErrorProcedure] nvarchar(126)&#xA;, [ErrorLine] int&#xA;, [ErrorMessage] nvarchar(4000)&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_HumanResources_Department"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C94A2E31-0A5A-42B3-A622-C9B8C5F420D4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_HumanResources_Department"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='HumanResources_Department')&#xA;    create table aw.HumanResources_Department(&#xA;    &#xA;    [DepartmentID] smallint&#xA;, [Name] nvarchar(50)&#xA;, [GroupName] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_HumanResources_Employee"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{7AA3F642-0072-403D-BAAE-16F001D93523}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_HumanResources_Employee"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='HumanResources_Employee')&#xA;    create table aw.HumanResources_Employee(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [NationalIDNumber] nvarchar(15)&#xA;, [LoginID] nvarchar(256)&#xA;, [OrganizationNode] hierarchyid&#xA;, [OrganizationLevel] smallint&#xA;, [JobTitle] nvarchar(50)&#xA;, [BirthDate] date&#xA;, [MaritalStatus] nchar(1)&#xA;, [Gender] nchar(1)&#xA;, [HireDate] date&#xA;, [SalariedFlag] bit&#xA;, [VacationHours] smallint&#xA;, [SickLeaveHours] smallint&#xA;, [CurrentFlag] bit&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_HumanResources_EmployeeDepartmentHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{5E60D215-DFCD-48C1-A9C5-3EB22FEDF891}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_HumanResources_EmployeeDepartmentHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='HumanResources_EmployeeDepartmentHistory')&#xA;    create table aw.HumanResources_EmployeeDepartmentHistory(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [DepartmentID] smallint&#xA;, [ShiftID] tinyint&#xA;, [StartDate] date&#xA;, [EndDate] date&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_HumanResources_EmployeePayHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{CED5C743-BA3D-4DE7-93F6-F84E2F0FA2FD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_HumanResources_EmployeePayHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='HumanResources_EmployeePayHistory')&#xA;    create table aw.HumanResources_EmployeePayHistory(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [RateChangeDate] datetime&#xA;, [Rate] money&#xA;, [PayFrequency] tinyint&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_HumanResources_JobCandidate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{A059E017-3FA5-46C1-9873-EC5A2F0A5461}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_HumanResources_JobCandidate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='HumanResources_JobCandidate')&#xA;    create table aw.HumanResources_JobCandidate(&#xA;    &#xA;    [JobCandidateID] int&#xA;, [BusinessEntityID] int&#xA;, [Resume] xml&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_HumanResources_Shift"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{49D68B4C-B4B7-4D49-AD5B-8F0DAF2298E5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_HumanResources_Shift"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='HumanResources_Shift')&#xA;    create table aw.HumanResources_Shift(&#xA;    &#xA;    [ShiftID] tinyint&#xA;, [Name] nvarchar(50)&#xA;, [StartTime] time&#xA;, [EndTime] time&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_Address"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{14A100D2-9F54-4A7B-B8C5-99D0827A9B28}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_Address"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_Address')&#xA;    create table aw.Person_Address(&#xA;    &#xA;    [AddressID] int&#xA;, [AddressLine1] nvarchar(60)&#xA;, [AddressLine2] nvarchar(60)&#xA;, [City] nvarchar(30)&#xA;, [StateProvinceID] int&#xA;, [PostalCode] nvarchar(15)&#xA;, [SpatialLocation] geography&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_AddressType"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{58046158-ED80-467C-9730-783AE9A5A96C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_AddressType"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_AddressType')&#xA;    create table aw.Person_AddressType(&#xA;    &#xA;    [AddressTypeID] int&#xA;, [Name] nvarchar(50)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_BusinessEntity"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{9301DE54-D233-434A-BC20-DC55AC3AE1CA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_BusinessEntity"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_BusinessEntity')&#xA;    create table aw.Person_BusinessEntity(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_BusinessEntityAddress"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{2DC8FCEF-8F74-4BB2-860C-A032D4A8A380}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_BusinessEntityAddress"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_BusinessEntityAddress')&#xA;    create table aw.Person_BusinessEntityAddress(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [AddressID] int&#xA;, [AddressTypeID] int&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_BusinessEntityContact"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{940665FB-B6C9-46DA-9AAB-DF044FD24122}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_BusinessEntityContact"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_BusinessEntityContact')&#xA;    create table aw.Person_BusinessEntityContact(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [PersonID] int&#xA;, [ContactTypeID] int&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_ContactType"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{28D57DDC-E49F-49E1-AD65-4A28407D07FD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_ContactType"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_ContactType')&#xA;    create table aw.Person_ContactType(&#xA;    &#xA;    [ContactTypeID] int&#xA;, [Name] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_CountryRegion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{8BEABBF4-B627-40C5-A9A6-B0BE824CD896}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_CountryRegion"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_CountryRegion')&#xA;    create table aw.Person_CountryRegion(&#xA;    &#xA;    [CountryRegionCode] nvarchar(3)&#xA;, [Name] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_EmailAddress"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{30025CE8-5A33-4CEF-9A40-AF13D711DBC9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_EmailAddress"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_EmailAddress')&#xA;    create table aw.Person_EmailAddress(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [EmailAddressID] int&#xA;, [EmailAddress] nvarchar(50)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_Password"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F00496F1-B24E-464F-9039-168199B72218}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_Password"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_Password')&#xA;    create table aw.Person_Password(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [PasswordHash] varchar(128)&#xA;, [PasswordSalt] varchar(10)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_Person"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{D8D38CDC-322E-4450-AFB0-FEFB41843197}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_Person"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_Person')&#xA;    create table aw.Person_Person(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [PersonType] nchar(2)&#xA;, [NameStyle] bit&#xA;, [Title] nvarchar(8)&#xA;, [FirstName] nvarchar(50)&#xA;, [MiddleName] nvarchar(50)&#xA;, [LastName] nvarchar(50)&#xA;, [Suffix] nvarchar(10)&#xA;, [EmailPromotion] int&#xA;, [AdditionalContactInfo] xml&#xA;, [Demographics] xml&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_PersonPhone"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{3531B7EB-C189-4B36-A4B8-DF61C64688DB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_PersonPhone"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_PersonPhone')&#xA;    create table aw.Person_PersonPhone(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [PhoneNumber] nvarchar(25)&#xA;, [PhoneNumberTypeID] int&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_PhoneNumberType"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F9E308B1-1B3E-4EDD-88E7-6C8C858FDE6D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_PhoneNumberType"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_PhoneNumberType')&#xA;    create table aw.Person_PhoneNumberType(&#xA;    &#xA;    [PhoneNumberTypeID] int&#xA;, [Name] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Person_StateProvince"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{734BE936-56CE-4957-BE29-B9B41ECB9C74}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Person_StateProvince"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Person_StateProvince')&#xA;    create table aw.Person_StateProvince(&#xA;    &#xA;    [StateProvinceID] int&#xA;, [StateProvinceCode] nchar(3)&#xA;, [CountryRegionCode] nvarchar(3)&#xA;, [IsOnlyStateProvinceFlag] bit&#xA;, [Name] nvarchar(50)&#xA;, [TerritoryID] int&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_BillOfMaterials"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{CC641474-7A7B-4E88-ADA1-C2D329807611}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_BillOfMaterials"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_BillOfMaterials')&#xA;    create table aw.Production_BillOfMaterials(&#xA;    &#xA;    [BillOfMaterialsID] int&#xA;, [ProductAssemblyID] int&#xA;, [ComponentID] int&#xA;, [StartDate] datetime&#xA;, [EndDate] datetime&#xA;, [UnitMeasureCode] nchar(3)&#xA;, [BOMLevel] smallint&#xA;, [PerAssemblyQty] decimal(8,2)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_Culture"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E064DF3B-89C9-40D3-9358-6B12152472F5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_Culture"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_Culture')&#xA;    create table aw.Production_Culture(&#xA;    &#xA;    [CultureID] nchar(6)&#xA;, [Name] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_Document"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{1BAA566A-F142-4EFE-88C1-36924A0B9450}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_Document"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_Document')&#xA;    create table aw.Production_Document(&#xA;    &#xA;    [DocumentNode] hierarchyid&#xA;, [DocumentLevel] smallint&#xA;, [Title] nvarchar(50)&#xA;, [Owner] int&#xA;, [FolderFlag] bit&#xA;, [FileName] nvarchar(400)&#xA;, [FileExtension] nvarchar(8)&#xA;, [Revision] nchar(5)&#xA;, [ChangeNumber] int&#xA;, [Status] tinyint&#xA;, [DocumentSummary] nvarchar(max)&#xA;, [Document] varbinary(max)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_Illustration"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{70A4F5EF-F358-4BBA-BA07-7FBCECE5934C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_Illustration"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_Illustration')&#xA;    create table aw.Production_Illustration(&#xA;    &#xA;    [IllustrationID] int&#xA;, [Diagram] xml&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_Location"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{EB361925-9222-46F3-A83D-0B7A96E6ADDC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_Location"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_Location')&#xA;    create table aw.Production_Location(&#xA;    &#xA;    [LocationID] smallint&#xA;, [Name] nvarchar(50)&#xA;, [CostRate] smallmoney&#xA;, [Availability] decimal(8,2)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_Product"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E7E5FBA1-1C63-4B49-B408-EB65D228F185}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_Product"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_Product')&#xA;    create table aw.Production_Product(&#xA;    &#xA;    [ProductID] int&#xA;, [Name] nvarchar(50)&#xA;, [ProductNumber] nvarchar(25)&#xA;, [MakeFlag] bit&#xA;, [FinishedGoodsFlag] bit&#xA;, [Color] nvarchar(15)&#xA;, [SafetyStockLevel] smallint&#xA;, [ReorderPoint] smallint&#xA;, [StandardCost] money&#xA;, [ListPrice] money&#xA;, [Size] nvarchar(5)&#xA;, [SizeUnitMeasureCode] nchar(3)&#xA;, [WeightUnitMeasureCode] nchar(3)&#xA;, [Weight] decimal(8,2)&#xA;, [DaysToManufacture] int&#xA;, [ProductLine] nchar(2)&#xA;, [Class] nchar(2)&#xA;, [Style] nchar(2)&#xA;, [ProductSubcategoryID] int&#xA;, [ProductModelID] int&#xA;, [SellStartDate] datetime&#xA;, [SellEndDate] datetime&#xA;, [DiscontinuedDate] datetime&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductCategory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{81FF452B-6113-450D-BE28-9EE7A6DC4771}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductCategory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductCategory')&#xA;    create table aw.Production_ProductCategory(&#xA;    &#xA;    [ProductCategoryID] int&#xA;, [Name] nvarchar(50)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductCostHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{2235C14D-F12E-489D-94CD-664BD5C3BC67}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductCostHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductCostHistory')&#xA;    create table aw.Production_ProductCostHistory(&#xA;    &#xA;    [ProductID] int&#xA;, [StartDate] datetime&#xA;, [EndDate] datetime&#xA;, [StandardCost] money&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductDescription"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{8B8A9FA1-FF29-4E02-BAB2-F818FBE00D0D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductDescription"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductDescription')&#xA;    create table aw.Production_ProductDescription(&#xA;    &#xA;    [ProductDescriptionID] int&#xA;, [Description] nvarchar(400)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductDocument"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{21717E33-7952-4230-B31F-7A59BAAD9B38}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductDocument"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductDocument')&#xA;    create table aw.Production_ProductDocument(&#xA;    &#xA;    [ProductID] int&#xA;, [DocumentNode] hierarchyid&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductInventory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{244562C7-B8A8-4505-BCCE-48624382041F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductInventory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductInventory')&#xA;    create table aw.Production_ProductInventory(&#xA;    &#xA;    [ProductID] int&#xA;, [LocationID] smallint&#xA;, [Shelf] nvarchar(10)&#xA;, [Bin] tinyint&#xA;, [Quantity] smallint&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductListPriceHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{BC3E774E-5315-4D3C-B442-D399ABFC4F49}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductListPriceHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductListPriceHistory')&#xA;    create table aw.Production_ProductListPriceHistory(&#xA;    &#xA;    [ProductID] int&#xA;, [StartDate] datetime&#xA;, [EndDate] datetime&#xA;, [ListPrice] money&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductModel"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{309E258E-283D-4F6B-B471-00F9BFDAA5C9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductModel"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductModel')&#xA;    create table aw.Production_ProductModel(&#xA;    &#xA;    [ProductModelID] int&#xA;, [Name] nvarchar(50)&#xA;, [CatalogDescription] xml&#xA;, [Instructions] xml&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductModelIllustration"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{A11464E3-F380-4363-BF65-9EE21C32C8AB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductModelIllustration"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductModelIllustration')&#xA;    create table aw.Production_ProductModelIllustration(&#xA;    &#xA;    [ProductModelID] int&#xA;, [IllustrationID] int&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductModelProductDescriptionCulture"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{3E7775A8-C93B-48A0-9DF7-D92545FE5A15}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductModelProductDescriptionCulture"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductModelProductDescriptionCulture')&#xA;    create table aw.Production_ProductModelProductDescriptionCulture(&#xA;    &#xA;    [ProductModelID] int&#xA;, [ProductDescriptionID] int&#xA;, [CultureID] nchar(6)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductPhoto"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{4899A337-EEB1-489D-B0A3-080EBE6B797D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductPhoto"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductPhoto')&#xA;    create table aw.Production_ProductPhoto(&#xA;    &#xA;    [ProductPhotoID] int&#xA;, [ThumbNailPhoto] varbinary(max)&#xA;, [ThumbnailPhotoFileName] nvarchar(50)&#xA;, [LargePhoto] varbinary(max)&#xA;, [LargePhotoFileName] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductProductPhoto"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{42B7BF9A-CD86-4011-9D14-E891BA78305B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductProductPhoto"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductProductPhoto')&#xA;    create table aw.Production_ProductProductPhoto(&#xA;    &#xA;    [ProductID] int&#xA;, [ProductPhotoID] int&#xA;, [Primary] bit&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductReview"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F7EDFD1D-8D3A-4CF1-BC24-0209C17CB86D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductReview"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductReview')&#xA;    create table aw.Production_ProductReview(&#xA;    &#xA;    [ProductReviewID] int&#xA;, [ProductID] int&#xA;, [ReviewerName] nvarchar(50)&#xA;, [ReviewDate] datetime&#xA;, [EmailAddress] nvarchar(50)&#xA;, [Rating] int&#xA;, [Comments] nvarchar(3850)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ProductSubcategory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{3292DC0C-E351-4203-B0CE-40A47C721041}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ProductSubcategory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ProductSubcategory')&#xA;    create table aw.Production_ProductSubcategory(&#xA;    &#xA;    [ProductSubcategoryID] int&#xA;, [ProductCategoryID] int&#xA;, [Name] nvarchar(50)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_ScrapReason"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{02B1D81C-BD49-4682-AE0E-2441FC069B5C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_ScrapReason"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_ScrapReason')&#xA;    create table aw.Production_ScrapReason(&#xA;    &#xA;    [ScrapReasonID] smallint&#xA;, [Name] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_TransactionHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F227ECE8-1AD7-4C18-88AF-67CBCDA3FF69}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_TransactionHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_TransactionHistory')&#xA;    create table aw.Production_TransactionHistory(&#xA;    &#xA;    [TransactionID] int&#xA;, [ProductID] int&#xA;, [ReferenceOrderID] int&#xA;, [ReferenceOrderLineID] int&#xA;, [TransactionDate] datetime&#xA;, [TransactionType] nchar(1)&#xA;, [Quantity] int&#xA;, [ActualCost] money&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_TransactionHistoryArchive"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{1B113D4C-2D95-4481-B4FE-BAADC118374A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_TransactionHistoryArchive"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_TransactionHistoryArchive')&#xA;    create table aw.Production_TransactionHistoryArchive(&#xA;    &#xA;    [TransactionID] int&#xA;, [ProductID] int&#xA;, [ReferenceOrderID] int&#xA;, [ReferenceOrderLineID] int&#xA;, [TransactionDate] datetime&#xA;, [TransactionType] nchar(1)&#xA;, [Quantity] int&#xA;, [ActualCost] money&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_UnitMeasure"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{39D4D02B-A2A0-4CE9-9ACA-C89F2234633C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_UnitMeasure"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_UnitMeasure')&#xA;    create table aw.Production_UnitMeasure(&#xA;    &#xA;    [UnitMeasureCode] nchar(3)&#xA;, [Name] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_WorkOrder"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{0E7A97F9-73E8-4D71-B36B-65C2BD516E82}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_WorkOrder"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_WorkOrder')&#xA;    create table aw.Production_WorkOrder(&#xA;    &#xA;    [WorkOrderID] int&#xA;, [ProductID] int&#xA;, [OrderQty] int&#xA;, [StockedQty] int&#xA;, [ScrappedQty] smallint&#xA;, [StartDate] datetime&#xA;, [EndDate] datetime&#xA;, [DueDate] datetime&#xA;, [ScrapReasonID] smallint&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Production_WorkOrderRouting"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{DAC831A5-5961-4906-A3DD-1B955FE4C00D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Production_WorkOrderRouting"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Production_WorkOrderRouting')&#xA;    create table aw.Production_WorkOrderRouting(&#xA;    &#xA;    [WorkOrderID] int&#xA;, [ProductID] int&#xA;, [OperationSequence] smallint&#xA;, [LocationID] smallint&#xA;, [ScheduledStartDate] datetime&#xA;, [ScheduledEndDate] datetime&#xA;, [ActualStartDate] datetime&#xA;, [ActualEndDate] datetime&#xA;, [ActualResourceHrs] decimal(9,4)&#xA;, [PlannedCost] money&#xA;, [ActualCost] money&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Purchasing_ProductVendor"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{968827A9-86D3-40CB-924A-F29A1FD9D1D7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Purchasing_ProductVendor"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Purchasing_ProductVendor')&#xA;    create table aw.Purchasing_ProductVendor(&#xA;    &#xA;    [ProductID] int&#xA;, [BusinessEntityID] int&#xA;, [AverageLeadTime] int&#xA;, [StandardPrice] money&#xA;, [LastReceiptCost] money&#xA;, [LastReceiptDate] datetime&#xA;, [MinOrderQty] int&#xA;, [MaxOrderQty] int&#xA;, [OnOrderQty] int&#xA;, [UnitMeasureCode] nchar(3)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Purchasing_PurchaseOrderDetail"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{535E6EC6-91DE-4203-94A1-44D979E4564E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Purchasing_PurchaseOrderDetail"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Purchasing_PurchaseOrderDetail')&#xA;    create table aw.Purchasing_PurchaseOrderDetail(&#xA;    &#xA;    [PurchaseOrderID] int&#xA;, [PurchaseOrderDetailID] int&#xA;, [DueDate] datetime&#xA;, [OrderQty] smallint&#xA;, [ProductID] int&#xA;, [UnitPrice] money&#xA;, [LineTotal] money&#xA;, [ReceivedQty] decimal(8,2)&#xA;, [RejectedQty] decimal(8,2)&#xA;, [StockedQty] decimal(9,2)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Purchasing_PurchaseOrderHeader"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C19B27C2-20B3-48A5-876A-20CDCC686654}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Purchasing_PurchaseOrderHeader"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Purchasing_PurchaseOrderHeader')&#xA;    create table aw.Purchasing_PurchaseOrderHeader(&#xA;    &#xA;    [PurchaseOrderID] int&#xA;, [RevisionNumber] tinyint&#xA;, [Status] tinyint&#xA;, [EmployeeID] int&#xA;, [VendorID] int&#xA;, [ShipMethodID] int&#xA;, [OrderDate] datetime&#xA;, [ShipDate] datetime&#xA;, [SubTotal] money&#xA;, [TaxAmt] money&#xA;, [Freight] money&#xA;, [TotalDue] money&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Purchasing_ShipMethod"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{91B68CA7-A73C-4E5F-854D-83A81B079BD8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Purchasing_ShipMethod"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Purchasing_ShipMethod')&#xA;    create table aw.Purchasing_ShipMethod(&#xA;    &#xA;    [ShipMethodID] int&#xA;, [Name] nvarchar(50)&#xA;, [ShipBase] money&#xA;, [ShipRate] money&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Purchasing_Vendor"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{FDA19E1A-A006-45DF-9D0A-CB1B987D298D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Purchasing_Vendor"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Purchasing_Vendor')&#xA;    create table aw.Purchasing_Vendor(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [AccountNumber] nvarchar(15)&#xA;, [Name] nvarchar(50)&#xA;, [CreditRating] tinyint&#xA;, [PreferredVendorStatus] bit&#xA;, [ActiveFlag] bit&#xA;, [PurchasingWebServiceURL] nvarchar(1024)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_CountryRegionCurrency"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{9C624041-70FA-4ADC-AAF0-0C7A42B9FA5B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_CountryRegionCurrency"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_CountryRegionCurrency')&#xA;    create table aw.Sales_CountryRegionCurrency(&#xA;    &#xA;    [CountryRegionCode] nvarchar(3)&#xA;, [CurrencyCode] nchar(3)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_CreditCard"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{9BB93D46-C2A4-48BB-9FCB-D5285FCF09EB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_CreditCard"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_CreditCard')&#xA;    create table aw.Sales_CreditCard(&#xA;    &#xA;    [CreditCardID] int&#xA;, [CardType] nvarchar(50)&#xA;, [CardNumber] nvarchar(25)&#xA;, [ExpMonth] tinyint&#xA;, [ExpYear] smallint&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_Currency"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{64A92BD1-F511-46F8-AF7D-65B3D3103AC2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_Currency"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_Currency')&#xA;    create table aw.Sales_Currency(&#xA;    &#xA;    [CurrencyCode] nchar(3)&#xA;, [Name] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_CurrencyRate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{0EE7F4E7-E313-41FA-A233-E41F8E32A081}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_CurrencyRate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_CurrencyRate')&#xA;    create table aw.Sales_CurrencyRate(&#xA;    &#xA;    [CurrencyRateID] int&#xA;, [CurrencyRateDate] datetime&#xA;, [FromCurrencyCode] nchar(3)&#xA;, [ToCurrencyCode] nchar(3)&#xA;, [AverageRate] money&#xA;, [EndOfDayRate] money&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_Customer"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{A486514B-3D65-4D34-9407-ECA12EA71788}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_Customer"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_Customer')&#xA;    create table aw.Sales_Customer(&#xA;    &#xA;    [CustomerID] int&#xA;, [PersonID] int&#xA;, [StoreID] int&#xA;, [TerritoryID] int&#xA;, [AccountNumber] varchar(10)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_PersonCreditCard"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{474071FD-7409-466D-B02E-4B7635738606}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_PersonCreditCard"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_PersonCreditCard')&#xA;    create table aw.Sales_PersonCreditCard(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [CreditCardID] int&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SalesOrderDetail"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{7AB379BB-2033-4182-9937-6716C79BA1F2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SalesOrderDetail"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SalesOrderDetail')&#xA;    create table aw.Sales_SalesOrderDetail(&#xA;    &#xA;    [SalesOrderID] int&#xA;, [SalesOrderDetailID] int&#xA;, [CarrierTrackingNumber] nvarchar(25)&#xA;, [OrderQty] smallint&#xA;, [ProductID] int&#xA;, [SpecialOfferID] int&#xA;, [UnitPrice] money&#xA;, [UnitPriceDiscount] money&#xA;, [LineTotal] numeric(38,6)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SalesOrderHeader"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{BBF77042-7F86-4F19-9B12-D99F99B40F2D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SalesOrderHeader"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SalesOrderHeader')&#xA;    create table aw.Sales_SalesOrderHeader(&#xA;    &#xA;    [SalesOrderID] int&#xA;, [RevisionNumber] tinyint&#xA;, [OrderDate] datetime&#xA;, [DueDate] datetime&#xA;, [ShipDate] datetime&#xA;, [Status] tinyint&#xA;, [OnlineOrderFlag] bit&#xA;, [SalesOrderNumber] nvarchar(25)&#xA;, [PurchaseOrderNumber] nvarchar(25)&#xA;, [AccountNumber] nvarchar(15)&#xA;, [CustomerID] int&#xA;, [SalesPersonID] int&#xA;, [TerritoryID] int&#xA;, [BillToAddressID] int&#xA;, [ShipToAddressID] int&#xA;, [ShipMethodID] int&#xA;, [CreditCardID] int&#xA;, [CreditCardApprovalCode] varchar(15)&#xA;, [CurrencyRateID] int&#xA;, [SubTotal] money&#xA;, [TaxAmt] money&#xA;, [Freight] money&#xA;, [TotalDue] money&#xA;, [Comment] nvarchar(128)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SalesOrderHeaderSalesReason"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{3B977422-14C9-4A4F-A475-6268775D228F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SalesOrderHeaderSalesReason"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SalesOrderHeaderSalesReason')&#xA;    create table aw.Sales_SalesOrderHeaderSalesReason(&#xA;    &#xA;    [SalesOrderID] int&#xA;, [SalesReasonID] int&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SalesPerson"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{83BBB198-E9B0-4E3E-A60C-10A58C4C3389}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SalesPerson"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SalesPerson')&#xA;    create table aw.Sales_SalesPerson(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [TerritoryID] int&#xA;, [SalesQuota] money&#xA;, [Bonus] money&#xA;, [CommissionPct] smallmoney&#xA;, [SalesYTD] money&#xA;, [SalesLastYear] money&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SalesPersonQuotaHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{495B738D-B1FD-45AC-A332-4330BFD15633}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SalesPersonQuotaHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SalesPersonQuotaHistory')&#xA;    create table aw.Sales_SalesPersonQuotaHistory(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [QuotaDate] datetime&#xA;, [SalesQuota] money&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SalesReason"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{B7F30B74-1ABC-4417-8D7E-5446BF9AED33}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SalesReason"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SalesReason')&#xA;    create table aw.Sales_SalesReason(&#xA;    &#xA;    [SalesReasonID] int&#xA;, [Name] nvarchar(50)&#xA;, [ReasonType] nvarchar(50)&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SalesTaxRate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{690CADE0-9CCA-4E6E-81AB-CBA8D69FC85B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SalesTaxRate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SalesTaxRate')&#xA;    create table aw.Sales_SalesTaxRate(&#xA;    &#xA;    [SalesTaxRateID] int&#xA;, [StateProvinceID] int&#xA;, [TaxType] tinyint&#xA;, [TaxRate] smallmoney&#xA;, [Name] nvarchar(50)&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SalesTerritory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{A681A6DE-1D79-42CE-BDEE-36FFB2ECCF92}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SalesTerritory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SalesTerritory')&#xA;    create table aw.Sales_SalesTerritory(&#xA;    &#xA;    [TerritoryID] int&#xA;, [Name] nvarchar(50)&#xA;, [CountryRegionCode] nvarchar(3)&#xA;, [Group] nvarchar(50)&#xA;, [SalesYTD] money&#xA;, [SalesLastYear] money&#xA;, [CostYTD] money&#xA;, [CostLastYear] money&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SalesTerritoryHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F1C1D8F8-586A-4152-AC83-1885316F388B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SalesTerritoryHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SalesTerritoryHistory')&#xA;    create table aw.Sales_SalesTerritoryHistory(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [TerritoryID] int&#xA;, [StartDate] datetime&#xA;, [EndDate] datetime&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_ShoppingCartItem"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{69046C62-AA6E-43D9-A82F-192CB8528FFE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_ShoppingCartItem"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_ShoppingCartItem')&#xA;    create table aw.Sales_ShoppingCartItem(&#xA;    &#xA;    [ShoppingCartItemID] int&#xA;, [ShoppingCartID] nvarchar(50)&#xA;, [Quantity] int&#xA;, [ProductID] int&#xA;, [DateCreated] datetime&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SpecialOffer"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{35985118-BF12-4AC8-9A8D-611CA610E53C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SpecialOffer"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SpecialOffer')&#xA;    create table aw.Sales_SpecialOffer(&#xA;    &#xA;    [SpecialOfferID] int&#xA;, [Description] nvarchar(255)&#xA;, [DiscountPct] smallmoney&#xA;, [Type] nvarchar(50)&#xA;, [Category] nvarchar(50)&#xA;, [StartDate] datetime&#xA;, [EndDate] datetime&#xA;, [MinQty] int&#xA;, [MaxQty] int&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_SpecialOfferProduct"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{8C20CF1E-0883-44CA-8B73-96DF87D050A3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_SpecialOfferProduct"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_SpecialOfferProduct')&#xA;    create table aw.Sales_SpecialOfferProduct(&#xA;    &#xA;    [SpecialOfferID] int&#xA;, [ProductID] int&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_Sales_Store"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{BC42A342-7686-4D54-BD61-48DE0982B027}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_Sales_Store"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152232CF-200D-4A2F-9E17-24B3B4C87A03}"
+          SQLTask:SqlStatementSource="&#xA;  if not exists (select name from sys.schemas where name='aw')&#xA;   exec sp_executesql N'create schema aw'&#xA;&#xA;&#xA;  if not exists (select  table_name&#xA;   from INFORMATION_SCHEMA.TABLES&#xA;   where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='aw'&#xA;   and table_name='Sales_Store')&#xA;    create table aw.Sales_Store(&#xA;    &#xA;    [BusinessEntityID] int&#xA;, [Name] nvarchar(50)&#xA;, [SalesPersonID] int&#xA;, [Demographics] xml&#xA;, [rowguid] uniqueidentifier&#xA;, [ModifiedDate] datetime&#xA;                   , append_dt datetime default getdate()&#xA;                   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_dbo_AWBuildVersion_To_create_Production_BillOfMaterials]"
+      DTS:CreationName=""
+      DTS:DTSID="{35CA94A0-A02E-45BE-A86C-255DF9E6542F}"
+      DTS:From="Package\create_dbo_AWBuildVersion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_dbo_AWBuildVersion_To_create_Production_BillOfMaterials"
+      DTS:To="Package\create_Production_BillOfMaterials" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_dbo_DatabaseLog_To_create_HumanResources_Department]"
+      DTS:CreationName=""
+      DTS:DTSID="{FEC0A4FE-79CB-4448-9F2A-E829E06A9061}"
+      DTS:From="Package\create_dbo_DatabaseLog"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_dbo_DatabaseLog_To_create_HumanResources_Department"
+      DTS:To="Package\create_HumanResources_Department" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_dbo_ErrorLog_To_create_Production_Illustration]"
+      DTS:CreationName=""
+      DTS:DTSID="{91D0D790-74C9-4F16-9D49-F652E220BB1B}"
+      DTS:From="Package\create_dbo_ErrorLog"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_dbo_ErrorLog_To_create_Production_Illustration"
+      DTS:To="Package\create_Production_Illustration" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_HumanResources_Department_To_create_Production_Document]"
+      DTS:CreationName=""
+      DTS:DTSID="{54AC0D5F-7DD6-4A3E-91CC-BCC98D20FD4E}"
+      DTS:From="Package\create_HumanResources_Department"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_HumanResources_Department_To_create_Production_Document"
+      DTS:To="Package\create_Production_Document" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_HumanResources_EmployeeDepartmentHistory_To_create_HumanResources_EmployeePayHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{0876D142-B795-4DE8-A7BF-230A5E30DD0B}"
+      DTS:From="Package\create_HumanResources_EmployeeDepartmentHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_HumanResources_EmployeeDepartmentHistory_To_create_HumanResources_EmployeePayHistory"
+      DTS:To="Package\create_HumanResources_EmployeePayHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_HumanResources_EmployeePayHistory_To_create_dbo_ErrorLog]"
+      DTS:CreationName=""
+      DTS:DTSID="{0757AB75-6D24-4532-B6B8-1070C3893C56}"
+      DTS:From="Package\create_HumanResources_EmployeePayHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_HumanResources_EmployeePayHistory_To_create_dbo_ErrorLog"
+      DTS:To="Package\create_dbo_ErrorLog" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_HumanResources_Employee_To_create_HumanResources_EmployeeDepartmentHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{F32606A4-EB26-449F-ADF5-82BF232DB9BA}"
+      DTS:From="Package\create_HumanResources_Employee"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_HumanResources_Employee_To_create_HumanResources_EmployeeDepartmentHistory"
+      DTS:To="Package\create_HumanResources_EmployeeDepartmentHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_HumanResources_JobCandidate_To_create_Production_Location]"
+      DTS:CreationName=""
+      DTS:DTSID="{AB841701-EB1F-4AAB-B793-24FE3E25A8F3}"
+      DTS:From="Package\create_HumanResources_JobCandidate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_HumanResources_JobCandidate_To_create_Production_Location"
+      DTS:To="Package\create_Production_Location" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_HumanResources_Shift_To_create_Purchasing_ShipMethod]"
+      DTS:CreationName=""
+      DTS:DTSID="{695E32D1-89C4-4C70-9999-18B527EE5D77}"
+      DTS:From="Package\create_HumanResources_Shift"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_HumanResources_Shift_To_create_Purchasing_ShipMethod"
+      DTS:To="Package\create_Purchasing_ShipMethod" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_AddressType_To_create_dbo_AWBuildVersion]"
+      DTS:CreationName=""
+      DTS:DTSID="{CF15E7D3-7CA6-4334-9E00-401CE4500CDA}"
+      DTS:From="Package\create_Person_AddressType"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_AddressType_To_create_dbo_AWBuildVersion"
+      DTS:To="Package\create_dbo_AWBuildVersion" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_Address_To_create_Person_AddressType]"
+      DTS:CreationName=""
+      DTS:DTSID="{7F48A183-C199-4CDD-AD6A-CC0B288F25DE}"
+      DTS:From="Package\create_Person_Address"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_Address_To_create_Person_AddressType"
+      DTS:To="Package\create_Person_AddressType" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_BusinessEntityAddress_To_create_Person_BusinessEntityContact]"
+      DTS:CreationName=""
+      DTS:DTSID="{E8266124-C815-4D85-9A6E-5994AFEB801D}"
+      DTS:From="Package\create_Person_BusinessEntityAddress"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_BusinessEntityAddress_To_create_Person_BusinessEntityContact"
+      DTS:To="Package\create_Person_BusinessEntityContact" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_BusinessEntityContact_To_create_Person_ContactType]"
+      DTS:CreationName=""
+      DTS:DTSID="{AA91F064-CC27-4427-9C68-33A21578E6F8}"
+      DTS:From="Package\create_Person_BusinessEntityContact"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_BusinessEntityContact_To_create_Person_ContactType"
+      DTS:To="Package\create_Person_ContactType" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_BusinessEntity_To_create_Person_BusinessEntityAddress]"
+      DTS:CreationName=""
+      DTS:DTSID="{10750AA9-BC37-4306-864B-434976D6E838}"
+      DTS:From="Package\create_Person_BusinessEntity"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_BusinessEntity_To_create_Person_BusinessEntityAddress"
+      DTS:To="Package\create_Person_BusinessEntityAddress" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_ContactType_To_create_Person_CountryRegion]"
+      DTS:CreationName=""
+      DTS:DTSID="{A4F3D83B-349E-4C8C-82EF-AE8BB425592B}"
+      DTS:From="Package\create_Person_ContactType"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_ContactType_To_create_Person_CountryRegion"
+      DTS:To="Package\create_Person_CountryRegion" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_CountryRegion_To_create_Sales_CountryRegionCurrency]"
+      DTS:CreationName=""
+      DTS:DTSID="{2E9119B8-4285-408A-8647-938BA73508AA}"
+      DTS:From="Package\create_Person_CountryRegion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_CountryRegion_To_create_Sales_CountryRegionCurrency"
+      DTS:To="Package\create_Sales_CountryRegionCurrency" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_EmailAddress_To_create_HumanResources_Employee]"
+      DTS:CreationName=""
+      DTS:DTSID="{9126E1CE-C3EB-46BA-B100-ACE4A61D0686}"
+      DTS:From="Package\create_Person_EmailAddress"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_EmailAddress_To_create_HumanResources_Employee"
+      DTS:To="Package\create_HumanResources_Employee" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_Password_To_create_Person_Person]"
+      DTS:CreationName=""
+      DTS:DTSID="{5E9B32AE-A5B7-4E94-9A5F-CC8C039567AD}"
+      DTS:From="Package\create_Person_Password"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_Password_To_create_Person_Person"
+      DTS:To="Package\create_Person_Person" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_PersonPhone_To_create_Person_PhoneNumberType]"
+      DTS:CreationName=""
+      DTS:DTSID="{CF6D1037-2E1E-47C2-98C6-1B0943CA3F5A}"
+      DTS:From="Package\create_Person_PersonPhone"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_PersonPhone_To_create_Person_PhoneNumberType"
+      DTS:To="Package\create_Person_PhoneNumberType" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_Person_To_create_Sales_PersonCreditCard]"
+      DTS:CreationName=""
+      DTS:DTSID="{EAA3F903-DCE2-4144-9AA6-387DBB9614DA}"
+      DTS:From="Package\create_Person_Person"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_Person_To_create_Sales_PersonCreditCard"
+      DTS:To="Package\create_Sales_PersonCreditCard" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_PhoneNumberType_To_create_Production_Product]"
+      DTS:CreationName=""
+      DTS:DTSID="{1ADE2F15-9E3D-49CE-96FD-0CC9EA820053}"
+      DTS:From="Package\create_Person_PhoneNumberType"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_PhoneNumberType_To_create_Production_Product"
+      DTS:To="Package\create_Production_Product" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Person_StateProvince_To_create_Sales_Store]"
+      DTS:CreationName=""
+      DTS:DTSID="{620C7310-E7E0-4525-A953-5538E8D502E6}"
+      DTS:From="Package\create_Person_StateProvince"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Person_StateProvince_To_create_Sales_Store"
+      DTS:To="Package\create_Sales_Store" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_BillOfMaterials_To_create_Person_BusinessEntity]"
+      DTS:CreationName=""
+      DTS:DTSID="{5784ED5F-7CC8-4549-AA67-38DCEBC63CA5}"
+      DTS:From="Package\create_Production_BillOfMaterials"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_BillOfMaterials_To_create_Person_BusinessEntity"
+      DTS:To="Package\create_Person_BusinessEntity" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_Culture_To_create_Sales_Currency]"
+      DTS:CreationName=""
+      DTS:DTSID="{D209B234-6A7D-4030-9BEB-BFEE47530B6C}"
+      DTS:From="Package\create_Production_Culture"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_Culture_To_create_Sales_Currency"
+      DTS:To="Package\create_Sales_Currency" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_Document_To_create_Person_EmailAddress]"
+      DTS:CreationName=""
+      DTS:DTSID="{9E938873-3914-4EE1-9326-2DCB374438FB}"
+      DTS:From="Package\create_Production_Document"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_Document_To_create_Person_EmailAddress"
+      DTS:To="Package\create_Person_EmailAddress" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_Illustration_To_create_HumanResources_JobCandidate]"
+      DTS:CreationName=""
+      DTS:DTSID="{2F2D7688-A367-4ACB-BE56-C5DCB69B927C}"
+      DTS:From="Package\create_Production_Illustration"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_Illustration_To_create_HumanResources_JobCandidate"
+      DTS:To="Package\create_HumanResources_JobCandidate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_Location_To_create_Person_Password]"
+      DTS:CreationName=""
+      DTS:DTSID="{7998E6BE-C5F3-4B35-B583-AA9607D467FC}"
+      DTS:From="Package\create_Production_Location"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_Location_To_create_Person_Password"
+      DTS:To="Package\create_Person_Password" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductCategory_To_create_Production_ProductCostHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{FDB74E04-F317-402C-BED8-6A1A492C6E9B}"
+      DTS:From="Package\create_Production_ProductCategory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductCategory_To_create_Production_ProductCostHistory"
+      DTS:To="Package\create_Production_ProductCostHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductCostHistory_To_create_Production_ProductDescription]"
+      DTS:CreationName=""
+      DTS:DTSID="{C2107AF7-D784-4D87-9ED4-A0994C590625}"
+      DTS:From="Package\create_Production_ProductCostHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductCostHistory_To_create_Production_ProductDescription"
+      DTS:To="Package\create_Production_ProductDescription" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductDescription_To_create_Production_ProductDocument]"
+      DTS:CreationName=""
+      DTS:DTSID="{3452A60A-1B4B-4B07-B617-613B4B930CCD}"
+      DTS:From="Package\create_Production_ProductDescription"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductDescription_To_create_Production_ProductDocument"
+      DTS:To="Package\create_Production_ProductDocument" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductDocument_To_create_Production_ProductInventory]"
+      DTS:CreationName=""
+      DTS:DTSID="{9DC9A176-00A6-44E6-938B-8195CC43E312}"
+      DTS:From="Package\create_Production_ProductDocument"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductDocument_To_create_Production_ProductInventory"
+      DTS:To="Package\create_Production_ProductInventory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductInventory_To_create_Production_ProductListPriceHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{382C9351-8879-4DCA-BA9B-E30AC741D532}"
+      DTS:From="Package\create_Production_ProductInventory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductInventory_To_create_Production_ProductListPriceHistory"
+      DTS:To="Package\create_Production_ProductListPriceHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductListPriceHistory_To_create_Production_ProductModel]"
+      DTS:CreationName=""
+      DTS:DTSID="{5FED1F68-7C36-4C58-8F37-2BFE57D8D8BF}"
+      DTS:From="Package\create_Production_ProductListPriceHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductListPriceHistory_To_create_Production_ProductModel"
+      DTS:To="Package\create_Production_ProductModel" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductModelIllustration_To_create_Production_ProductModelProductDescriptionCulture]"
+      DTS:CreationName=""
+      DTS:DTSID="{3371EDF2-5F22-44A3-8C53-231D104FBED8}"
+      DTS:From="Package\create_Production_ProductModelIllustration"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductModelIllustration_To_create_Production_ProductModelProductDescriptionCulture"
+      DTS:To="Package\create_Production_ProductModelProductDescriptionCulture" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductModelProductDescriptionCulture_To_create_Production_ProductPhoto]"
+      DTS:CreationName=""
+      DTS:DTSID="{5AE48AAC-B05A-48E4-B756-E68776358A76}"
+      DTS:From="Package\create_Production_ProductModelProductDescriptionCulture"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductModelProductDescriptionCulture_To_create_Production_ProductPhoto"
+      DTS:To="Package\create_Production_ProductPhoto" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductModel_To_create_Production_ProductModelIllustration]"
+      DTS:CreationName=""
+      DTS:DTSID="{3D18166A-5F6D-42BD-8BC9-E8BE37241618}"
+      DTS:From="Package\create_Production_ProductModel"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductModel_To_create_Production_ProductModelIllustration"
+      DTS:To="Package\create_Production_ProductModelIllustration" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductPhoto_To_create_Production_ProductProductPhoto]"
+      DTS:CreationName=""
+      DTS:DTSID="{A06D02F4-40B4-4FEC-8530-11D3528D19ED}"
+      DTS:From="Package\create_Production_ProductPhoto"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductPhoto_To_create_Production_ProductProductPhoto"
+      DTS:To="Package\create_Production_ProductProductPhoto" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductProductPhoto_To_create_Production_ProductReview]"
+      DTS:CreationName=""
+      DTS:DTSID="{21E0B57B-E910-4E8E-9E1D-4F694AB2341C}"
+      DTS:From="Package\create_Production_ProductProductPhoto"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductProductPhoto_To_create_Production_ProductReview"
+      DTS:To="Package\create_Production_ProductReview" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductReview_To_create_Production_ProductSubcategory]"
+      DTS:CreationName=""
+      DTS:DTSID="{3FE93957-6A34-4E73-95A6-CDFC6F7413E3}"
+      DTS:From="Package\create_Production_ProductReview"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductReview_To_create_Production_ProductSubcategory"
+      DTS:To="Package\create_Production_ProductSubcategory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ProductSubcategory_To_create_Purchasing_ProductVendor]"
+      DTS:CreationName=""
+      DTS:DTSID="{4A572E1F-8B50-402C-ABE7-4AE5A2CF99E4}"
+      DTS:From="Package\create_Production_ProductSubcategory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ProductSubcategory_To_create_Purchasing_ProductVendor"
+      DTS:To="Package\create_Purchasing_ProductVendor" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_Product_To_create_Production_ProductCategory]"
+      DTS:CreationName=""
+      DTS:DTSID="{3E4A99B9-CFEC-4032-BD8F-D8C255CB524F}"
+      DTS:From="Package\create_Production_Product"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_Product_To_create_Production_ProductCategory"
+      DTS:To="Package\create_Production_ProductCategory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_ScrapReason_To_create_HumanResources_Shift]"
+      DTS:CreationName=""
+      DTS:DTSID="{2912697B-50B9-4E36-B85F-CC0C7DC93105}"
+      DTS:From="Package\create_Production_ScrapReason"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_ScrapReason_To_create_HumanResources_Shift"
+      DTS:To="Package\create_HumanResources_Shift" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_TransactionHistoryArchive_To_create_Production_UnitMeasure]"
+      DTS:CreationName=""
+      DTS:DTSID="{3E3C20FB-371F-4583-9811-021484695300}"
+      DTS:From="Package\create_Production_TransactionHistoryArchive"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_TransactionHistoryArchive_To_create_Production_UnitMeasure"
+      DTS:To="Package\create_Production_UnitMeasure" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_TransactionHistory_To_create_Production_TransactionHistoryArchive]"
+      DTS:CreationName=""
+      DTS:DTSID="{8C589A5D-C941-4976-857E-17DCB80B7AEF}"
+      DTS:From="Package\create_Production_TransactionHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_TransactionHistory_To_create_Production_TransactionHistoryArchive"
+      DTS:To="Package\create_Production_TransactionHistoryArchive" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_UnitMeasure_To_create_Purchasing_Vendor]"
+      DTS:CreationName=""
+      DTS:DTSID="{D680A72F-AFA0-4632-BED6-B50E02C5B3CD}"
+      DTS:From="Package\create_Production_UnitMeasure"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_UnitMeasure_To_create_Purchasing_Vendor"
+      DTS:To="Package\create_Purchasing_Vendor" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Production_WorkOrder_To_create_Production_WorkOrderRouting]"
+      DTS:CreationName=""
+      DTS:DTSID="{C5FA9D20-66D4-4B1B-85B1-1B19FE697BA4}"
+      DTS:From="Package\create_Production_WorkOrder"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Production_WorkOrder_To_create_Production_WorkOrderRouting"
+      DTS:To="Package\create_Production_WorkOrderRouting" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Purchasing_ProductVendor_To_create_Purchasing_PurchaseOrderDetail]"
+      DTS:CreationName=""
+      DTS:DTSID="{2347590B-CE9D-478E-9773-06CEB1C203BF}"
+      DTS:From="Package\create_Purchasing_ProductVendor"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Purchasing_ProductVendor_To_create_Purchasing_PurchaseOrderDetail"
+      DTS:To="Package\create_Purchasing_PurchaseOrderDetail" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Purchasing_PurchaseOrderDetail_To_create_Purchasing_PurchaseOrderHeader]"
+      DTS:CreationName=""
+      DTS:DTSID="{D079CC27-EA7A-4911-BFF6-BFEC466EF180}"
+      DTS:From="Package\create_Purchasing_PurchaseOrderDetail"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Purchasing_PurchaseOrderDetail_To_create_Purchasing_PurchaseOrderHeader"
+      DTS:To="Package\create_Purchasing_PurchaseOrderHeader" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Purchasing_PurchaseOrderHeader_To_create_Sales_SalesOrderDetail]"
+      DTS:CreationName=""
+      DTS:DTSID="{039110F7-7E1F-4812-BFE2-0EEAFC746CBD}"
+      DTS:From="Package\create_Purchasing_PurchaseOrderHeader"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Purchasing_PurchaseOrderHeader_To_create_Sales_SalesOrderDetail"
+      DTS:To="Package\create_Sales_SalesOrderDetail" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Purchasing_ShipMethod_To_create_Sales_ShoppingCartItem]"
+      DTS:CreationName=""
+      DTS:DTSID="{A7A4E271-B363-45EC-9DF1-CB4F423262E0}"
+      DTS:From="Package\create_Purchasing_ShipMethod"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Purchasing_ShipMethod_To_create_Sales_ShoppingCartItem"
+      DTS:To="Package\create_Sales_ShoppingCartItem" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Purchasing_Vendor_To_create_Production_WorkOrder]"
+      DTS:CreationName=""
+      DTS:DTSID="{D2E2482E-4DB7-45E4-8F0F-76295BAB284F}"
+      DTS:From="Package\create_Purchasing_Vendor"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Purchasing_Vendor_To_create_Production_WorkOrder"
+      DTS:To="Package\create_Production_WorkOrder" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_CountryRegionCurrency_To_create_Sales_CreditCard]"
+      DTS:CreationName=""
+      DTS:DTSID="{75970678-133C-47FC-A0CC-E64D81B66C4B}"
+      DTS:From="Package\create_Sales_CountryRegionCurrency"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_CountryRegionCurrency_To_create_Sales_CreditCard"
+      DTS:To="Package\create_Sales_CreditCard" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_CreditCard_To_create_Production_Culture]"
+      DTS:CreationName=""
+      DTS:DTSID="{DFEE2A3C-9786-445E-B6E4-D06F583E6790}"
+      DTS:From="Package\create_Sales_CreditCard"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_CreditCard_To_create_Production_Culture"
+      DTS:To="Package\create_Production_Culture" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_CurrencyRate_To_create_Sales_Customer]"
+      DTS:CreationName=""
+      DTS:DTSID="{9B8605B8-7058-4BD9-A64A-7AAB169DD536}"
+      DTS:From="Package\create_Sales_CurrencyRate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_CurrencyRate_To_create_Sales_Customer"
+      DTS:To="Package\create_Sales_Customer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_Currency_To_create_Sales_CurrencyRate]"
+      DTS:CreationName=""
+      DTS:DTSID="{2BAEAF07-2CAE-455E-89FF-4B114513F1DF}"
+      DTS:From="Package\create_Sales_Currency"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_Currency_To_create_Sales_CurrencyRate"
+      DTS:To="Package\create_Sales_CurrencyRate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_Customer_To_create_dbo_DatabaseLog]"
+      DTS:CreationName=""
+      DTS:DTSID="{A0B24B7A-9E25-4B68-A25B-922D4273A51E}"
+      DTS:From="Package\create_Sales_Customer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_Customer_To_create_dbo_DatabaseLog"
+      DTS:To="Package\create_dbo_DatabaseLog" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_PersonCreditCard_To_create_Person_PersonPhone]"
+      DTS:CreationName=""
+      DTS:DTSID="{AF0062DB-712A-4506-AA80-0F2985314A44}"
+      DTS:From="Package\create_Sales_PersonCreditCard"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_PersonCreditCard_To_create_Person_PersonPhone"
+      DTS:To="Package\create_Person_PersonPhone" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SalesOrderDetail_To_create_Sales_SalesOrderHeader]"
+      DTS:CreationName=""
+      DTS:DTSID="{9CE641ED-A1F3-4DDE-B733-2AF644CF9AA5}"
+      DTS:From="Package\create_Sales_SalesOrderDetail"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SalesOrderDetail_To_create_Sales_SalesOrderHeader"
+      DTS:To="Package\create_Sales_SalesOrderHeader" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SalesOrderHeaderSalesReason_To_create_Sales_SalesPerson]"
+      DTS:CreationName=""
+      DTS:DTSID="{83BF0B68-29EA-4DED-B51D-A9DE51262002}"
+      DTS:From="Package\create_Sales_SalesOrderHeaderSalesReason"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SalesOrderHeaderSalesReason_To_create_Sales_SalesPerson"
+      DTS:To="Package\create_Sales_SalesPerson" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SalesOrderHeader_To_create_Sales_SalesOrderHeaderSalesReason]"
+      DTS:CreationName=""
+      DTS:DTSID="{0149534C-4736-4B50-B602-0B44F308EA92}"
+      DTS:From="Package\create_Sales_SalesOrderHeader"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SalesOrderHeader_To_create_Sales_SalesOrderHeaderSalesReason"
+      DTS:To="Package\create_Sales_SalesOrderHeaderSalesReason" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SalesPersonQuotaHistory_To_create_Sales_SalesReason]"
+      DTS:CreationName=""
+      DTS:DTSID="{741163E2-7022-432C-9862-B116D0DA7F58}"
+      DTS:From="Package\create_Sales_SalesPersonQuotaHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SalesPersonQuotaHistory_To_create_Sales_SalesReason"
+      DTS:To="Package\create_Sales_SalesReason" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SalesPerson_To_create_Sales_SalesPersonQuotaHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{EA46C89A-A362-49DC-B7D9-DEF753A5ABBC}"
+      DTS:From="Package\create_Sales_SalesPerson"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SalesPerson_To_create_Sales_SalesPersonQuotaHistory"
+      DTS:To="Package\create_Sales_SalesPersonQuotaHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SalesReason_To_create_Sales_SalesTaxRate]"
+      DTS:CreationName=""
+      DTS:DTSID="{BF9093DE-4307-47F8-B34B-DCD25287018F}"
+      DTS:From="Package\create_Sales_SalesReason"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SalesReason_To_create_Sales_SalesTaxRate"
+      DTS:To="Package\create_Sales_SalesTaxRate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SalesTaxRate_To_create_Sales_SalesTerritory]"
+      DTS:CreationName=""
+      DTS:DTSID="{2031647C-48D5-4E4B-8D2A-18D4339F420B}"
+      DTS:From="Package\create_Sales_SalesTaxRate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SalesTaxRate_To_create_Sales_SalesTerritory"
+      DTS:To="Package\create_Sales_SalesTerritory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SalesTerritoryHistory_To_create_Production_ScrapReason]"
+      DTS:CreationName=""
+      DTS:DTSID="{7E10E7E1-750A-4E25-B3EB-574E488E42B1}"
+      DTS:From="Package\create_Sales_SalesTerritoryHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SalesTerritoryHistory_To_create_Production_ScrapReason"
+      DTS:To="Package\create_Production_ScrapReason" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SalesTerritory_To_create_Sales_SalesTerritoryHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{955E1894-BF8B-4254-B20A-CC2EE9619203}"
+      DTS:From="Package\create_Sales_SalesTerritory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SalesTerritory_To_create_Sales_SalesTerritoryHistory"
+      DTS:To="Package\create_Sales_SalesTerritoryHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_ShoppingCartItem_To_create_Sales_SpecialOffer]"
+      DTS:CreationName=""
+      DTS:DTSID="{39363857-B5F3-4581-A707-7A6A5C7D99F9}"
+      DTS:From="Package\create_Sales_ShoppingCartItem"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_ShoppingCartItem_To_create_Sales_SpecialOffer"
+      DTS:To="Package\create_Sales_SpecialOffer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SpecialOfferProduct_To_create_Person_StateProvince]"
+      DTS:CreationName=""
+      DTS:DTSID="{47AB13AD-F3CA-4EA6-9EC4-C3B134E27B52}"
+      DTS:From="Package\create_Sales_SpecialOfferProduct"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SpecialOfferProduct_To_create_Person_StateProvince"
+      DTS:To="Package\create_Person_StateProvince" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_SpecialOffer_To_create_Sales_SpecialOfferProduct]"
+      DTS:CreationName=""
+      DTS:DTSID="{0D65C16E-F5EE-4FFC-87C8-9B4AA2F19A0A}"
+      DTS:From="Package\create_Sales_SpecialOffer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_SpecialOffer_To_create_Sales_SpecialOfferProduct"
+      DTS:To="Package\create_Sales_SpecialOfferProduct" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_Sales_Store_To_create_Production_TransactionHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{4765F5DE-188A-408F-B7EC-382B44AC7EB7}"
+      DTS:From="Package\create_Sales_Store"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_Sales_Store_To_create_Production_TransactionHistory"
+      DTS:To="Package\create_Production_TransactionHistory" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

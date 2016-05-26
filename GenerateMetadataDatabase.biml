@@ -1,0 +1,244 @@
+<Connections>
+	<Connection ConnectionName="OLEDB_Config"/>
+	<Connection ConnectionName="<#= _bdcx #>"/>
+</Connections>
+<Tasks>
+	<Container Name="CT_source_database_<#= _bdcx #>" ConstraintMode="Linear">
+		<Tasks>
+			<ExecuteSQL Name="ET_delete_source_database_table_index_column" ConnectionName="OLEDB_Config">
+				<DirectInput>
+					delete from biml.source_database_table_index_column where exists (
+					select * from biml.source_database_table_index i join biml.source_database_table t on i.database_table_id=t.database_table_id where i.database_table_index_id=source_database_table_index_column.database_table_index_id
+					and t.database_id=<#= _sourceId #>)
+				</DirectInput>
+			</ExecuteSQL>
+			
+			<ExecuteSQL Name="ET_delete_source_database_table_index" ConnectionName="OLEDB_Config">
+				<DirectInput>
+					delete from biml.source_database_table_index where exists (select * from biml.source_database_table t where t.database_table_id=source_database_table_index.database_table_id and t.database_id=<#= _sourceId #>)
+				</DirectInput>
+			</ExecuteSQL>
+			
+			<ExecuteSQL Name="ET_delete_source_column" ConnectionName="OLEDB_Config">
+				<DirectInput>
+					delete from biml.source_column where exists (select * from biml.source_database_table t where t.database_table_id=source_detail_id and t.database_id=<#= _sourceId #>)
+				</DirectInput>
+			</ExecuteSQL>
+			
+			<ExecuteSQL Name="ET_DELETE_source_database_table" ConnectionName="OLEDB_Config">
+				<DirectInput>
+					delete
+					from biml.source_database_table
+					where database_id=<#= _sourceId #>
+
+					delete
+					from biml.source_detail
+					where source_id=<#= _sourceId #>
+					</DirectInput>
+			</ExecuteSQL>
+			<Dataflow Name="DF_Load source_database_table">
+				<Transformations>
+					<OleDbSource Name="SRC_source_database_table" ConnectionName="<#= _bdcx #>">
+						<DirectInput>
+							select  cast(TABLE_SCHEMA as varchar(200)) as TABLE_SCHEMA , cast(table_name as varchar(200)) as table_name from INFORMATION_SCHEMA.TABLES
+							where TABLE_TYPE='BASE TABLE' order by 2
+						</DirectInput>
+					</OleDbSource>
+					<DerivedColumns Name="DBID">
+						<Columns>
+							<Column Name="databaseID" DataType="Int64">
+								<#= _sourceId #>
+							</Column>
+						</Columns>
+					</DerivedColumns>
+					
+					<OleDbDestination Name="DST_source_database_table" ConnectionName="OLEDB_Config" UseFastLoadIfAvailable="false">
+						<ExternalTableOutput Table="biml.source_database_table" />
+						<Columns>
+							<Column SourceColumn="TABLE_SCHEMA" TargetColumn="schema_name"></Column>
+							<Column SourceColumn="table_name" TargetColumn="table_name"></Column>
+							<Column SourceColumn="databaseID" TargetColumn="database_id"></Column>
+						</Columns>
+					</OleDbDestination>
+					
+				</Transformations>
+			</Dataflow>
+
+			<Dataflow Name="DF_Load source_column">
+				<Transformations>
+					<OleDbSource Name="SRC_source_column" ConnectionName="<#= _bdcx #>">
+						<DirectInput>
+							select cast(TABLE_NAME as varchar(200)) as TABLE_NAME, cast(TABLE_SCHEMA as varchar(200)) as TABLE_SCHEMA,
+							cast(COLUMN_NAME as varchar(200)) as COLUMN_NAME, cast(DATA_TYPE as varchar(200)) as DATA_TYPE,
+							CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION, NUMERIC_SCALE, ORDINAL_POSITION
+							from INFORMATION_SCHEMA.COLUMNS order by ORDINAL_POSITION
+						</DirectInput>
+					</OleDbSource>
+
+					<Lookup Name="LK_detailId" OleDbConnectionName="OLEDB_Config" NoMatchBehavior="RedirectRowsToNoMatchOutput" 
+							CacheMode="Full">
+						<DirectInput>
+							select database_table_id, table_name, schema_name
+							from biml.source_database_table
+							where database_id=<#= _sourceId #>
+						</DirectInput>
+						<Inputs>
+							<Column SourceColumn="TABLE_NAME" TargetColumn="table_name"  />
+							<Column SourceColumn="TABLE_SCHEMA" TargetColumn="schema_name"  />
+						</Inputs>
+						<Outputs>
+							<Column SourceColumn="database_table_id" TargetColumn="database_table_id"  />
+						</Outputs>
+					</Lookup>
+					
+					<OleDbDestination Name="DST_source_column" ConnectionName="OLEDB_Config">
+						<ExternalTableOutput Table="biml.source_column" />
+						<Columns>
+							
+							<Column SourceColumn="database_table_id" TargetColumn="source_detail_id"></Column>
+							<Column SourceColumn="column_name" TargetColumn="column_name"></Column>
+							<Column SourceColumn="data_type" TargetColumn="data_type"></Column>
+							<Column SourceColumn="CHARACTER_MAXIMUM_LENGTH" TargetColumn="character_maximum_length"></Column>
+							<Column SourceColumn="NUMERIC_PRECISION" TargetColumn="numeric_precision"></Column>
+							<Column SourceColumn="NUMERIC_SCALE" TargetColumn="numeric_scale"></Column>
+							<Column SourceColumn="ORDINAL_POSITION" TargetColumn="ordinal_position"></Column>
+						</Columns>
+					</OleDbDestination>
+				</Transformations>
+			</Dataflow>
+
+
+			<Dataflow Name="DF_Load source_database_table_index">
+				<Transformations>
+					<OleDbSource Name="SRC_source_database_table_index" ConnectionName="<#= _bdcx #>">
+						<DirectInput>
+							select cast(o.name as varchar(200)) as table_name,
+							cast(i.name as varchar(200)) as index_name,
+							cast(i.type_desc as varchar(200)) as type_index,
+							case when i.is_unique=0 then '' else 'UNIQUE' end as is_unique, cast(s.name as varchar(200)) as TABLE_SCHEMA
+							from sys.objects o join sys.indexes i on o.object_id=i.object_id
+							join sys.schemas s on o.schema_id=s.schema_id
+						</DirectInput>
+					</OleDbSource>
+
+					<Lookup Name="LK_detailId" OleDbConnectionName="OLEDB_Config" NoMatchBehavior="RedirectRowsToNoMatchOutput"
+							CacheMode="Full">
+						<DirectInput>
+							select database_table_id, table_name, schema_name
+							from biml.source_database_table
+							where database_id=<#= _sourceId #>
+						</DirectInput>
+						<Inputs>
+							<Column SourceColumn="TABLE_NAME" TargetColumn="table_name"  />
+							<Column SourceColumn="TABLE_SCHEMA" TargetColumn="schema_name"  />
+						</Inputs>
+						<Outputs>
+							<Column SourceColumn="database_table_id" TargetColumn="database_table_id"  />
+						</Outputs>
+					</Lookup>
+
+					<OleDbDestination Name="DST_source_database_table_index" ConnectionName="OLEDB_Config">
+						<ExternalTableOutput Table="biml.source_database_table_index" />
+						<Columns>
+
+							<Column SourceColumn="database_table_id" TargetColumn="database_table_id"></Column>
+							<Column SourceColumn="index_name" TargetColumn="index_name"></Column>
+							<Column SourceColumn="type_index" TargetColumn="index_type"></Column>
+							<Column SourceColumn="is_unique" TargetColumn="is_unique"></Column>
+						</Columns>
+					</OleDbDestination>
+				</Transformations>
+			</Dataflow>
+
+
+			<Dataflow Name="DF_Load source_database_table_index_column">
+				<Transformations>
+					<OleDbSource Name="SRC_source_database_table_index_column" ConnectionName="<#= _bdcx #>">
+						<DirectInput>
+							select cast(o.name as varchar(200)) as table_name,
+							cast(i.name as varchar(200)) as index_name,
+							cast(s.name as varchar(200)) as TABLE_SCHEMA
+							,ic.index_column_id, ic.is_included_column, cast(c.name as varchar(200)) as column_name
+							from sys.objects o join sys.indexes i on o.object_id=i.object_id
+							join sys.schemas s on o.schema_id=s.schema_id
+							join sys.index_columns ic on ic.object_id=i.object_id and ic.index_id=i.index_id
+							join sys.columns c on ic.object_id=c.object_id and ic.column_id=c.column_id
+						</DirectInput>
+					</OleDbSource>
+
+					<Lookup Name="LK_detailId" OleDbConnectionName="OLEDB_Config" NoMatchBehavior="RedirectRowsToNoMatchOutput"
+							CacheMode="Full">
+						<DirectInput>
+							select t.table_name, t.schema_name, i.index_name, i.database_table_index_id
+							from biml.source_database_table t join biml.source_database_table_index i on t.database_table_id=i.database_table_id
+							where database_id=<#= _sourceId #>
+						</DirectInput>
+						<Inputs>
+							<Column SourceColumn="table_name" TargetColumn="table_name"  />
+							<Column SourceColumn="TABLE_SCHEMA" TargetColumn="schema_name"  />
+							<Column SourceColumn="index_name" TargetColumn="index_name"  />
+						</Inputs>
+						<Outputs>
+							<Column SourceColumn="database_table_index_id" TargetColumn="database_table_index_id"  />
+						</Outputs>
+					</Lookup>
+
+
+					<Lookup Name="LK_columnId" OleDbConnectionName="OLEDB_Config" NoMatchBehavior="RedirectRowsToNoMatchOutput"
+							CacheMode="Full">
+						<DirectInput>
+							select c.source_column_id, c.column_name, t.schema_name, t.table_name
+							from biml.source_column c join biml.source_database_table t on c.source_detail_id=t.database_table_id
+							where database_id=<#= _sourceId #>
+						</DirectInput>
+						<Inputs>
+							<Column SourceColumn="table_name" TargetColumn="table_name"  />
+							<Column SourceColumn="TABLE_SCHEMA" TargetColumn="schema_name"  />
+							<Column SourceColumn="column_name" TargetColumn="column_name"  />
+						</Inputs>
+						<Outputs>
+							<Column SourceColumn="source_column_id" TargetColumn="source_column_id"  />
+						</Outputs>
+					</Lookup>
+					
+					<OleDbDestination Name="DST_source_database_table_index_columm" ConnectionName="OLEDB_Config">
+						<ExternalTableOutput Table="biml.source_database_table_index_column" />
+						<Columns>
+
+							<Column SourceColumn="database_table_index_id" TargetColumn="database_table_index_id"></Column>
+							<Column SourceColumn="source_column_id" TargetColumn="column_id"></Column>
+							<Column SourceColumn="index_column_id" TargetColumn="column_ordinal"></Column>
+							<Column SourceColumn="is_included_column" TargetColumn="is_include"></Column>
+						</Columns>
+					</OleDbDestination>
+				</Transformations>
+			</Dataflow>
+
+			<ExecuteSQL Name="ET_pk" ConnectionName="OLEDB_Config">
+				<DirectInput>
+					update c set c.is_pk=1
+					from biml.source_database_table_index_column ic join biml.source_database_table_index i on ic.database_table_index_id=i.database_table_index_id
+					join biml.source_column c on ic.column_id=c.source_column_id
+					join biml.source_database_table t on i.database_table_id=t.database_table_id
+					where i.index_type='clustered' and i.is_unique='unique'
+					and c.is_pk is null
+					and t.database_id=<#= _sourceId #>
+
+
+					update c set c.is_pk=0
+					from biml.source_column c
+					join biml.source_database_table t on c.source_detail_id=t.database_table_id
+					where is_pk is null
+					and t.database_id=<#= _sourceId #>
+
+					</DirectInput>
+			</ExecuteSQL>
+			
+		</Tasks>
+	</Container>
+
+
+	
+	
+	
+</Tasks>

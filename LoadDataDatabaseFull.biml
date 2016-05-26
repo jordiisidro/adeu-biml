@@ -1,0 +1,58 @@
+ <Variables>
+    <Variable DataType="Int32" Name="RowCountSource">0</Variable>
+</Variables>
+<Tasks>
+	<ExecuteSQL Name="ET_truncate_<#= _tableTD["schema_name"]#>_<#= _tableTD["table_name"]#>" ConnectionName="<#= _sa_cs_name #>">
+		<DirectInput>
+			truncate table <#= _tableTD["short_name"]#>.<#= _tableTD["schema_name"]#>_<#= _tableTD["table_name"]#>
+		</DirectInput>
+	</ExecuteSQL>
+	<Dataflow Name="DF_Load <#= _tableTD["schema_name"]#>_<#= _tableTD["table_name"]#>">
+		<Transformations>
+			<OleDbSource Name="SRC_<#= _tableTD["schema_name"]#>_<#= _tableTD["table_name"]#>" ConnectionName="<#= _bdcx #>">
+				<DirectInput>
+					select 
+						<#
+                           
+                     string _col_name_sql = "select sc.column_name " +
+					"from biml.project p join biml.source s on p.project_id=s.project_id " +
+					"join biml.source_database sd on s.source_id=sd.source_id " +
+					"join biml.source_database_table t on sd.source_id=t.database_id " +
+					"join biml.source_detail de on t.database_table_id=de.source_detail_id " +
+					"join biml.source_column sc on de.source_detail_id=sc.source_detail_id " +
+					" where t.database_table_id="+_tableTD["database_table_id"];
+
+					DataTable _col_names = new DataTable();
+					SqlDataAdapter _col_names_da = new SqlDataAdapter(_col_name_sql, _config_con_string);
+					_col_names_da.Fill(_col_names);
+
+					for (int _i=0; _i<_col_names.Rows.Count ; _i++  )
+                    {
+                        DataRow _r = _col_names.Rows[_i];
+                        if (_i == 0)
+                            WriteLine("["+_r["column_name"].ToString()+"]");
+                        else
+                            WriteLine(", [" +_r["column_name"].ToString()+"]");                                
+                    }
+                            
+                   #>
+					from [<#= _tableTD["schema_name"] #>].[<#= _tableTD["table_name"] #>]
+				</DirectInput>
+			</OleDbSource>
+			<RowCount VariableName="User.RowCountSource" Name="CNT rows">
+				 <InputPath OutputPathName="SRC_<#= _tableTD["schema_name"]#>_<#= _tableTD["table_name"]#>.Output" />
+			</RowCount>
+			<OleDbDestination Name="DST_<#= _tableTD["schema_name"]#>_<#= _tableTD["table_name"]#>" ConnectionName="<#= _sa_cs_name #>">
+				<ExternalTableOutput Table="<#= _tableTD["short_name"]#>.<#= _tableTD["schema_name"]#>_<#= _tableTD["table_name"]#>" />
+			</OleDbDestination>
+		</Transformations>
+	</Dataflow>
+	<ExecuteSQL Name="ET_ins_log" ConnectionName="<#= _sa_cs_name #>">
+		<DirectInput>
+			insert into log.load_data values ( '<#= _tableTD["short_name"]#>', '<#= _tableTD["schema_name"]#>_<#= _tableTD["table_name"]#>', getdate(), ?)
+		</DirectInput>
+		<Parameters>
+            <Parameter Name="0" VariableName="User.RowCountSource" DataType="Int32" />
+		</Parameters>
+	</ExecuteSQL>
+</Tasks>

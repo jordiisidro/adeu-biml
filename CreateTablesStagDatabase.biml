@@ -1,0 +1,61 @@
+
+	
+<Tasks>
+	<# string _table_sql = "select t.table_name, t.schema_name, d.source_name, t.database_table_id, d.source_id, d.short_name "+
+		"from biml.source_database_table t "+
+		"join biml.source_detail de on t.database_table_id=de.source_detail_id "+
+		"join biml.source d on t.database_id=d.source_id "+
+		"join biml.project p on d.project_id=p.project_id  "+
+		"join biml.source_type st on st.id_source_type=d.source_type "+
+		"where de.extract_type is not null and project_name='"+_project+"' "+
+		" and d.source_name='"+_bdcx+"'";
+
+	DataTable _sourcesTD = new DataTable();
+	SqlDataAdapter _sourcesTD_da = new SqlDataAdapter(_table_sql, _config_con_string);
+	_sourcesTD_da.Fill(_sourcesTD);
+
+	foreach(DataRow _tableTD in _sourcesTD.Rows) {    #>
+
+	<ExecuteSQL Name="create_<#= _tableTD["schema_name"] #>_<#= _tableTD["table_name"] #>" ConnectionName="<#= _sa_cs_name #>">
+		<DirectInput>
+		if not exists (select name from sys.schemas where name='<#= _tableTD["short_name"] #>')
+			exec sp_executesql N'create schema <#= _tableTD["short_name"] #>'
+
+
+		if not exists (select  table_name
+			from INFORMATION_SCHEMA.TABLES
+			where TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='<#= _tableTD["short_name"] #>'
+			and table_name='<#= _tableTD["schema_name"] #>_<#= _tableTD["table_name"] #>')
+				create table <#= _tableTD["short_name"] #>.<#= _tableTD["schema_name"] #>_<#= _tableTD["table_name"] #>(
+				
+				<#
+                           
+                     string _col_name_sql = "select sc.column_name,sc.data_type, sc.character_maximum_length, sc.numeric_precision, sc.numeric_scale " +
+					"from biml.project p join biml.source s on p.project_id=s.project_id " +
+					"join biml.source_database sd on s.source_id=sd.source_id " +
+					"join biml.source_database_table t on sd.source_id=t.database_id " +
+					"join biml.source_detail de on t.database_table_id=de.source_detail_id " +
+					"join biml.source_column sc on de.source_detail_id=sc.source_detail_id " +
+					" where t.database_table_id="+_tableTD["database_table_id"];
+
+
+					DataTable _col_names = new DataTable();
+					SqlDataAdapter _col_names_da = new SqlDataAdapter(_col_name_sql, _config_con_string);
+					_col_names_da.Fill(_col_names);
+
+					for (int _i=0; _i<_col_names.Rows.Count ; _i++  )
+                    {
+                        DataRow _r = _col_names.Rows[_i];
+                        if (_i == 0)
+                            WriteLine(UT_SQLServer_datatype.RowConversion(_r));
+                        else
+                            WriteLine(", " + UT_SQLServer_datatype.RowConversion(_r));                                
+                    }
+                            
+                   #>
+                   , append_dt datetime default getdate()
+                   )
+		</DirectInput>
+	</ExecuteSQL>
+	<# } #>
+</Tasks>

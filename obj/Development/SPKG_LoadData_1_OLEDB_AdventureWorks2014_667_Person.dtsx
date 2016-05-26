@@ -1,0 +1,825 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:04 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{107DAB79-B327-4643-A85D-5F20C2A10C5B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_667_Person"
+  DTS:VersionGUID="{5D59C3BB-11D9-4D69-82CD-CE474AEB1A4A}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{15D97C35-420D-4162-B26C-5367703F0EF6}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{06578A90-6416-4ACA-8F78-E269F70B95A8}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EDFBC82B-F856-41AE-BA67-DD20C6E22333}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6E060421-4D91-4861-BCF0-E0BA9947DB20}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F183595A-378D-40DE-BE83-F6B7B974C085}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Person_Person"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{A3EE6C9E-9B3B-43BC-818F-9FE6C255DD03}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Person_Person"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Person_Person\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Person_Person\CNT rows.Inputs[SRC_Person_Person_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Person_Person_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Person_Person\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Person_Person\CNT rows.Inputs[SRC_Person_Person_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Person_Person\DST_Person_Person"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Person_Person"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Person_Person</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Person_Person\DST_Person_Person.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Person_Person">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[BusinessEntityID]"
+                      cachedDataType="i4"
+                      cachedName="BusinessEntityID"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[BusinessEntityID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[PersonType]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="PersonType"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[PersonType]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[PersonType]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[NameStyle]"
+                      cachedDataType="bool"
+                      cachedName="NameStyle"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[NameStyle]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[NameStyle]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[Title]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[FirstName]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[MiddleName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="MiddleName"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[MiddleName]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[MiddleName]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[LastName]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[Suffix]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Suffix"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[Suffix]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[Suffix]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[EmailPromotion]"
+                      cachedDataType="i4"
+                      cachedName="EmailPromotion"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[EmailPromotion]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[EmailPromotion]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[AdditionalContactInfo]"
+                      cachedDataType="nText"
+                      cachedName="AdditionalContactInfo"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[AdditionalContactInfo]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[AdditionalContactInfo]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[Demographics]"
+                      cachedDataType="nText"
+                      cachedName="Demographics"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[Demographics]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[Demographics]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[rowguid]"
+                      cachedDataType="guid"
+                      cachedName="rowguid"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[rowguid]" />
+                    <inputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[PersonType]"
+                      dataType="wstr"
+                      length="2"
+                      name="PersonType" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[NameStyle]"
+                      dataType="bool"
+                      name="NameStyle" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="8"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[MiddleName]"
+                      dataType="wstr"
+                      length="50"
+                      name="MiddleName" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[Suffix]"
+                      dataType="wstr"
+                      length="10"
+                      name="Suffix" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[EmailPromotion]"
+                      dataType="i4"
+                      name="EmailPromotion" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[AdditionalContactInfo]"
+                      dataType="nText"
+                      name="AdditionalContactInfo" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[Demographics]"
+                      dataType="nText"
+                      name="Demographics" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Person_Person\DST_Person_Person.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Person_Person\DST_Person_Person.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\DST_Person_Person.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Person_Person\DST_Person_Person.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Person_Person\SRC_Person_Person"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Person_Person"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[BusinessEntityID]
+, [PersonType]
+, [NameStyle]
+, [Title]
+, [FirstName]
+, [MiddleName]
+, [LastName]
+, [Suffix]
+, [EmailPromotion]
+, [AdditionalContactInfo]
+, [Demographics]
+, [rowguid]
+, [ModifiedDate]
+					from [Person].[Person]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Person_Person\SRC_Person_Person.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[BusinessEntityID]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[BusinessEntityID]"
+                      name="BusinessEntityID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[PersonType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[PersonType]"
+                      length="2"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[PersonType]"
+                      name="PersonType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[NameStyle]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[NameStyle]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[NameStyle]"
+                      name="NameStyle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[Title]"
+                      length="8"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[Title]"
+                      name="Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[FirstName]"
+                      length="50"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[MiddleName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[MiddleName]"
+                      length="50"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[MiddleName]"
+                      name="MiddleName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[LastName]"
+                      length="50"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[Suffix]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[Suffix]"
+                      length="10"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[Suffix]"
+                      name="Suffix"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[EmailPromotion]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[EmailPromotion]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[EmailPromotion]"
+                      name="EmailPromotion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[AdditionalContactInfo]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[AdditionalContactInfo]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[AdditionalContactInfo]"
+                      name="AdditionalContactInfo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[Demographics]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[Demographics]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[Demographics]"
+                      name="Demographics"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[rowguid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[rowguid]"
+                      name="rowguid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[PersonType]"
+                      dataType="wstr"
+                      length="2"
+                      name="PersonType" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[NameStyle]"
+                      dataType="bool"
+                      name="NameStyle" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="8"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[MiddleName]"
+                      dataType="wstr"
+                      length="50"
+                      name="MiddleName" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[Suffix]"
+                      dataType="wstr"
+                      length="10"
+                      name="Suffix" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[EmailPromotion]"
+                      dataType="i4"
+                      name="EmailPromotion" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[AdditionalContactInfo]"
+                      dataType="nText"
+                      name="AdditionalContactInfo" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[Demographics]"
+                      dataType="nText"
+                      name="Demographics" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[BusinessEntityID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[BusinessEntityID]"
+                      name="BusinessEntityID" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[PersonType]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[PersonType]"
+                      name="PersonType" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[NameStyle]"
+                      dataType="bool"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[NameStyle]"
+                      name="NameStyle" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[Title]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[MiddleName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[MiddleName]"
+                      name="MiddleName" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[Suffix]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[Suffix]"
+                      name="Suffix" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[EmailPromotion]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[EmailPromotion]"
+                      name="EmailPromotion" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[AdditionalContactInfo]"
+                      dataType="nText"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[AdditionalContactInfo]"
+                      name="AdditionalContactInfo" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[Demographics]"
+                      dataType="nText"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[Demographics]"
+                      name="Demographics" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[rowguid]"
+                      dataType="guid"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[rowguid]"
+                      name="rowguid" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Person_Person.Paths[CNT rows_Output_DST_Person_Person]"
+              endId="Package\DF_Load Person_Person\DST_Person_Person.Inputs[CNT rows_Output_DST_Person_Person]"
+              name="CNT rows_Output_DST_Person_Person"
+              startId="Package\DF_Load Person_Person\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Person_Person.Paths[SRC_Person_Person_Output_CNT rows]"
+              endId="Package\DF_Load Person_Person\CNT rows.Inputs[SRC_Person_Person_Output_CNT rows]"
+              name="SRC_Person_Person_Output_CNT rows"
+              startId="Package\DF_Load Person_Person\SRC_Person_Person.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{D76BB8D2-39A4-4E09-B88B-29C0FECD5D1F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{06578A90-6416-4ACA-8F78-E269F70B95A8}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{BABF15F4-768B-4A87-8657-552DFD6A2642}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{06578A90-6416-4ACA-8F78-E269F70B95A8}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Person_Person', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Person_Person"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{3549FF40-D17A-403B-80F9-B98BC3A1F16F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Person_Person"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{06578A90-6416-4ACA-8F78-E269F70B95A8}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Person_Person&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Person_Person_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{BC37897B-2E84-4132-A255-DA83123DE40E}"
+      DTS:From="Package\DF_Load Person_Person"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Person_Person_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Person_Person]"
+      DTS:CreationName=""
+      DTS:DTSID="{A83E8460-C542-4ADA-871C-3DD6F5D9FFBF}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Person_Person"
+      DTS:To="Package\ET_truncate_Person_Person" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Person_Person_To_DF_Load Person_Person]"
+      DTS:CreationName=""
+      DTS:DTSID="{21668B9A-5A73-4AAF-9457-F66F6F39515F}"
+      DTS:From="Package\ET_truncate_Person_Person"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Person_Person_To_DF_Load Person_Person"
+      DTS:To="Package\DF_Load Person_Person" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

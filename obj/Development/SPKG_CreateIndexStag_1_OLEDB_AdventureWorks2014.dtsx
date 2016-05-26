@@ -1,0 +1,1682 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/27/2016 11:19:55 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{D0040B29-3FCA-4358-B2C4-806A14917D0B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_CreateIndexStag_1_OLEDB_AdventureWorks2014"
+  DTS:VersionGUID="{9F0928F1-FC9E-4384-AD40-53D87DEDCBB2}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_dbo_AWBuildVersion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{31C94260-DACA-4F09-B2A7-AD8C9D5BEFDC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_dbo_AWBuildVersion"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_dbo_AWBuildVersion on&#xA;   aw.dbo_AWBuildVersion (&#xA;   &#xA;    [SystemInformationID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_dbo_ErrorLog"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{A7943E36-505A-409E-8309-59E7A01474F9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_dbo_ErrorLog"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_dbo_ErrorLog on&#xA;   aw.dbo_ErrorLog (&#xA;   &#xA;    [ErrorLogID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_HumanResources_Department"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{D5E9B807-45F2-439C-AA0A-DD5D9C512A19}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_HumanResources_Department"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_HumanResources_Department on&#xA;   aw.HumanResources_Department (&#xA;   &#xA;    [DepartmentID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_HumanResources_Employee"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{439F5AEB-9635-469C-847B-F5222A71CEBF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_HumanResources_Employee"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_HumanResources_Employee on&#xA;   aw.HumanResources_Employee (&#xA;   &#xA;    [BusinessEntityID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_HumanResources_EmployeeDepartmentHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{04D6CC13-F862-431C-A8B5-EE36F4C52FB3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_HumanResources_EmployeeDepartmentHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_HumanResources_EmployeeDepartmentHistory on&#xA;   aw.HumanResources_EmployeeDepartmentHistory (&#xA;   &#xA;    [BusinessEntityID]&#xA;, [DepartmentID]&#xA;, [ShiftID]&#xA;, [StartDate]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_HumanResources_EmployeePayHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{280E5E57-BEFE-4651-9E42-6CB92A5B9658}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_HumanResources_EmployeePayHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_HumanResources_EmployeePayHistory on&#xA;   aw.HumanResources_EmployeePayHistory (&#xA;   &#xA;    [BusinessEntityID]&#xA;, [RateChangeDate]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_HumanResources_JobCandidate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{031AEA6C-CF4E-4084-A4CE-E4869A643716}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_HumanResources_JobCandidate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_HumanResources_JobCandidate on&#xA;   aw.HumanResources_JobCandidate (&#xA;   &#xA;    [JobCandidateID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_HumanResources_Shift"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{0213419A-22D2-4771-A720-54BB30381CC5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_HumanResources_Shift"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_HumanResources_Shift on&#xA;   aw.HumanResources_Shift (&#xA;   &#xA;    [ShiftID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_Address"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{7475F62E-EFBC-48D8-B128-74BE33552AB3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_Address"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_Address on&#xA;   aw.Person_Address (&#xA;   &#xA;    [AddressID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_AddressType"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{1376D2A3-DCF3-46D2-AA56-FDEABCA96AB0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_AddressType"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_AddressType on&#xA;   aw.Person_AddressType (&#xA;   &#xA;    [AddressTypeID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_BusinessEntity"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{B157BACD-9001-4160-9B16-5E2DF189F281}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_BusinessEntity"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_BusinessEntity on&#xA;   aw.Person_BusinessEntity (&#xA;   &#xA;    [BusinessEntityID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_BusinessEntityAddress"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{94176622-47E5-4C67-8BE1-DF46408A9985}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_BusinessEntityAddress"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_BusinessEntityAddress on&#xA;   aw.Person_BusinessEntityAddress (&#xA;   &#xA;    [BusinessEntityID]&#xA;, [AddressID]&#xA;, [AddressTypeID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_BusinessEntityContact"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{33D4346A-61F0-448B-99DE-223587FD166F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_BusinessEntityContact"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_BusinessEntityContact on&#xA;   aw.Person_BusinessEntityContact (&#xA;   &#xA;    [BusinessEntityID]&#xA;, [PersonID]&#xA;, [ContactTypeID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_ContactType"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{CE1128E6-6711-42A1-AD2D-2AA57F4585A8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_ContactType"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_ContactType on&#xA;   aw.Person_ContactType (&#xA;   &#xA;    [ContactTypeID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_CountryRegion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{DF74C2D5-6AC8-48B1-BD5A-967B53E719E5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_CountryRegion"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_CountryRegion on&#xA;   aw.Person_CountryRegion (&#xA;   &#xA;    [CountryRegionCode]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_EmailAddress"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{17672BBA-1823-4AA0-B42C-98E5331723E5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_EmailAddress"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_EmailAddress on&#xA;   aw.Person_EmailAddress (&#xA;   &#xA;    [BusinessEntityID]&#xA;, [EmailAddressID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_Password"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{5D880AC7-9763-4DDB-8817-D4DD84E6ED49}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_Password"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_Password on&#xA;   aw.Person_Password (&#xA;   &#xA;    [BusinessEntityID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_Person"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{6F4F83B2-F9C5-4521-B74B-91FD63319266}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_Person"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_Person on&#xA;   aw.Person_Person (&#xA;   &#xA;    [BusinessEntityID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_PersonPhone"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{FC67EEC5-15D7-4461-A342-AF96DF02D365}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_PersonPhone"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_PersonPhone on&#xA;   aw.Person_PersonPhone (&#xA;   &#xA;    [BusinessEntityID]&#xA;, [PhoneNumber]&#xA;, [PhoneNumberTypeID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_PhoneNumberType"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{580F20D9-1894-449C-AE4D-0E97C7DAFBF7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_PhoneNumberType"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_PhoneNumberType on&#xA;   aw.Person_PhoneNumberType (&#xA;   &#xA;    [PhoneNumberTypeID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Person_StateProvince"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{BF7B0FB7-46E0-466D-A61E-43B0580426F9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Person_StateProvince"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Person_StateProvince on&#xA;   aw.Person_StateProvince (&#xA;   &#xA;    [StateProvinceID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_BillOfMaterials"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{AEE2955D-919B-467B-897B-16C65CAEE3EC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_BillOfMaterials"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_BillOfMaterials on&#xA;   aw.Production_BillOfMaterials (&#xA;   &#xA;    [ProductAssemblyID]&#xA;, [ComponentID]&#xA;, [StartDate]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_Culture"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{30DA92CA-46F9-4062-807E-73EDEA6A7D82}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_Culture"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_Culture on&#xA;   aw.Production_Culture (&#xA;   &#xA;    [CultureID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_Document"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{193CBEA8-0F19-4C34-9A9F-4533D2D69C7A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_Document"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_Document on&#xA;   aw.Production_Document (&#xA;   &#xA;    [DocumentNode]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_Illustration"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{78DD9683-C97A-408D-866A-0521722F3BC2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_Illustration"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_Illustration on&#xA;   aw.Production_Illustration (&#xA;   &#xA;    [IllustrationID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_Location"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{CBDB72CD-14D9-402E-9192-971A3CA0ACB8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_Location"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_Location on&#xA;   aw.Production_Location (&#xA;   &#xA;    [LocationID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_Product"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{510C1625-E8A8-4A36-A080-689AB2218E67}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_Product"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_Product on&#xA;   aw.Production_Product (&#xA;   &#xA;    [ProductID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductCategory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{2E618C71-2444-47F0-9FA3-9A9FAFDF338A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductCategory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductCategory on&#xA;   aw.Production_ProductCategory (&#xA;   &#xA;    [ProductCategoryID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductCostHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{746F6417-03ED-42A4-9215-F5F2FFCEC1A9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductCostHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductCostHistory on&#xA;   aw.Production_ProductCostHistory (&#xA;   &#xA;    [ProductID]&#xA;, [StartDate]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductDescription"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{BCE7418F-EA07-45F6-93F0-7672AE772F95}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductDescription"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductDescription on&#xA;   aw.Production_ProductDescription (&#xA;   &#xA;    [ProductDescriptionID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductDocument"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{740B26A0-1944-45FC-ADF6-E833232ABCD1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductDocument"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductDocument on&#xA;   aw.Production_ProductDocument (&#xA;   &#xA;    [ProductID]&#xA;, [DocumentNode]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductInventory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E419475E-3062-4DB2-A902-DD68299536FC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductInventory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductInventory on&#xA;   aw.Production_ProductInventory (&#xA;   &#xA;    [ProductID]&#xA;, [LocationID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductListPriceHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F77EE29E-41EB-4F67-91E6-5188AD4F7005}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductListPriceHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductListPriceHistory on&#xA;   aw.Production_ProductListPriceHistory (&#xA;   &#xA;    [ProductID]&#xA;, [StartDate]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductModel"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E41FB089-49A8-49EF-BC03-4D28907ACD76}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductModel"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductModel on&#xA;   aw.Production_ProductModel (&#xA;   &#xA;    [ProductModelID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductModelIllustration"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E4192D74-BAB9-4533-8D1E-E373A6EC57E0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductModelIllustration"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductModelIllustration on&#xA;   aw.Production_ProductModelIllustration (&#xA;   &#xA;    [ProductModelID]&#xA;, [IllustrationID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductModelProductDescriptionCulture"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{706F57D6-A2A7-48A3-A6AC-8B577A28E15C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductModelProductDescriptionCulture"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductModelProductDescriptionCulture on&#xA;   aw.Production_ProductModelProductDescriptionCulture (&#xA;   &#xA;    [ProductModelID]&#xA;, [ProductDescriptionID]&#xA;, [CultureID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductPhoto"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{DD64F78B-3600-46B2-A50F-890883E6EB70}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductPhoto"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductPhoto on&#xA;   aw.Production_ProductPhoto (&#xA;   &#xA;    [ProductPhotoID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductReview"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{D2D0402B-9B5E-405B-9971-082545BC5D9E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductReview"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductReview on&#xA;   aw.Production_ProductReview (&#xA;   &#xA;    [ProductReviewID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ProductSubcategory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{CBA6F3C3-2C7C-49BB-831C-FFA71FA8AA20}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ProductSubcategory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ProductSubcategory on&#xA;   aw.Production_ProductSubcategory (&#xA;   &#xA;    [ProductSubcategoryID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_ScrapReason"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{7E544005-8B98-414E-940B-520FB845B498}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_ScrapReason"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_ScrapReason on&#xA;   aw.Production_ScrapReason (&#xA;   &#xA;    [ScrapReasonID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_TransactionHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{FA079C4F-8206-4DFA-AEB3-EC0D05183ACE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_TransactionHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_TransactionHistory on&#xA;   aw.Production_TransactionHistory (&#xA;   &#xA;    [TransactionID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_TransactionHistoryArchive"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{A8D02A19-900D-4FAF-814B-970A0CB3BBD0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_TransactionHistoryArchive"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_TransactionHistoryArchive on&#xA;   aw.Production_TransactionHistoryArchive (&#xA;   &#xA;    [TransactionID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_UnitMeasure"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C0AF8820-0CD3-4ECC-A18E-36F0F4AE14A7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_UnitMeasure"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_UnitMeasure on&#xA;   aw.Production_UnitMeasure (&#xA;   &#xA;    [UnitMeasureCode]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_WorkOrder"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{AAFBE951-9C36-4EC6-8F9F-0094B7A63949}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_WorkOrder"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_WorkOrder on&#xA;   aw.Production_WorkOrder (&#xA;   &#xA;    [WorkOrderID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Production_WorkOrderRouting"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{FE016BFA-56BB-4E9E-B3F6-0FA6ABCEC45B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Production_WorkOrderRouting"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Production_WorkOrderRouting on&#xA;   aw.Production_WorkOrderRouting (&#xA;   &#xA;    [WorkOrderID]&#xA;, [ProductID]&#xA;, [OperationSequence]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Purchasing_ProductVendor"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E19A2FAC-13B3-4D80-9787-D86AB005F07F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Purchasing_ProductVendor"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Purchasing_ProductVendor on&#xA;   aw.Purchasing_ProductVendor (&#xA;   &#xA;    [ProductID]&#xA;, [BusinessEntityID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Purchasing_PurchaseOrderDetail"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{0FE1D0EC-18CF-41B6-BEF5-A84F0517BC39}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Purchasing_PurchaseOrderDetail"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Purchasing_PurchaseOrderDetail on&#xA;   aw.Purchasing_PurchaseOrderDetail (&#xA;   &#xA;    [PurchaseOrderID]&#xA;, [PurchaseOrderDetailID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Purchasing_PurchaseOrderHeader"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F40763D8-A954-4F9A-8506-27F9422B358E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Purchasing_PurchaseOrderHeader"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Purchasing_PurchaseOrderHeader on&#xA;   aw.Purchasing_PurchaseOrderHeader (&#xA;   &#xA;    [PurchaseOrderID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Purchasing_ShipMethod"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{872A9DAD-B3E4-4495-B520-84F48A0B3B2D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Purchasing_ShipMethod"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Purchasing_ShipMethod on&#xA;   aw.Purchasing_ShipMethod (&#xA;   &#xA;    [ShipMethodID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Purchasing_Vendor"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C6E142E7-4179-4BEB-A9BD-1CCFC77A19FF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Purchasing_Vendor"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Purchasing_Vendor on&#xA;   aw.Purchasing_Vendor (&#xA;   &#xA;    [BusinessEntityID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_CountryRegionCurrency"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{D6C03D6C-84DB-49A3-BA55-C22FD5E7E75B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_CountryRegionCurrency"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_CountryRegionCurrency on&#xA;   aw.Sales_CountryRegionCurrency (&#xA;   &#xA;    [CountryRegionCode]&#xA;, [CurrencyCode]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_CreditCard"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{367DADE9-4CE4-411A-BB2E-ADD629D31C34}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_CreditCard"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_CreditCard on&#xA;   aw.Sales_CreditCard (&#xA;   &#xA;    [CreditCardID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_Currency"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{8B62ED42-4007-4045-9D56-B2592A5F2364}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_Currency"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_Currency on&#xA;   aw.Sales_Currency (&#xA;   &#xA;    [CurrencyCode]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_CurrencyRate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{509E0709-31CA-4145-ACAE-BE04466B5F93}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_CurrencyRate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_CurrencyRate on&#xA;   aw.Sales_CurrencyRate (&#xA;   &#xA;    [CurrencyRateID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_Customer"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{1368B6E1-0150-493A-930B-7F118293F7B2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_Customer"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_Customer on&#xA;   aw.Sales_Customer (&#xA;   &#xA;    [CustomerID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_PersonCreditCard"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{A81C4956-0730-40E1-B92C-C79F34FF5DEC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_PersonCreditCard"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_PersonCreditCard on&#xA;   aw.Sales_PersonCreditCard (&#xA;   &#xA;    [BusinessEntityID]&#xA;, [CreditCardID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SalesOrderDetail"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C9C94422-AF19-4ADE-A96D-528CBE050516}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SalesOrderDetail"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SalesOrderDetail on&#xA;   aw.Sales_SalesOrderDetail (&#xA;   &#xA;    [SalesOrderID]&#xA;, [SalesOrderDetailID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SalesOrderHeader"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E537885E-900E-4DF0-BB5C-386BC3820C2B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SalesOrderHeader"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SalesOrderHeader on&#xA;   aw.Sales_SalesOrderHeader (&#xA;   &#xA;    [SalesOrderID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SalesOrderHeaderSalesReason"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{42A4B270-EF34-480D-BC9D-2902017AA6F1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SalesOrderHeaderSalesReason"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SalesOrderHeaderSalesReason on&#xA;   aw.Sales_SalesOrderHeaderSalesReason (&#xA;   &#xA;    [SalesOrderID]&#xA;, [SalesReasonID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SalesPerson"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{3F4D26D6-E2F6-42E3-A70B-E0E6C91C11C1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SalesPerson"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SalesPerson on&#xA;   aw.Sales_SalesPerson (&#xA;   &#xA;    [BusinessEntityID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SalesPersonQuotaHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{0CF1C464-C9E1-4E1A-B31B-A85E0BBD55FB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SalesPersonQuotaHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SalesPersonQuotaHistory on&#xA;   aw.Sales_SalesPersonQuotaHistory (&#xA;   &#xA;    [BusinessEntityID]&#xA;, [QuotaDate]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SalesReason"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C063E797-996E-43D6-AC9C-7D5388215382}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SalesReason"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SalesReason on&#xA;   aw.Sales_SalesReason (&#xA;   &#xA;    [SalesReasonID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SalesTaxRate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{01C57CB7-C76B-46AB-9CDC-94C699834C17}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SalesTaxRate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SalesTaxRate on&#xA;   aw.Sales_SalesTaxRate (&#xA;   &#xA;    [SalesTaxRateID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SalesTerritory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E8C18E42-0FB3-4756-8706-47EAEBB5BBB5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SalesTerritory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SalesTerritory on&#xA;   aw.Sales_SalesTerritory (&#xA;   &#xA;    [TerritoryID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SalesTerritoryHistory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{0E1980C4-5752-4716-AE4A-498D73BAA309}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SalesTerritoryHistory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SalesTerritoryHistory on&#xA;   aw.Sales_SalesTerritoryHistory (&#xA;   &#xA;    [BusinessEntityID]&#xA;, [TerritoryID]&#xA;, [StartDate]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_ShoppingCartItem"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{386304AE-6A35-4DE7-B66B-B8741D424783}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_ShoppingCartItem"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_ShoppingCartItem on&#xA;   aw.Sales_ShoppingCartItem (&#xA;   &#xA;    [ShoppingCartItemID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SpecialOffer"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{BAA5FE49-85B2-46F5-A2C7-73D3E581BD56}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SpecialOffer"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SpecialOffer on&#xA;   aw.Sales_SpecialOffer (&#xA;   &#xA;    [SpecialOfferID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_SpecialOfferProduct"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{4CE32EF4-54FF-4E61-8E39-9D176C05DEE1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_SpecialOfferProduct"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_SpecialOfferProduct on&#xA;   aw.Sales_SpecialOfferProduct (&#xA;   &#xA;    [SpecialOfferID]&#xA;, [ProductID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\create_pk_index_Sales_Store"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{1806BC8D-A317-45DE-90A3-0F9A9D1CD47A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create_pk_index_Sales_Store"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{20BB4E3B-C0B3-4C2D-AF54-DBE14995DE29}"
+          SQLTask:SqlStatementSource="&#xA;   create unique clustered index pk_ix_aw_Sales_Store on&#xA;   aw.Sales_Store (&#xA;   &#xA;    [BusinessEntityID]&#xA;   )&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_dbo_AWBuildVersion_To_create_pk_index_Production_ProductModelProductDescriptionCulture]"
+      DTS:CreationName=""
+      DTS:DTSID="{8D28C8B1-85CD-4092-A8D2-9EF0AB2A8C1E}"
+      DTS:From="Package\create_pk_index_dbo_AWBuildVersion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_dbo_AWBuildVersion_To_create_pk_index_Production_ProductModelProductDescriptionCulture"
+      DTS:To="Package\create_pk_index_Production_ProductModelProductDescriptionCulture" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_dbo_ErrorLog_To_create_pk_index_Production_ProductListPriceHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{C6F47092-D0A6-4563-B0C5-D40D99D789DB}"
+      DTS:From="Package\create_pk_index_dbo_ErrorLog"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_dbo_ErrorLog_To_create_pk_index_Production_ProductListPriceHistory"
+      DTS:To="Package\create_pk_index_Production_ProductListPriceHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_HumanResources_Department_To_create_pk_index_Production_Document]"
+      DTS:CreationName=""
+      DTS:DTSID="{DB448988-EDD1-4A92-9E5C-F6980AC699F5}"
+      DTS:From="Package\create_pk_index_HumanResources_Department"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_HumanResources_Department_To_create_pk_index_Production_Document"
+      DTS:To="Package\create_pk_index_Production_Document" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_HumanResources_EmployeeDepartmentHistory_To_create_pk_index_HumanResources_EmployeePayHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{1E0EB145-D92E-402C-8140-167EBB2A3C19}"
+      DTS:From="Package\create_pk_index_HumanResources_EmployeeDepartmentHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_HumanResources_EmployeeDepartmentHistory_To_create_pk_index_HumanResources_EmployeePayHistory"
+      DTS:To="Package\create_pk_index_HumanResources_EmployeePayHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_HumanResources_EmployeePayHistory_To_create_pk_index_Sales_SalesOrderHeaderSalesReason]"
+      DTS:CreationName=""
+      DTS:DTSID="{B463F2A7-AA08-419D-AB88-BBD3DA52264C}"
+      DTS:From="Package\create_pk_index_HumanResources_EmployeePayHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_HumanResources_EmployeePayHistory_To_create_pk_index_Sales_SalesOrderHeaderSalesReason"
+      DTS:To="Package\create_pk_index_Sales_SalesOrderHeaderSalesReason" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_HumanResources_Employee_To_create_pk_index_Sales_SalesOrderHeader]"
+      DTS:CreationName=""
+      DTS:DTSID="{2301EB79-E867-42B9-94CD-5657040F6A5B}"
+      DTS:From="Package\create_pk_index_HumanResources_Employee"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_HumanResources_Employee_To_create_pk_index_Sales_SalesOrderHeader"
+      DTS:To="Package\create_pk_index_Sales_SalesOrderHeader" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_HumanResources_JobCandidate_To_create_pk_index_Production_Location]"
+      DTS:CreationName=""
+      DTS:DTSID="{3B344C55-9379-463D-96DF-9C40AD5DB730}"
+      DTS:From="Package\create_pk_index_HumanResources_JobCandidate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_HumanResources_JobCandidate_To_create_pk_index_Production_Location"
+      DTS:To="Package\create_pk_index_Production_Location" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_HumanResources_Shift_To_create_pk_index_Production_ProductCategory]"
+      DTS:CreationName=""
+      DTS:DTSID="{E87E92C6-C8C4-4C61-BC07-F5722CB057F9}"
+      DTS:From="Package\create_pk_index_HumanResources_Shift"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_HumanResources_Shift_To_create_pk_index_Production_ProductCategory"
+      DTS:To="Package\create_pk_index_Production_ProductCategory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_AddressType_To_create_pk_index_Person_StateProvince]"
+      DTS:CreationName=""
+      DTS:DTSID="{0C3F1F3E-B15F-4AF5-988C-7E2526C6FF1A}"
+      DTS:From="Package\create_pk_index_Person_AddressType"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_AddressType_To_create_pk_index_Person_StateProvince"
+      DTS:To="Package\create_pk_index_Person_StateProvince" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_Address_To_create_pk_index_Sales_SpecialOfferProduct]"
+      DTS:CreationName=""
+      DTS:DTSID="{0514A08B-ED4A-4649-9FCA-89580B365996}"
+      DTS:From="Package\create_pk_index_Person_Address"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_Address_To_create_pk_index_Sales_SpecialOfferProduct"
+      DTS:To="Package\create_pk_index_Sales_SpecialOfferProduct" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_BusinessEntityAddress_To_create_pk_index_Purchasing_ProductVendor]"
+      DTS:CreationName=""
+      DTS:DTSID="{F89127F4-2002-4D44-BCB1-5E88EF8C867F}"
+      DTS:From="Package\create_pk_index_Person_BusinessEntityAddress"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_BusinessEntityAddress_To_create_pk_index_Purchasing_ProductVendor"
+      DTS:To="Package\create_pk_index_Purchasing_ProductVendor" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_BusinessEntityContact_To_create_pk_index_Production_UnitMeasure]"
+      DTS:CreationName=""
+      DTS:DTSID="{B333AD67-6CAA-4EF4-8C0E-1B035EB98477}"
+      DTS:From="Package\create_pk_index_Person_BusinessEntityContact"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_BusinessEntityContact_To_create_pk_index_Production_UnitMeasure"
+      DTS:To="Package\create_pk_index_Production_UnitMeasure" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_BusinessEntity_To_create_pk_index_Production_TransactionHistoryArchive]"
+      DTS:CreationName=""
+      DTS:DTSID="{2EB6EFAA-36FF-429C-AD11-FD7ABC6C8A14}"
+      DTS:From="Package\create_pk_index_Person_BusinessEntity"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_BusinessEntity_To_create_pk_index_Production_TransactionHistoryArchive"
+      DTS:To="Package\create_pk_index_Production_TransactionHistoryArchive" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_ContactType_To_create_pk_index_Sales_CountryRegionCurrency]"
+      DTS:CreationName=""
+      DTS:DTSID="{055BB830-F6A8-4FAD-89B8-1471B6B7F61A}"
+      DTS:From="Package\create_pk_index_Person_ContactType"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_ContactType_To_create_pk_index_Sales_CountryRegionCurrency"
+      DTS:To="Package\create_pk_index_Sales_CountryRegionCurrency" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_CountryRegion_To_create_pk_index_Production_WorkOrder]"
+      DTS:CreationName=""
+      DTS:DTSID="{3B9194B6-31E2-46BA-8107-12BA72B99D15}"
+      DTS:From="Package\create_pk_index_Person_CountryRegion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_CountryRegion_To_create_pk_index_Production_WorkOrder"
+      DTS:To="Package\create_pk_index_Production_WorkOrder" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_EmailAddress_To_create_pk_index_HumanResources_Employee]"
+      DTS:CreationName=""
+      DTS:DTSID="{C2A3FD1E-D994-454B-876E-FA8A57D10F47}"
+      DTS:From="Package\create_pk_index_Person_EmailAddress"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_EmailAddress_To_create_pk_index_HumanResources_Employee"
+      DTS:To="Package\create_pk_index_HumanResources_Employee" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_Password_To_create_pk_index_Sales_SalesPersonQuotaHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{A0995494-C0BF-44F7-8389-75FCD5B3BFD8}"
+      DTS:From="Package\create_pk_index_Person_Password"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_Password_To_create_pk_index_Sales_SalesPersonQuotaHistory"
+      DTS:To="Package\create_pk_index_Sales_SalesPersonQuotaHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_PersonPhone_To_create_pk_index_Sales_SalesTerritory]"
+      DTS:CreationName=""
+      DTS:DTSID="{72E99982-296B-49ED-94CB-6DDDDE2F074F}"
+      DTS:From="Package\create_pk_index_Person_PersonPhone"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_PersonPhone_To_create_pk_index_Sales_SalesTerritory"
+      DTS:To="Package\create_pk_index_Sales_SalesTerritory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_Person_To_create_pk_index_Sales_SalesReason]"
+      DTS:CreationName=""
+      DTS:DTSID="{A2CA5357-D610-46DC-8E58-881EDBDA7A1C}"
+      DTS:From="Package\create_pk_index_Person_Person"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_Person_To_create_pk_index_Sales_SalesReason"
+      DTS:To="Package\create_pk_index_Sales_SalesReason" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_PhoneNumberType_To_create_pk_index_Production_Product]"
+      DTS:CreationName=""
+      DTS:DTSID="{0867C140-CAC2-4EE4-8BAB-C52970F18912}"
+      DTS:From="Package\create_pk_index_Person_PhoneNumberType"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_PhoneNumberType_To_create_pk_index_Production_Product"
+      DTS:To="Package\create_pk_index_Production_Product" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Person_StateProvince_To_create_pk_index_Production_ProductModelIllustration]"
+      DTS:CreationName=""
+      DTS:DTSID="{ACF7BA9A-CAC0-43CC-9375-928730177D5E}"
+      DTS:From="Package\create_pk_index_Person_StateProvince"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Person_StateProvince_To_create_pk_index_Production_ProductModelIllustration"
+      DTS:To="Package\create_pk_index_Production_ProductModelIllustration" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_BillOfMaterials_To_create_pk_index_Sales_Store]"
+      DTS:CreationName=""
+      DTS:DTSID="{47013391-5C97-4F48-89D1-2CF087F52CC2}"
+      DTS:From="Package\create_pk_index_Production_BillOfMaterials"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_BillOfMaterials_To_create_pk_index_Sales_Store"
+      DTS:To="Package\create_pk_index_Sales_Store" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_Culture_To_create_pk_index_Production_WorkOrderRouting]"
+      DTS:CreationName=""
+      DTS:DTSID="{EA4AD53A-7B80-4E1A-809F-DD09F537E9A4}"
+      DTS:From="Package\create_pk_index_Production_Culture"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_Culture_To_create_pk_index_Production_WorkOrderRouting"
+      DTS:To="Package\create_pk_index_Production_WorkOrderRouting" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_Document_To_create_pk_index_Sales_SalesOrderDetail]"
+      DTS:CreationName=""
+      DTS:DTSID="{DB70BF20-81AC-43C0-B7F3-D0D07C10D977}"
+      DTS:From="Package\create_pk_index_Production_Document"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_Document_To_create_pk_index_Sales_SalesOrderDetail"
+      DTS:To="Package\create_pk_index_Sales_SalesOrderDetail" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_Illustration_To_create_pk_index_HumanResources_JobCandidate]"
+      DTS:CreationName=""
+      DTS:DTSID="{FD7CCC06-ACB9-47F2-AF82-B9576E16B3B1}"
+      DTS:From="Package\create_pk_index_Production_Illustration"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_Illustration_To_create_pk_index_HumanResources_JobCandidate"
+      DTS:To="Package\create_pk_index_HumanResources_JobCandidate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_Location_To_create_pk_index_Person_Password]"
+      DTS:CreationName=""
+      DTS:DTSID="{661C332A-3775-445F-A705-01E48FA688B9}"
+      DTS:From="Package\create_pk_index_Production_Location"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_Location_To_create_pk_index_Person_Password"
+      DTS:To="Package\create_pk_index_Person_Password" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductCategory_To_create_pk_index_Purchasing_ShipMethod]"
+      DTS:CreationName=""
+      DTS:DTSID="{3E84461E-71B9-4BDB-8C64-276C55225667}"
+      DTS:From="Package\create_pk_index_Production_ProductCategory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductCategory_To_create_pk_index_Purchasing_ShipMethod"
+      DTS:To="Package\create_pk_index_Purchasing_ShipMethod" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductCostHistory_To_create_pk_index_Production_ProductDescription]"
+      DTS:CreationName=""
+      DTS:DTSID="{0773CDE1-256A-473A-A364-55F657E508A9}"
+      DTS:From="Package\create_pk_index_Production_ProductCostHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductCostHistory_To_create_pk_index_Production_ProductDescription"
+      DTS:To="Package\create_pk_index_Production_ProductDescription" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductDescription_To_create_pk_index_Sales_ShoppingCartItem]"
+      DTS:CreationName=""
+      DTS:DTSID="{84A701FA-7CE0-4AC0-85FD-4861C2A5D34A}"
+      DTS:From="Package\create_pk_index_Production_ProductDescription"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductDescription_To_create_pk_index_Sales_ShoppingCartItem"
+      DTS:To="Package\create_pk_index_Sales_ShoppingCartItem" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductDocument_To_create_pk_index_Production_ProductInventory]"
+      DTS:CreationName=""
+      DTS:DTSID="{04F09280-E17D-4FE8-8346-92EEB21D10A1}"
+      DTS:From="Package\create_pk_index_Production_ProductDocument"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductDocument_To_create_pk_index_Production_ProductInventory"
+      DTS:To="Package\create_pk_index_Production_ProductInventory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductInventory_To_create_pk_index_Sales_SpecialOffer]"
+      DTS:CreationName=""
+      DTS:DTSID="{884824C5-01F2-40C8-A536-8CB5CF9D2935}"
+      DTS:From="Package\create_pk_index_Production_ProductInventory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductInventory_To_create_pk_index_Sales_SpecialOffer"
+      DTS:To="Package\create_pk_index_Sales_SpecialOffer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductListPriceHistory_To_create_pk_index_Person_Address]"
+      DTS:CreationName=""
+      DTS:DTSID="{86675647-2F5D-44B1-B84C-757CC41E93AF}"
+      DTS:From="Package\create_pk_index_Production_ProductListPriceHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductListPriceHistory_To_create_pk_index_Person_Address"
+      DTS:To="Package\create_pk_index_Person_Address" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductModelIllustration_To_create_pk_index_dbo_AWBuildVersion]"
+      DTS:CreationName=""
+      DTS:DTSID="{4FE61F7A-15C1-4C14-A107-34E19B40DFC6}"
+      DTS:From="Package\create_pk_index_Production_ProductModelIllustration"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductModelIllustration_To_create_pk_index_dbo_AWBuildVersion"
+      DTS:To="Package\create_pk_index_dbo_AWBuildVersion" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductModelProductDescriptionCulture_To_create_pk_index_Production_BillOfMaterials]"
+      DTS:CreationName=""
+      DTS:DTSID="{4C1C1895-5285-4B91-992A-F938A2C7DC7A}"
+      DTS:From="Package\create_pk_index_Production_ProductModelProductDescriptionCulture"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductModelProductDescriptionCulture_To_create_pk_index_Production_BillOfMaterials"
+      DTS:To="Package\create_pk_index_Production_BillOfMaterials" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductModel_To_create_pk_index_Person_AddressType]"
+      DTS:CreationName=""
+      DTS:DTSID="{4F33C877-9B14-490C-A38A-535303668951}"
+      DTS:From="Package\create_pk_index_Production_ProductModel"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductModel_To_create_pk_index_Person_AddressType"
+      DTS:To="Package\create_pk_index_Person_AddressType" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductPhoto_To_create_pk_index_Production_TransactionHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{5962254E-DC50-4614-A68E-232E74791BCC}"
+      DTS:From="Package\create_pk_index_Production_ProductPhoto"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductPhoto_To_create_pk_index_Production_TransactionHistory"
+      DTS:To="Package\create_pk_index_Production_TransactionHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductReview_To_create_pk_index_Person_BusinessEntity]"
+      DTS:CreationName=""
+      DTS:DTSID="{B37199C5-D512-4AA2-A294-E4B606034738}"
+      DTS:From="Package\create_pk_index_Production_ProductReview"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductReview_To_create_pk_index_Person_BusinessEntity"
+      DTS:To="Package\create_pk_index_Person_BusinessEntity" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ProductSubcategory_To_create_pk_index_Person_BusinessEntityAddress]"
+      DTS:CreationName=""
+      DTS:DTSID="{90934254-D524-4765-BAF6-D3E552F88446}"
+      DTS:From="Package\create_pk_index_Production_ProductSubcategory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ProductSubcategory_To_create_pk_index_Person_BusinessEntityAddress"
+      DTS:To="Package\create_pk_index_Person_BusinessEntityAddress" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_Product_To_create_pk_index_Sales_SalesTerritoryHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{16B0EE4B-F258-4C02-8763-42375DFF7859}"
+      DTS:From="Package\create_pk_index_Production_Product"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_Product_To_create_pk_index_Sales_SalesTerritoryHistory"
+      DTS:To="Package\create_pk_index_Sales_SalesTerritoryHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_ScrapReason_To_create_pk_index_HumanResources_Shift]"
+      DTS:CreationName=""
+      DTS:DTSID="{54846CA5-85D4-4D3A-8D6E-D9CBC2F0D55E}"
+      DTS:From="Package\create_pk_index_Production_ScrapReason"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_ScrapReason_To_create_pk_index_HumanResources_Shift"
+      DTS:To="Package\create_pk_index_HumanResources_Shift" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_TransactionHistoryArchive_To_create_pk_index_Production_ProductSubcategory]"
+      DTS:CreationName=""
+      DTS:DTSID="{7F56D03D-3EF7-45BF-B2C4-D365B30DF58D}"
+      DTS:From="Package\create_pk_index_Production_TransactionHistoryArchive"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_TransactionHistoryArchive_To_create_pk_index_Production_ProductSubcategory"
+      DTS:To="Package\create_pk_index_Production_ProductSubcategory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_TransactionHistory_To_create_pk_index_Production_ProductReview]"
+      DTS:CreationName=""
+      DTS:DTSID="{D0206F7A-6EDA-493B-95F8-5DDBE6CF1559}"
+      DTS:From="Package\create_pk_index_Production_TransactionHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_TransactionHistory_To_create_pk_index_Production_ProductReview"
+      DTS:To="Package\create_pk_index_Production_ProductReview" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_UnitMeasure_To_create_pk_index_Purchasing_Vendor]"
+      DTS:CreationName=""
+      DTS:DTSID="{1E36586F-2FF5-41DF-9B32-4AF851A38080}"
+      DTS:From="Package\create_pk_index_Production_UnitMeasure"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_UnitMeasure_To_create_pk_index_Purchasing_Vendor"
+      DTS:To="Package\create_pk_index_Purchasing_Vendor" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_WorkOrderRouting_To_create_pk_index_Sales_Currency]"
+      DTS:CreationName=""
+      DTS:DTSID="{AF11EBA7-A327-4A3E-9096-16157CB05786}"
+      DTS:From="Package\create_pk_index_Production_WorkOrderRouting"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_WorkOrderRouting_To_create_pk_index_Sales_Currency"
+      DTS:To="Package\create_pk_index_Sales_Currency" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Production_WorkOrder_To_create_pk_index_Purchasing_PurchaseOrderDetail]"
+      DTS:CreationName=""
+      DTS:DTSID="{37311B68-B9F0-4AFC-9060-0A3F5EE3595B}"
+      DTS:From="Package\create_pk_index_Production_WorkOrder"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Production_WorkOrder_To_create_pk_index_Purchasing_PurchaseOrderDetail"
+      DTS:To="Package\create_pk_index_Purchasing_PurchaseOrderDetail" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Purchasing_ProductVendor_To_create_pk_index_Person_BusinessEntityContact]"
+      DTS:CreationName=""
+      DTS:DTSID="{B002344A-2740-4F75-9349-56C42F433165}"
+      DTS:From="Package\create_pk_index_Purchasing_ProductVendor"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Purchasing_ProductVendor_To_create_pk_index_Person_BusinessEntityContact"
+      DTS:To="Package\create_pk_index_Person_BusinessEntityContact" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Purchasing_PurchaseOrderDetail_To_create_pk_index_Sales_CreditCard]"
+      DTS:CreationName=""
+      DTS:DTSID="{7992A59B-4591-4737-A25F-0652F36D75E8}"
+      DTS:From="Package\create_pk_index_Purchasing_PurchaseOrderDetail"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Purchasing_PurchaseOrderDetail_To_create_pk_index_Sales_CreditCard"
+      DTS:To="Package\create_pk_index_Sales_CreditCard" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Purchasing_PurchaseOrderHeader_To_create_pk_index_Sales_CurrencyRate]"
+      DTS:CreationName=""
+      DTS:DTSID="{C8FCBE0C-B72A-47AF-BD25-B856B139D5E9}"
+      DTS:From="Package\create_pk_index_Purchasing_PurchaseOrderHeader"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Purchasing_PurchaseOrderHeader_To_create_pk_index_Sales_CurrencyRate"
+      DTS:To="Package\create_pk_index_Sales_CurrencyRate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Purchasing_ShipMethod_To_create_pk_index_Production_ProductCostHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{A56D83DC-112C-42B4-BBC1-EB2AD0F25C67}"
+      DTS:From="Package\create_pk_index_Purchasing_ShipMethod"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Purchasing_ShipMethod_To_create_pk_index_Production_ProductCostHistory"
+      DTS:To="Package\create_pk_index_Production_ProductCostHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Purchasing_Vendor_To_create_pk_index_Person_ContactType]"
+      DTS:CreationName=""
+      DTS:DTSID="{5153AE3D-48F0-4039-9BB5-F48D63DAEB68}"
+      DTS:From="Package\create_pk_index_Purchasing_Vendor"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Purchasing_Vendor_To_create_pk_index_Person_ContactType"
+      DTS:To="Package\create_pk_index_Person_ContactType" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_CountryRegionCurrency_To_create_pk_index_Person_CountryRegion]"
+      DTS:CreationName=""
+      DTS:DTSID="{325D1206-11EC-44F4-928B-7ED97328C16F}"
+      DTS:From="Package\create_pk_index_Sales_CountryRegionCurrency"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_CountryRegionCurrency_To_create_pk_index_Person_CountryRegion"
+      DTS:To="Package\create_pk_index_Person_CountryRegion" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_CreditCard_To_create_pk_index_Production_Culture]"
+      DTS:CreationName=""
+      DTS:DTSID="{FDA7E40C-917E-4294-9471-493B0C5E9B36}"
+      DTS:From="Package\create_pk_index_Sales_CreditCard"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_CreditCard_To_create_pk_index_Production_Culture"
+      DTS:To="Package\create_pk_index_Production_Culture" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_CurrencyRate_To_create_pk_index_Sales_Customer]"
+      DTS:CreationName=""
+      DTS:DTSID="{32986DAE-8EAB-4FBE-B80D-62CE9AF5C28A}"
+      DTS:From="Package\create_pk_index_Sales_CurrencyRate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_CurrencyRate_To_create_pk_index_Sales_Customer"
+      DTS:To="Package\create_pk_index_Sales_Customer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_Currency_To_create_pk_index_Purchasing_PurchaseOrderHeader]"
+      DTS:CreationName=""
+      DTS:DTSID="{E7BE231F-F8C7-4A34-BE89-82400F780DFC}"
+      DTS:From="Package\create_pk_index_Sales_Currency"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_Currency_To_create_pk_index_Purchasing_PurchaseOrderHeader"
+      DTS:To="Package\create_pk_index_Purchasing_PurchaseOrderHeader" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_Customer_To_create_pk_index_HumanResources_Department]"
+      DTS:CreationName=""
+      DTS:DTSID="{63D434AF-8981-47E6-97AE-E87897FB56DF}"
+      DTS:From="Package\create_pk_index_Sales_Customer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_Customer_To_create_pk_index_HumanResources_Department"
+      DTS:To="Package\create_pk_index_HumanResources_Department" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_PersonCreditCard_To_create_pk_index_Person_PersonPhone]"
+      DTS:CreationName=""
+      DTS:DTSID="{C81186AD-93F8-4246-BF4F-DA15BD700D21}"
+      DTS:From="Package\create_pk_index_Sales_PersonCreditCard"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_PersonCreditCard_To_create_pk_index_Person_PersonPhone"
+      DTS:To="Package\create_pk_index_Person_PersonPhone" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SalesOrderDetail_To_create_pk_index_Person_EmailAddress]"
+      DTS:CreationName=""
+      DTS:DTSID="{C932DC9D-4B76-44E4-9734-893E172C8A3B}"
+      DTS:From="Package\create_pk_index_Sales_SalesOrderDetail"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SalesOrderDetail_To_create_pk_index_Person_EmailAddress"
+      DTS:To="Package\create_pk_index_Person_EmailAddress" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SalesOrderHeaderSalesReason_To_create_pk_index_Sales_SalesPerson]"
+      DTS:CreationName=""
+      DTS:DTSID="{10F066F1-A6F1-42DA-911C-60EC14E88EA7}"
+      DTS:From="Package\create_pk_index_Sales_SalesOrderHeaderSalesReason"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SalesOrderHeaderSalesReason_To_create_pk_index_Sales_SalesPerson"
+      DTS:To="Package\create_pk_index_Sales_SalesPerson" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SalesOrderHeader_To_create_pk_index_HumanResources_EmployeeDepartmentHistory]"
+      DTS:CreationName=""
+      DTS:DTSID="{4BC95476-E3C1-41CD-9DEB-0436543D357D}"
+      DTS:From="Package\create_pk_index_Sales_SalesOrderHeader"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SalesOrderHeader_To_create_pk_index_HumanResources_EmployeeDepartmentHistory"
+      DTS:To="Package\create_pk_index_HumanResources_EmployeeDepartmentHistory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SalesPersonQuotaHistory_To_create_pk_index_Person_Person]"
+      DTS:CreationName=""
+      DTS:DTSID="{85BFB14B-E5C5-4B0B-98A0-93112A004907}"
+      DTS:From="Package\create_pk_index_Sales_SalesPersonQuotaHistory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SalesPersonQuotaHistory_To_create_pk_index_Person_Person"
+      DTS:To="Package\create_pk_index_Person_Person" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SalesPerson_To_create_pk_index_Production_Illustration]"
+      DTS:CreationName=""
+      DTS:DTSID="{866FA7A3-FD93-44B0-9786-99F46D86AA4E}"
+      DTS:From="Package\create_pk_index_Sales_SalesPerson"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SalesPerson_To_create_pk_index_Production_Illustration"
+      DTS:To="Package\create_pk_index_Production_Illustration" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SalesReason_To_create_pk_index_Sales_SalesTaxRate]"
+      DTS:CreationName=""
+      DTS:DTSID="{0114DAD9-7B53-402A-8437-A0CADA811204}"
+      DTS:From="Package\create_pk_index_Sales_SalesReason"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SalesReason_To_create_pk_index_Sales_SalesTaxRate"
+      DTS:To="Package\create_pk_index_Sales_SalesTaxRate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SalesTaxRate_To_create_pk_index_Sales_PersonCreditCard]"
+      DTS:CreationName=""
+      DTS:DTSID="{493FBD98-E45E-4C30-B140-C2722026FC53}"
+      DTS:From="Package\create_pk_index_Sales_SalesTaxRate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SalesTaxRate_To_create_pk_index_Sales_PersonCreditCard"
+      DTS:To="Package\create_pk_index_Sales_PersonCreditCard" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SalesTerritory_To_create_pk_index_Person_PhoneNumberType]"
+      DTS:CreationName=""
+      DTS:DTSID="{8E78D2EC-654F-4001-960D-718745493DFB}"
+      DTS:From="Package\create_pk_index_Sales_SalesTerritory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SalesTerritory_To_create_pk_index_Person_PhoneNumberType"
+      DTS:To="Package\create_pk_index_Person_PhoneNumberType" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_ShoppingCartItem_To_create_pk_index_Production_ProductDocument]"
+      DTS:CreationName=""
+      DTS:DTSID="{4238A41C-7E6D-40A6-A5BC-7DE222D392DA}"
+      DTS:From="Package\create_pk_index_Sales_ShoppingCartItem"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_ShoppingCartItem_To_create_pk_index_Production_ProductDocument"
+      DTS:To="Package\create_pk_index_Production_ProductDocument" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SpecialOfferProduct_To_create_pk_index_Production_ProductModel]"
+      DTS:CreationName=""
+      DTS:DTSID="{120E4DDE-BB8A-44A2-A6F2-9007080463B3}"
+      DTS:From="Package\create_pk_index_Sales_SpecialOfferProduct"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SpecialOfferProduct_To_create_pk_index_Production_ProductModel"
+      DTS:To="Package\create_pk_index_Production_ProductModel" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_SpecialOffer_To_create_pk_index_dbo_ErrorLog]"
+      DTS:CreationName=""
+      DTS:DTSID="{33FA1A15-5C95-4730-891E-729BE3CAB815}"
+      DTS:From="Package\create_pk_index_Sales_SpecialOffer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_SpecialOffer_To_create_pk_index_dbo_ErrorLog"
+      DTS:To="Package\create_pk_index_dbo_ErrorLog" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_create_pk_index_Sales_Store_To_create_pk_index_Production_ProductPhoto]"
+      DTS:CreationName=""
+      DTS:DTSID="{714C77B5-583D-4C58-A36F-D65BCB65AC60}"
+      DTS:From="Package\create_pk_index_Sales_Store"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_create_pk_index_Sales_Store_To_create_pk_index_Production_ProductPhoto"
+      DTS:To="Package\create_pk_index_Production_ProductPhoto" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

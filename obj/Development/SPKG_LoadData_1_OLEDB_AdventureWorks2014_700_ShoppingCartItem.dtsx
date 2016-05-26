@@ -1,0 +1,597 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{BD84B3E4-991F-46EA-B392-9F4E333AEBA8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_700_ShoppingCartItem"
+  DTS:VersionGUID="{CF4A921F-0D5A-4CFE-99BA-93B83816DA00}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DE1EA466-091F-4202-A455-5C9C3C13D7F6}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{EA0ED3E9-4259-42CB-9D5A-C158A6401DF7}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9877B959-73A5-42AC-9049-09B5B1A13A5B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E0AA80B1-2427-45C2-AE50-0ABDA2F4A9A7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C098E2B1-DE1D-44E2-8509-D1047C3DBECF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Sales_ShoppingCartItem"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{CFEC5400-9067-4C54-A99F-16A05B3273BC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Sales_ShoppingCartItem"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Sales_ShoppingCartItem\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Sales_ShoppingCartItem\CNT rows.Inputs[SRC_Sales_ShoppingCartItem_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Sales_ShoppingCartItem_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_ShoppingCartItem\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Sales_ShoppingCartItem\CNT rows.Inputs[SRC_Sales_ShoppingCartItem_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Sales_ShoppingCartItem"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Sales_ShoppingCartItem</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Sales_ShoppingCartItem">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].Columns[ShoppingCartItemID]"
+                      cachedDataType="i4"
+                      cachedName="ShoppingCartItemID"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[ShoppingCartItemID]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ShoppingCartItemID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].Columns[ShoppingCartID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ShoppingCartID"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[ShoppingCartID]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ShoppingCartID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].Columns[Quantity]"
+                      cachedDataType="i4"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[Quantity]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[ProductID]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].Columns[DateCreated]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateCreated"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[DateCreated]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[DateCreated]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[ShoppingCartItemID]"
+                      dataType="i4"
+                      name="ShoppingCartItemID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[ShoppingCartID]"
+                      dataType="wstr"
+                      length="50"
+                      name="ShoppingCartID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      name="DateCreated" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Sales_ShoppingCartItem"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[ShoppingCartItemID]
+, [ShoppingCartID]
+, [Quantity]
+, [ProductID]
+, [DateCreated]
+, [ModifiedDate]
+					from [Sales].[ShoppingCartItem]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ShoppingCartItemID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[ShoppingCartItemID]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ShoppingCartItemID]"
+                      name="ShoppingCartItemID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ShoppingCartID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[ShoppingCartID]"
+                      length="50"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ShoppingCartID]"
+                      name="ShoppingCartID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[Quantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[Quantity]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ProductID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[ProductID]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[DateCreated]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[DateCreated]"
+                      name="DateCreated"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[ShoppingCartItemID]"
+                      dataType="i4"
+                      name="ShoppingCartItemID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[ShoppingCartID]"
+                      dataType="wstr"
+                      length="50"
+                      name="ShoppingCartID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      name="DateCreated" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ShoppingCartItemID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ShoppingCartItemID]"
+                      name="ShoppingCartItemID" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ShoppingCartID]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ShoppingCartID]"
+                      name="ShoppingCartID" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[Quantity]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[DateCreated]"
+                      name="DateCreated" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Sales_ShoppingCartItem.Paths[CNT rows_Output_DST_Sales_ShoppingCartItem]"
+              endId="Package\DF_Load Sales_ShoppingCartItem\DST_Sales_ShoppingCartItem.Inputs[CNT rows_Output_DST_Sales_ShoppingCartItem]"
+              name="CNT rows_Output_DST_Sales_ShoppingCartItem"
+              startId="Package\DF_Load Sales_ShoppingCartItem\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Sales_ShoppingCartItem.Paths[SRC_Sales_ShoppingCartItem_Output_CNT rows]"
+              endId="Package\DF_Load Sales_ShoppingCartItem\CNT rows.Inputs[SRC_Sales_ShoppingCartItem_Output_CNT rows]"
+              name="SRC_Sales_ShoppingCartItem_Output_CNT rows"
+              startId="Package\DF_Load Sales_ShoppingCartItem\SRC_Sales_ShoppingCartItem.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{491AB73A-8FE7-4298-804A-531FF4FEF04B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EA0ED3E9-4259-42CB-9D5A-C158A6401DF7}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{AFB05F69-98FD-4C02-9003-AE1B3C4BA39C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EA0ED3E9-4259-42CB-9D5A-C158A6401DF7}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Sales_ShoppingCartItem', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Sales_ShoppingCartItem"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{77A2EBA1-0F2D-45B5-9922-72DA2361C8BF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Sales_ShoppingCartItem"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EA0ED3E9-4259-42CB-9D5A-C158A6401DF7}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Sales_ShoppingCartItem&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Sales_ShoppingCartItem_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{2A022604-2E30-4FEC-8721-C6063BB85F9C}"
+      DTS:From="Package\DF_Load Sales_ShoppingCartItem"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Sales_ShoppingCartItem_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Sales_ShoppingCartItem]"
+      DTS:CreationName=""
+      DTS:DTSID="{C6731A64-2674-42EA-A386-784081C065D2}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Sales_ShoppingCartItem"
+      DTS:To="Package\ET_truncate_Sales_ShoppingCartItem" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Sales_ShoppingCartItem_To_DF_Load Sales_ShoppingCartItem]"
+      DTS:CreationName=""
+      DTS:DTSID="{8276674D-79C5-4EDC-8162-7DDC67E072DD}"
+      DTS:From="Package\ET_truncate_Sales_ShoppingCartItem"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Sales_ShoppingCartItem_To_DF_Load Sales_ShoppingCartItem"
+      DTS:To="Package\DF_Load Sales_ShoppingCartItem" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

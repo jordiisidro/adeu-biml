@@ -1,0 +1,684 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{AF7C10E4-E056-4FD3-BB70-AE94943645D1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_706_TransactionHistoryArchive"
+  DTS:VersionGUID="{D3560B48-86EB-4B50-B4A8-49471F2974A9}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{FA63E603-6341-49AB-A826-95A33B2C0D6B}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{FE471687-6FEB-4DB8-A61F-7A10CCEB205F}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{317A8240-C921-471A-823D-2DCF00FFD45C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7CDAD100-EE5A-4098-8DA0-3CFD7B015DC3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8D3EAF4C-17D4-465F-9FBB-7E7F80216266}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Production_TransactionHistoryArchive"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{9863FC3E-924B-44DE-80FF-54FB61CBE737}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Production_TransactionHistoryArchive"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Production_TransactionHistoryArchive\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Production_TransactionHistoryArchive\CNT rows.Inputs[SRC_Production_TransactionHistoryArchive_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Production_TransactionHistoryArchive_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Production_TransactionHistoryArchive\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Production_TransactionHistoryArchive\CNT rows.Inputs[SRC_Production_TransactionHistoryArchive_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Production_TransactionHistoryArchive"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Production_TransactionHistoryArchive</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Production_TransactionHistoryArchive">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].Columns[TransactionID]"
+                      cachedDataType="i4"
+                      cachedName="TransactionID"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[TransactionID]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[TransactionID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ProductID]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].Columns[ReferenceOrderID]"
+                      cachedDataType="i4"
+                      cachedName="ReferenceOrderID"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ReferenceOrderID]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ReferenceOrderID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].Columns[ReferenceOrderLineID]"
+                      cachedDataType="i4"
+                      cachedName="ReferenceOrderLineID"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ReferenceOrderLineID]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ReferenceOrderLineID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].Columns[TransactionDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="TransactionDate"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[TransactionDate]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[TransactionDate]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].Columns[TransactionType]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="TransactionType"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[TransactionType]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[TransactionType]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].Columns[Quantity]"
+                      cachedDataType="i4"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[Quantity]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].Columns[ActualCost]"
+                      cachedDataType="cy"
+                      cachedName="ActualCost"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ActualCost]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ActualCost]" />
+                    <inputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[TransactionID]"
+                      dataType="i4"
+                      name="TransactionID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ReferenceOrderID]"
+                      dataType="i4"
+                      name="ReferenceOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ReferenceOrderLineID]"
+                      dataType="i4"
+                      name="ReferenceOrderLineID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[TransactionDate]"
+                      dataType="dbTimeStamp"
+                      name="TransactionDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[TransactionType]"
+                      dataType="wstr"
+                      length="1"
+                      name="TransactionType" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ActualCost]"
+                      dataType="cy"
+                      name="ActualCost" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Production_TransactionHistoryArchive"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[TransactionID]
+, [ProductID]
+, [ReferenceOrderID]
+, [ReferenceOrderLineID]
+, [TransactionDate]
+, [TransactionType]
+, [Quantity]
+, [ActualCost]
+, [ModifiedDate]
+					from [Production].[TransactionHistoryArchive]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[TransactionID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[TransactionID]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[TransactionID]"
+                      name="TransactionID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ProductID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ProductID]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ReferenceOrderID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ReferenceOrderID]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ReferenceOrderID]"
+                      name="ReferenceOrderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ReferenceOrderLineID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ReferenceOrderLineID]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ReferenceOrderLineID]"
+                      name="ReferenceOrderLineID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[TransactionDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[TransactionDate]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[TransactionDate]"
+                      name="TransactionDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[TransactionType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[TransactionType]"
+                      length="1"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[TransactionType]"
+                      name="TransactionType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[Quantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[Quantity]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ActualCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ActualCost]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ActualCost]"
+                      name="ActualCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[TransactionID]"
+                      dataType="i4"
+                      name="TransactionID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ReferenceOrderID]"
+                      dataType="i4"
+                      name="ReferenceOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ReferenceOrderLineID]"
+                      dataType="i4"
+                      name="ReferenceOrderLineID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[TransactionDate]"
+                      dataType="dbTimeStamp"
+                      name="TransactionDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[TransactionType]"
+                      dataType="wstr"
+                      length="1"
+                      name="TransactionType" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ActualCost]"
+                      dataType="cy"
+                      name="ActualCost" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[TransactionID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[TransactionID]"
+                      name="TransactionID" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ReferenceOrderID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ReferenceOrderID]"
+                      name="ReferenceOrderID" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ReferenceOrderLineID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ReferenceOrderLineID]"
+                      name="ReferenceOrderLineID" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[TransactionDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[TransactionDate]"
+                      name="TransactionDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[TransactionType]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[TransactionType]"
+                      name="TransactionType" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[Quantity]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ActualCost]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ActualCost]"
+                      name="ActualCost" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Production_TransactionHistoryArchive.Paths[CNT rows_Output_DST_Production_TransactionHistoryArchive]"
+              endId="Package\DF_Load Production_TransactionHistoryArchive\DST_Production_TransactionHistoryArchive.Inputs[CNT rows_Output_DST_Production_TransactionHistoryArchive]"
+              name="CNT rows_Output_DST_Production_TransactionHistoryArchive"
+              startId="Package\DF_Load Production_TransactionHistoryArchive\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Production_TransactionHistoryArchive.Paths[SRC_Production_TransactionHistoryArchive_Output_CNT rows]"
+              endId="Package\DF_Load Production_TransactionHistoryArchive\CNT rows.Inputs[SRC_Production_TransactionHistoryArchive_Output_CNT rows]"
+              name="SRC_Production_TransactionHistoryArchive_Output_CNT rows"
+              startId="Package\DF_Load Production_TransactionHistoryArchive\SRC_Production_TransactionHistoryArchive.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{4E776792-FF3D-493C-9FD2-3A5DA9446DCD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FE471687-6FEB-4DB8-A61F-7A10CCEB205F}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E23F6D1F-28E8-4E17-A893-23A0A4F6F28A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FE471687-6FEB-4DB8-A61F-7A10CCEB205F}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Production_TransactionHistoryArchive', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Production_TransactionHistoryArchive"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{18415A7C-647D-49FF-9C7E-2A709ECA6EFF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Production_TransactionHistoryArchive"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FE471687-6FEB-4DB8-A61F-7A10CCEB205F}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Production_TransactionHistoryArchive&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Production_TransactionHistoryArchive_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{4F759FE4-F59C-4B64-9D20-CE5EC406DDA1}"
+      DTS:From="Package\DF_Load Production_TransactionHistoryArchive"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Production_TransactionHistoryArchive_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Production_TransactionHistoryArchive]"
+      DTS:CreationName=""
+      DTS:DTSID="{79A11ACD-F0AA-4BEB-B462-AB79CA664CBB}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Production_TransactionHistoryArchive"
+      DTS:To="Package\ET_truncate_Production_TransactionHistoryArchive" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Production_TransactionHistoryArchive_To_DF_Load Production_TransactionHistoryArchive]"
+      DTS:CreationName=""
+      DTS:DTSID="{E1EE531C-FDD7-4DE5-9A8E-F452E2EF077C}"
+      DTS:From="Package\ET_truncate_Production_TransactionHistoryArchive"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Production_TransactionHistoryArchive_To_DF_Load Production_TransactionHistoryArchive"
+      DTS:To="Package\DF_Load Production_TransactionHistoryArchive" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

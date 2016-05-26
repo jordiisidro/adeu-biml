@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DeploymentModel>Project</DeploymentModel>
+  <ProductVersion>12.0.2430.0</ProductVersion>
+  <SchemaVersion>9.0.1.0</SchemaVersion>
+  <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkZGwzMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAiIHhtbG5zOmRkbDMwMF8zMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAvMzAwIiB4bWxuczpkZGw0MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAiIHhtbG5zOmRkbDQwMF80MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAvNDAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD50cnVlPC9FbmFibGVkPg0KICA8UHJvamVjdE5hbWU+U0FLPC9Qcm9qZWN0TmFtZT4NCiAgPEF1eFBhdGg+U0FLPC9BdXhQYXRoPg0KICA8TG9jYWxQYXRoPlNBSzwvTG9jYWxQYXRoPg0KICA8UHJvdmlkZXI+U0FLPC9Qcm92aWRlcj4NCjwvU291cmNlQ29udHJvbEluZm8+</State>
+  <Database>
+    <Name>PRJ_GENERIC_BIML.database</Name>
+    <FullPath>PRJ_GENERIC_BIML.database</FullPath>
+  </Database>
+  <DataSources />
+  <DataSourceViews />
+  <DeploymentModelSpecificContent>
+    <Manifest>
+      <SSIS:Project SSIS:ProtectionLevel="EncryptSensitiveWithUserKey" xmlns:SSIS="www.microsoft.com/SqlServer/SSIS">
+        <SSIS:Properties>
+          <SSIS:Property SSIS:Name="ID">{3d6682be-ec30-46a6-a42d-a14b8ecb35e9}</SSIS:Property>
+          <SSIS:Property SSIS:Name="Name">PRJ_GENERIC_BIML</SSIS:Property>
+          <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+          <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+          <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
+          <SSIS:Property SSIS:Name="VersionComments">
+          </SSIS:Property>
+          <SSIS:Property SSIS:Name="CreationDate">2016-04-21T15:47:49.5721959Z</SSIS:Property>
+          <SSIS:Property SSIS:Name="CreatorName">SQL2014BIML\administrador</SSIS:Property>
+          <SSIS:Property SSIS:Name="CreatorComputerName">SQL2014BIML</SSIS:Property>
+          <SSIS:Property SSIS:Name="Description">
+          </SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWJxmHByuzUuoSATlwMSdJgAAAAACAAAAAAAQZgAAAAEAACAAAADVYvisoKOmfmD7JfajtA6usaQmwqHEy0vA3Ygr5OXT0QAAAAAOgAAAAAIAACAAAABI2ps+OcNojyS9TqskVZohF60Nnr0VZwuXllJiT5i5mJAAAAAPQjXQBOEcojwqtlT+nMgXJmdF2C2VNWEg53Hv8wpZG8bQAn5zaH9Ni0ZUuySuPC6vAE7o5lCGQsLIZYxlOmGlE331j+KWgOpVDGY90PIvFx78Alasd8xQq2tkgdRIApId5nIPBySlXmM84VdypZoLJe92L3weO8OEgc3nRdXse2cxOsP+qmUDEjP7z5prTF9AAAAAqucyMHzWrtCtUBDR3fG5RweU8be8Vtxtr/lWRhwT2xMWAf9AgM5OWyzrWF22XPB5DxSziGnLDbku1zDErYYhHA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
+        </SSIS:Properties>
+        <SSIS:Packages />
+        <SSIS:ConnectionManagers />
+        <SSIS:DeploymentInfo>
+          <SSIS:ProjectConnectionParameters />
+          <SSIS:PackageInfo />
+        </SSIS:DeploymentInfo>
+      </SSIS:Project>
+    </Manifest>
+  </DeploymentModelSpecificContent>
+  <Miscellaneous>
+    <ProjectItem>
+      <Name>UT_getProject.biml</Name>
+      <FullPath>UT_getProject.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>000_GenerateMetadataParent.biml</Name>
+      <FullPath>000_GenerateMetadataParent.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>002_DropTablesStagParent.biml</Name>
+      <FullPath>002_DropTablesStagParent.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DropTablesStagDatabase.biml</Name>
+      <FullPath>DropTablesStagDatabase.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>GenerateMetadataDatabase.biml</Name>
+      <FullPath>GenerateMetadataDatabase.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_connections.biml</Name>
+      <FullPath>UT_connections.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_generateConnections.biml</Name>
+      <FullPath>UT_generateConnections.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_generatePackages.biml</Name>
+      <FullPath>UT_generatePackages.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_generateSubPackages.biml</Name>
+      <FullPath>UT_generateSubPackages.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>001_CreateTablesStagParent.biml</Name>
+      <FullPath>001_CreateTablesStagParent.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CreateTablesStagDatabase.biml</Name>
+      <FullPath>CreateTablesStagDatabase.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_SQLServer_datatype.cs</Name>
+      <FullPath>UT_SQLServer_datatype.cs</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>003_CreateIndexStagParent.biml</Name>
+      <FullPath>003_CreateIndexStagParent.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CreateIndexStagDatabase.biml</Name>
+      <FullPath>CreateIndexStagDatabase.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>004_LoadDataParent.biml</Name>
+      <FullPath>004_LoadDataParent.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LoadDataDatabase.biml</Name>
+      <FullPath>LoadDataDatabase.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LoadDataDatabaseTables.biml</Name>
+      <FullPath>LoadDataDatabaseTables.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LoadDataDatabaseFull.biml</Name>
+      <FullPath>LoadDataDatabaseFull.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_generateParameters.biml</Name>
+      <FullPath>UT_generateParameters.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_generateParametersDatabase.biml</Name>
+      <FullPath>UT_generateParametersDatabase.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LoadDataDatabaseIncremental.biml</Name>
+      <FullPath>LoadDataDatabaseIncremental.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_generateParametersExcelSheet.biml</Name>
+      <FullPath>UT_generateParametersExcelSheet.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>GenerateMetadataExcelSheet.biml</Name>
+      <FullPath>GenerateMetadataExcelSheet.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CreateTablesStagExcelSheet.biml</Name>
+      <FullPath>CreateTablesStagExcelSheet.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DropTablesStagExcelSheet.biml</Name>
+      <FullPath>DropTablesStagExcelSheet.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LoadDataExcelSheet.biml</Name>
+      <FullPath>LoadDataExcelSheet.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LoadDataExcelSheetTables.biml</Name>
+      <FullPath>LoadDataExcelSheetTables.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LoadDataExcelSheetFull.biml</Name>
+      <FullPath>LoadDataExcelSheetFull.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>GenerateMetadataFlatFile.biml</Name>
+      <FullPath>GenerateMetadataFlatFile.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CreateTablesStagFlatFile.biml</Name>
+      <FullPath>CreateTablesStagFlatFile.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DropTablesStagFlatFile.biml</Name>
+      <FullPath>DropTablesStagFlatFile.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LoadDataFlatFile.biml</Name>
+      <FullPath>LoadDataFlatFile.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_generateParametersFlatFile.biml</Name>
+      <FullPath>UT_generateParametersFlatFile.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LoadDataFlatFiles.biml</Name>
+      <FullPath>LoadDataFlatFiles.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>UT_paramExpression.biml</Name>
+      <FullPath>UT_paramExpression.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>configurations20160523.sql</Name>
+      <FullPath>configurations20160523.sql</FullPath>
+    </ProjectItem>
+  </Miscellaneous>
+  <Configurations>
+    <Configuration>
+      <Name>Development</Name>
+      <Options>
+        <OutputPath>bin</OutputPath>
+        <ConnectionMappings />
+        <ConnectionProviderMappings />
+        <ConnectionSecurityMappings />
+        <DatabaseStorageLocations />
+        <ParameterConfigurationValues>
+          <ConfigurationSetting>
+            <Id>LastModifiedTime</Id>
+            <Name>LastModifiedTime</Name>
+            <Value xsi:type="xsd:dateTime">2016-04-22T10:38:37.9617072Z</Value>
+          </ConfigurationSetting>
+        </ParameterConfigurationValues>
+      </Options>
+    </Configuration>
+  </Configurations>
+</Project>

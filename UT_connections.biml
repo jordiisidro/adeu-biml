@@ -1,0 +1,29 @@
+
+<#
+   
+	string _config_con_string = @"Data Source=SQL2014BIML;Initial Catalog=Configurations;Integrated Security=SSPI;";
+	string _config_con_string_provider =_config_con_string+"Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;";
+	string _project_sql = "select sa_connection_string, dwh_connection_string,sa_connection_name, dwh_connection_name, project_short_name, sa_hasParameter "+
+	"from biml.project "+
+	"where project_name='"+_project+"'";
+
+	DataTable _connection_strings = new DataTable();
+	SqlDataAdapter _connection_strings_da = new SqlDataAdapter(_project_sql, _config_con_string);
+	_connection_strings_da.Fill(_connection_strings);
+
+	string _sa_cs="";
+	string _dwh_cs="";
+	string _sa_cs_name="";
+	string _dwh_cs_name="";
+	string _prj_short="";
+	bool _sa_param=false;
+	foreach(DataRow _connection_sring in _connection_strings.Rows) {
+	_sa_cs =_connection_sring["sa_connection_string"].ToString();
+	_dwh_cs =_connection_sring["dwh_connection_string"].ToString();
+	_sa_cs_name =_connection_sring["sa_connection_name"].ToString();
+	_dwh_cs_name =_connection_sring["dwh_connection_name"].ToString();
+	_prj_short =_connection_sring["project_short_name"].ToString();
+	 _sa_param =   Convert.ToBoolean(_connection_sring["sa_hasParameter"]);
+	}
+
+	#>

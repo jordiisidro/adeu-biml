@@ -1,0 +1,597 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{04A9A2E5-9488-4825-84DB-552A1C0357D1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_699_ShipMethod"
+  DTS:VersionGUID="{73E9991D-AF92-452A-9A4C-DDAE5D82388D}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F97CB656-5C1B-4EB9-9D19-611C3BFD5DAD}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BBE3D6B9-6422-42AD-821C-67E3469AAE25}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B53E47A4-CC74-4262-A95D-E6448AE922A7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0198E73E-8A5D-4F63-A1F1-640DE1DF1B21}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CBD19682-319E-4AED-825D-CFF586BD79C2}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Purchasing_ShipMethod"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{CED26BEC-AB7F-400A-8F3A-7E791B2B5155}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Purchasing_ShipMethod"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Purchasing_ShipMethod\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Purchasing_ShipMethod\CNT rows.Inputs[SRC_Purchasing_ShipMethod_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Purchasing_ShipMethod_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Purchasing_ShipMethod\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Purchasing_ShipMethod\CNT rows.Inputs[SRC_Purchasing_ShipMethod_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Purchasing_ShipMethod"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Purchasing_ShipMethod</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Purchasing_ShipMethod">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].Columns[ShipMethodID]"
+                      cachedDataType="i4"
+                      cachedName="ShipMethodID"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[ShipMethodID]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ShipMethodID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[Name]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].Columns[ShipBase]"
+                      cachedDataType="cy"
+                      cachedName="ShipBase"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[ShipBase]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ShipBase]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].Columns[ShipRate]"
+                      cachedDataType="cy"
+                      cachedName="ShipRate"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[ShipRate]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ShipRate]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].Columns[rowguid]"
+                      cachedDataType="guid"
+                      cachedName="rowguid"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[rowguid]" />
+                    <inputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[ShipMethodID]"
+                      dataType="i4"
+                      name="ShipMethodID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[ShipBase]"
+                      dataType="cy"
+                      name="ShipBase" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[ShipRate]"
+                      dataType="cy"
+                      name="ShipRate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Purchasing_ShipMethod"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[ShipMethodID]
+, [Name]
+, [ShipBase]
+, [ShipRate]
+, [rowguid]
+, [ModifiedDate]
+					from [Purchasing].[ShipMethod]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ShipMethodID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[ShipMethodID]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ShipMethodID]"
+                      name="ShipMethodID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[Name]"
+                      length="50"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ShipBase]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[ShipBase]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ShipBase]"
+                      name="ShipBase"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ShipRate]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[ShipRate]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ShipRate]"
+                      name="ShipRate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[rowguid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[rowguid]"
+                      name="rowguid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[ShipMethodID]"
+                      dataType="i4"
+                      name="ShipMethodID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[ShipBase]"
+                      dataType="cy"
+                      name="ShipBase" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[ShipRate]"
+                      dataType="cy"
+                      name="ShipRate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ShipMethodID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ShipMethodID]"
+                      name="ShipMethodID" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ShipBase]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ShipBase]"
+                      name="ShipBase" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ShipRate]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ShipRate]"
+                      name="ShipRate" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[rowguid]"
+                      dataType="guid"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[rowguid]"
+                      name="rowguid" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Purchasing_ShipMethod.Paths[CNT rows_Output_DST_Purchasing_ShipMethod]"
+              endId="Package\DF_Load Purchasing_ShipMethod\DST_Purchasing_ShipMethod.Inputs[CNT rows_Output_DST_Purchasing_ShipMethod]"
+              name="CNT rows_Output_DST_Purchasing_ShipMethod"
+              startId="Package\DF_Load Purchasing_ShipMethod\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Purchasing_ShipMethod.Paths[SRC_Purchasing_ShipMethod_Output_CNT rows]"
+              endId="Package\DF_Load Purchasing_ShipMethod\CNT rows.Inputs[SRC_Purchasing_ShipMethod_Output_CNT rows]"
+              name="SRC_Purchasing_ShipMethod_Output_CNT rows"
+              startId="Package\DF_Load Purchasing_ShipMethod\SRC_Purchasing_ShipMethod.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{E8E9664E-C19E-4520-8E1D-462BC9D8327D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BBE3D6B9-6422-42AD-821C-67E3469AAE25}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{EFCC31E3-41BA-4EBC-9935-2DE0088AF687}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BBE3D6B9-6422-42AD-821C-67E3469AAE25}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Purchasing_ShipMethod', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Purchasing_ShipMethod"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F9EB29A3-742B-45E4-BF57-07246C5AB8E5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Purchasing_ShipMethod"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BBE3D6B9-6422-42AD-821C-67E3469AAE25}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Purchasing_ShipMethod&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Purchasing_ShipMethod_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{F2FFEF91-77D0-48AF-8371-8401C119EEA3}"
+      DTS:From="Package\DF_Load Purchasing_ShipMethod"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Purchasing_ShipMethod_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Purchasing_ShipMethod]"
+      DTS:CreationName=""
+      DTS:DTSID="{61C1E8B6-E8F6-467D-B343-E5BDABDBCC6D}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Purchasing_ShipMethod"
+      DTS:To="Package\ET_truncate_Purchasing_ShipMethod" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Purchasing_ShipMethod_To_DF_Load Purchasing_ShipMethod]"
+      DTS:CreationName=""
+      DTS:DTSID="{6913B4F0-68C0-4737-91EF-3058ED51665D}"
+      DTS:From="Package\ET_truncate_Purchasing_ShipMethod"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Purchasing_ShipMethod_To_DF_Load Purchasing_ShipMethod"
+      DTS:To="Package\DF_Load Purchasing_ShipMethod" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

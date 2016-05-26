@@ -1,0 +1,631 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 6:59:03 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQL2014BIML"
+  DTS:CreatorName="administrador"
+  DTS:DTSID="{DBBC52FE-0466-46B9-BE8E-06DC73F06FB8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPKG_LoadData_1_OLEDB_AdventureWorks2014_653_CurrencyRate"
+  DTS:VersionGUID="{17C50A30-844C-4934-A53B-5ED5AD481247}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9B9E7863-8FAC-411D-80F6-3219347362D2}"
+      DTS:ObjectName="OLEDB_AdventureWorks2014">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_AdventureWorks2014]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{32111110-87CA-42E6-9902-911D7D1A14F4}"
+      DTS:ObjectName="OLEDB_SQL2014BIML_AdventureStagingArea">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::OLEDB_SQL2014BIML_AdventureStagingArea]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQL2014BIML;Initial Catalog=AdventureStagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DFEB12F4-FABB-46F3-99E5-F4873C87A9E7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataFi">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C3AB56E0-9227-4158-9E03-1A6A39873E2E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dataIni">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2016</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{77808E6D-D60B-42EC-BE06-2510C56B6A77}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Load Sales_CurrencyRate"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{977B280D-77DB-4BE4-A9D4-E8215CD70345}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Load Sales_CurrencyRate"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Load Sales_CurrencyRate\CNT rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="CNT rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCountSource</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Sales_CurrencyRate\CNT rows.Inputs[SRC_Sales_CurrencyRate_Output_CNT rows]"
+                  hasSideEffects="true"
+                  name="SRC_Sales_CurrencyRate_Output_CNT rows">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_CurrencyRate\CNT rows.Outputs[Output]"
+                  name="Output"
+                  synchronousInputId="Package\DF_Load Sales_CurrencyRate\CNT rows.Inputs[SRC_Sales_CurrencyRate_Output_CNT rows]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="DST_Sales_CurrencyRate"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">aw.Sales_CurrencyRate</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL2014BIML_AdventureStagingArea]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="CNT rows_Output_DST_Sales_CurrencyRate">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].Columns[CurrencyRateID]"
+                      cachedDataType="i4"
+                      cachedName="CurrencyRateID"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[CurrencyRateID]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[CurrencyRateID]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].Columns[CurrencyRateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CurrencyRateDate"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[CurrencyRateDate]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[CurrencyRateDate]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].Columns[FromCurrencyCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="FromCurrencyCode"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[FromCurrencyCode]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[FromCurrencyCode]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].Columns[ToCurrencyCode]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="ToCurrencyCode"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[ToCurrencyCode]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[ToCurrencyCode]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].Columns[AverageRate]"
+                      cachedDataType="cy"
+                      cachedName="AverageRate"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[AverageRate]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[AverageRate]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].Columns[EndOfDayRate]"
+                      cachedDataType="cy"
+                      cachedName="EndOfDayRate"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[EndOfDayRate]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[EndOfDayRate]" />
+                    <inputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[CurrencyRateID]"
+                      dataType="i4"
+                      name="CurrencyRateID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[CurrencyRateDate]"
+                      dataType="dbTimeStamp"
+                      name="CurrencyRateDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[FromCurrencyCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="FromCurrencyCode" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[ToCurrencyCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="ToCurrencyCode" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[AverageRate]"
+                      dataType="cy"
+                      name="AverageRate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[EndOfDayRate]"
+                      dataType="cy"
+                      name="EndOfDayRate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate].ExternalColumns[append_dt]"
+                      dataType="dbTimeStamp"
+                      name="append_dt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="SRC_Sales_CurrencyRate"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+					select 
+						[CurrencyRateID]
+, [CurrencyRateDate]
+, [FromCurrencyCode]
+, [ToCurrencyCode]
+, [AverageRate]
+, [EndOfDayRate]
+, [ModifiedDate]
+					from [Sales].[CurrencyRate]
+					where ModifiedDate between ? and ?
+				</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0",User::dataIni;"Parameter1",User::dataFi;</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[CurrencyRateID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[CurrencyRateID]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[CurrencyRateID]"
+                      name="CurrencyRateID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[CurrencyRateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[CurrencyRateDate]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[CurrencyRateDate]"
+                      name="CurrencyRateDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[FromCurrencyCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[FromCurrencyCode]"
+                      length="3"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[FromCurrencyCode]"
+                      name="FromCurrencyCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[ToCurrencyCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[ToCurrencyCode]"
+                      length="3"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[ToCurrencyCode]"
+                      name="ToCurrencyCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[AverageRate]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[AverageRate]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[AverageRate]"
+                      name="AverageRate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[EndOfDayRate]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[EndOfDayRate]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[EndOfDayRate]"
+                      name="EndOfDayRate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[CurrencyRateID]"
+                      dataType="i4"
+                      name="CurrencyRateID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[CurrencyRateDate]"
+                      dataType="dbTimeStamp"
+                      name="CurrencyRateDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[FromCurrencyCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="FromCurrencyCode" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[ToCurrencyCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="ToCurrencyCode" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[AverageRate]"
+                      dataType="cy"
+                      name="AverageRate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[EndOfDayRate]"
+                      dataType="cy"
+                      name="EndOfDayRate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[CurrencyRateID]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[CurrencyRateID]"
+                      name="CurrencyRateID" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[CurrencyRateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[CurrencyRateDate]"
+                      name="CurrencyRateDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[FromCurrencyCode]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[FromCurrencyCode]"
+                      name="FromCurrencyCode" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[ToCurrencyCode]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[ToCurrencyCode]"
+                      name="ToCurrencyCode" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[AverageRate]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[AverageRate]"
+                      name="AverageRate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[EndOfDayRate]"
+                      dataType="cy"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[EndOfDayRate]"
+                      name="EndOfDayRate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Load Sales_CurrencyRate.Paths[CNT rows_Output_DST_Sales_CurrencyRate]"
+              endId="Package\DF_Load Sales_CurrencyRate\DST_Sales_CurrencyRate.Inputs[CNT rows_Output_DST_Sales_CurrencyRate]"
+              name="CNT rows_Output_DST_Sales_CurrencyRate"
+              startId="Package\DF_Load Sales_CurrencyRate\CNT rows.Outputs[Output]" />
+            <path
+              refId="Package\DF_Load Sales_CurrencyRate.Paths[SRC_Sales_CurrencyRate_Output_CNT rows]"
+              endId="Package\DF_Load Sales_CurrencyRate\CNT rows.Inputs[SRC_Sales_CurrencyRate_Output_CNT rows]"
+              name="SRC_Sales_CurrencyRate_Output_CNT rows"
+              startId="Package\DF_Load Sales_CurrencyRate\SRC_Sales_CurrencyRate.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_assign_date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{0AF3F044-2498-42A2-8C69-DB61DE2CBBD6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_assign_date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{32111110-87CA-42E6-9902-911D7D1A14F4}"
+          SQLTask:SqlStatementSource="&#xA;    select cast(cast(getdate()-5 as date) as datetime) as ini, cast(cast(getdate() as date) as datetime) as fi&#xA;  "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ini"
+            SQLTask:DtsVariableName="User::dataIni" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="fi"
+            SQLTask:DtsVariableName="User::dataFi" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_ins_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{24AAC7EA-8048-473C-8B96-593F2E158CBC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_ins_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{32111110-87CA-42E6-9902-911D7D1A14F4}"
+          SQLTask:SqlStatementSource="&#xA;   insert into log.load_data values ( 'aw', 'Sales_CurrencyRate', getdate(), ?)&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountSource"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET_truncate_Sales_CurrencyRate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{2912C872-7CC7-4063-A33D-F5CDC74E494A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET_truncate_Sales_CurrencyRate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{32111110-87CA-42E6-9902-911D7D1A14F4}"
+          SQLTask:SqlStatementSource="&#xA;   truncate table aw.Sales_CurrencyRate&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DF_Load Sales_CurrencyRate_To_ET_ins_log]"
+      DTS:CreationName=""
+      DTS:DTSID="{2F7865CC-FC3B-4066-BB2C-09BA448F3168}"
+      DTS:From="Package\DF_Load Sales_CurrencyRate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DF_Load Sales_CurrencyRate_To_ET_ins_log"
+      DTS:To="Package\ET_ins_log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_assign_date_To_ET_truncate_Sales_CurrencyRate]"
+      DTS:CreationName=""
+      DTS:DTSID="{A9116DBD-E112-43AB-9996-C282AB18FB6D}"
+      DTS:From="Package\ET_assign_date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_assign_date_To_ET_truncate_Sales_CurrencyRate"
+      DTS:To="Package\ET_truncate_Sales_CurrencyRate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_ET_truncate_Sales_CurrencyRate_To_DF_Load Sales_CurrencyRate]"
+      DTS:CreationName=""
+      DTS:DTSID="{F0A4E244-373B-4D6C-806D-C21517068A64}"
+      DTS:From="Package\ET_truncate_Sales_CurrencyRate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_ET_truncate_Sales_CurrencyRate_To_DF_Load Sales_CurrencyRate"
+      DTS:To="Package\DF_Load Sales_CurrencyRate" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

@@ -3,7 +3,7 @@ string _sources_sql = "select s.source_id, s.source_name, t.source_type_name, s.
 	   "from biml.source s "+
 		"join biml.project p on p.project_id=s.project_id "+
 		"join biml.source_type t on s.source_type=t.id_source_type "+
-		"where project_name='"+_project+"' and s.source_id <>2"+
+		"where project_name='"+_project+"' and s.source_id in (4,7)"+
 		"order by source_id"; 
 	
 #>
@@ -121,13 +121,14 @@ string _sources_sql = "select s.source_id, s.source_name, t.source_type_name, s.
 								>
 								 <Columns>
 									<# string _cols_sql = "select sc.column_name, sc.data_type, isnull(sc.character_maximum_length,0) as character_maximum_length , "+
-									"isnull(sc.numeric_precision,0) as numeric_precision, isnull(sc.numeric_scale,0) as numeric_scale, "+
-									"replace(replace(case when sc.ordinal_position= max(sc1.ordinal_position) then f.row_delimiter else f.separator end, '{',''),'}','') as separator "+
+									"isnull(sc.numeric_precision,0) as numeric_precision, isnull(sc.numeric_scale,0) as numeric_scale,   "+
+									"replace(replace(case when sc.ordinal_position= max(sc1.ordinal_position) then f.row_delimiter else f.separator end, '{',''),'}','') as separator, isnull(scff.length,0) as lengthFixed "+
 									"from biml.source_column sc join biml.source_detail sd on sd.source_detail_id=sc.source_detail_id "+
 									"join  biml.source_column sc1 on sd.source_detail_id=sc1.source_detail_id "+
 									"join biml.source_flatFile f on f.source_id=sd.source_id "+
+									" left join biml.source_column_flatFile_fixed scff on scff.source_column_id=sc.source_column_id " +
 									" where sd.source_id="+_table["source_id"]+
-									" group by sc.column_name, sc.data_type, sc.character_maximum_length, sc.numeric_precision, sc.numeric_scale, sc.ordinal_position,f.row_delimiter, f.separator "+
+									" group by sc.column_name, sc.data_type, sc.character_maximum_length, sc.numeric_precision, sc.numeric_scale, sc.ordinal_position,f.row_delimiter, f.separator,isnull(scff.length,0) "+
 									" order by sc.ordinal_position ";
 									DataTable _cols = new DataTable();
 									SqlDataAdapter _cols_da = new SqlDataAdapter(_cols_sql, _config_con_string);
@@ -137,8 +138,14 @@ string _sources_sql = "select s.source_id, s.source_name, t.source_type_name, s.
 									#>
 										<Column Name="<#= _col["column_name"] #>" DataType="<#= UT_SQLServer_datatype.SQLServerToBimlDatatype(_datatype )#>" Length="<#= _col["character_maximum_length"] #>"
 										Precision="<#= _col["numeric_precision"] #>" Scale="<#= _col["numeric_scale"] #>"
-										Delimiter="<#= _col["separator"] #>"  />
+										Delimiter="<#= _col["separator"] #>"  ColumnType="<#= _dbtable["type"] #>"  InputLength="<#= _col["lengthFixed"] #>"  />
+									
+									
 									<# }   #>	<!-- end foreach -->
+									<# if ( Convert.ToString(_dbtable["type"])=="FixedWidth"){ #>
+										<Column Name="EndColumn" DataType="AnsiStringFixedLength" Length="<#= _dbtable["row_delimiter"] #>"
+										  ColumnType="FixedWidth"  InputLength="<#= _dbtable["row_delimiter"] #>"  />
+									<# } #>
 									</Columns>
 								</FlatFileFormat>	
 							<# }   #>	<!-- end if -->	

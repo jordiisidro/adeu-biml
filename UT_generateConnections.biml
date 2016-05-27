@@ -3,7 +3,7 @@ string _sources_sql = "select s.source_id, s.source_name, t.source_type_name, s.
 	   "from biml.source s "+
 		"join biml.project p on p.project_id=s.project_id "+
 		"join biml.source_type t on s.source_type=t.id_source_type "+
-		"where project_name='"+_project+"' and s.source_id in (4,7)"+
+		"where project_name='"+_project+"' and s.source_id in (2,3,8)"+
 		"order by source_id"; 
 	
 #>

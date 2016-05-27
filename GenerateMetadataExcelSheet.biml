@@ -12,92 +12,100 @@
 						from biml.source_excel_table t 
 						where t.excel_table_id=source_detail_id and t.excel_id=<#= _sourceId #>
 						)
+					
+					
 				</DirectInput>
 			</ExecuteSQL>
 
-			<ExecuteSQL Name="ET_create_trash" ConnectionName="OLEDB_Config">
-				<DirectInput>
-					<#
-					String _sourcesEx_sql ="select s.source_name, e.file_connection_string, et.sheet_name "+
-					"from biml.source s "+
-					"join biml.source_excel e on s.source_id=e.source_id "+
-					"join biml.source_excel_table et on e.source_id=et.excel_id "+
-					"where e.source_id="+  _sourceId  ;
-					String _sourceName ="";
-					DataTable _sourcesEx = new DataTable();
-					SqlDataAdapter _sourcesEx_da = new SqlDataAdapter(_sourcesEx_sql, _config_con_string);
-					_sourcesEx_da.Fill(_sourcesEx);  
-					foreach(DataRow _tableEx in _sourcesEx.Rows) {   
-						_sourceName=_tableEx["source_name"].ToString();
-					#>   
-					
-					SELECT * into trash.<#= _tableEx["source_name"] #>
-					FROM OPENROWSET('Microsoft.ACE.OLEDB.12.0',
-					'Excel 12.0 Xml;
-					   Database=<#= _tableEx["file_connection_string"] #>',
-					   [<#= _tableEx["sheet_name"] #>]); 
-
-					<# } #>
-					</DirectInput>
-			</ExecuteSQL>
-
-			<Dataflow Name="DF_Load source_column">
-				<Transformations>
-					<OleDbSource Name="SRC_source_column" ConnectionName="OLEDB_Config">
-						<DirectInput>
-							
-							   
-								select cast(TABLE_NAME as varchar(200)) as TABLE_NAME, cast(TABLE_SCHEMA as varchar(200)) as TABLE_SCHEMA,
-								cast(COLUMN_NAME as varchar(200)) as COLUMN_NAME, cast(DATA_TYPE as varchar(200)) as DATA_TYPE,
-								CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION, NUMERIC_SCALE, ORDINAL_POSITION
-								from INFORMATION_SCHEMA.COLUMNS
-								where table_schema='trash' and table_name='<#= _sourceName #>' order by ORDINAL_POSITION
-							
-
-						</DirectInput>
-					</OleDbSource>
-					
-					<Lookup Name="LK_detailId" OleDbConnectionName="OLEDB_Config" NoMatchBehavior="RedirectRowsToNoMatchOutput" 
-							CacheMode="Full">
-						<DirectInput>
-							select excel_table_id, source_name
-							from biml.source s join biml.source_excel_table t on t.excel_id=s.source_id
-							where source_id=<#= _sourceId #>
-						</DirectInput>
-						<Inputs>
-							<Column SourceColumn="TABLE_NAME" TargetColumn="source_name"  />
-								</Inputs>
-						<Outputs>
-							<Column SourceColumn="excel_table_id" TargetColumn="source_id"  />
-						</Outputs>
-					</Lookup>
-					
-					<OleDbDestination Name="DST_source_column" ConnectionName="OLEDB_Config">
-						<ExternalTableOutput Table="biml.source_column" />
-						<Columns>
-							
-							<Column SourceColumn="source_id" TargetColumn="source_detail_id"></Column>
-							<Column SourceColumn="column_name" TargetColumn="column_name"></Column>
-							<Column SourceColumn="data_type" TargetColumn="data_type"></Column>
-							<Column SourceColumn="CHARACTER_MAXIMUM_LENGTH" TargetColumn="character_maximum_length"></Column>
-							<Column SourceColumn="NUMERIC_PRECISION" TargetColumn="numeric_precision"></Column>
-							<Column SourceColumn="NUMERIC_SCALE" TargetColumn="numeric_scale"></Column>
-							<Column SourceColumn="ORDINAL_POSITION" TargetColumn="ordinal_position"></Column>
-						</Columns>
-					</OleDbDestination>
-					
-				</Transformations>
-			</Dataflow>
+			<#
+				SqlConnection conn = null;
+				SqlDataReader rdr  = null;
+				conn = new SqlConnection(_config_con_string);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("sp_generateSheetsExcel" , conn);
+				cmd.Parameters.Add("@sourceId", SqlDbType.Int).Value = _sourceId;
+				cmd.CommandType = CommandType.StoredProcedure;
+				rdr = cmd.ExecuteReader();
+				
+				String _sourcesEx_sql ="select s.source_name, e.file_connection_string, et.sheet_name, replace(et.sheet_name,'$','') as sheet_name_plain "+
+				"from biml.source s "+
+				"join biml.source_excel e on s.source_id=e.source_id "+
+				"join biml.source_excel_table et on e.source_id=et.excel_id "+
+				"where e.source_id="+  _sourceId  ;
+				String _sourceName ="";
+				DataTable _sourcesEx = new DataTable();
+				SqlDataAdapter _sourcesEx_da = new SqlDataAdapter(_sourcesEx_sql, _config_con_string);
+				_sourcesEx_da.Fill(_sourcesEx);  
+				foreach(DataRow _tableEx in _sourcesEx.Rows) {   
+					_sourceName=_tableEx["source_name"].ToString();
+				#>   
+				<Container Name="CT_source_excel_<#= _bdcx #>_<#= _tableEx["sheet_name_plain"] #>" ConstraintMode="Linear">
+					<Tasks>
 			
-			<ExecuteSQL Name="ET_drop_trash" ConnectionName="OLEDB_Config">
-				<DirectInput>
-					<# foreach(DataRow _tableEx in _sourcesEx.Rows) {    #>   
-						drop table  trash.<#= _tableEx["source_name"] #>
-					<# } #>
-				</DirectInput>
-			</ExecuteSQL>
+						<ExecuteSQL Name="ET_create_trash" ConnectionName="OLEDB_Config">
+							<DirectInput>
+					
+								SELECT * into trash.<#= _tableEx["sheet_name_plain"] #>
+								FROM OPENROWSET('Microsoft.ACE.OLEDB.12.0',
+								'Excel 12.0 Xml;
+								   Database=<#= _tableEx["file_connection_string"] #>',
+								   [<#= _tableEx["sheet_name"] #>]); 
+							</DirectInput>
+						</ExecuteSQL>
+
+						<Dataflow Name="DF_Load source_column">
+							<Transformations>
+								<OleDbSource Name="SRC_source_column" ConnectionName="OLEDB_Config">
+									<DirectInput>
+										select cast(TABLE_NAME as varchar(200)) as TABLE_NAME, cast(TABLE_SCHEMA as varchar(200)) as TABLE_SCHEMA,
+										cast(COLUMN_NAME as varchar(200)) as COLUMN_NAME, cast(DATA_TYPE as varchar(200)) as DATA_TYPE,
+										CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION, NUMERIC_SCALE, ORDINAL_POSITION
+										from INFORMATION_SCHEMA.COLUMNS
+										where table_schema='trash' and table_name='<#= _tableEx["sheet_name_plain"] #>' order by ORDINAL_POSITION
+									</DirectInput>
+								</OleDbSource>
+					
+								<Lookup Name="LK_detailId" OleDbConnectionName="OLEDB_Config" NoMatchBehavior="RedirectRowsToNoMatchOutput" 
+										CacheMode="Full">
+									<DirectInput>
+										select excel_table_id, replace(t.sheet_name,'$','') as sheet_name
+										from biml.source s join biml.source_excel_table t on t.excel_id=s.source_id
+										where source_id=<#= _sourceId #>
+									</DirectInput>
+									<Inputs>
+										<Column SourceColumn="TABLE_NAME" TargetColumn="sheet_name"  />
+									</Inputs>
+									<Outputs>
+										<Column SourceColumn="excel_table_id" TargetColumn="source_id"  />
+									</Outputs>
+								</Lookup>
+					
+								<OleDbDestination Name="DST_source_column" ConnectionName="OLEDB_Config">
+									<ExternalTableOutput Table="biml.source_column" />
+									<Columns>
+										<Column SourceColumn="source_id" TargetColumn="source_detail_id"></Column>
+										<Column SourceColumn="column_name" TargetColumn="column_name"></Column>
+										<Column SourceColumn="data_type" TargetColumn="data_type"></Column>
+										<Column SourceColumn="CHARACTER_MAXIMUM_LENGTH" TargetColumn="character_maximum_length"></Column>
+										<Column SourceColumn="NUMERIC_PRECISION" TargetColumn="numeric_precision"></Column>
+										<Column SourceColumn="NUMERIC_SCALE" TargetColumn="numeric_scale"></Column>
+										<Column SourceColumn="ORDINAL_POSITION" TargetColumn="ordinal_position"></Column>
+									</Columns>
+								</OleDbDestination>
+					
+							</Transformations>
+						</Dataflow>
 			
-			
+						<ExecuteSQL Name="ET_drop_trash" ConnectionName="OLEDB_Config">
+							<DirectInput>
+						
+									drop table  trash.<#= _tableEx["sheet_name_plain"] #>
+						
+							</DirectInput>
+						</ExecuteSQL>
+					</Tasks>
+				</Container>
+			<# } #>
 		</Tasks>
 	</Container>
 </Tasks>

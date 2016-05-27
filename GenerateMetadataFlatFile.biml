@@ -40,7 +40,7 @@
 				_dbsources_da.Fill(_dbsources); 
 				foreach(DataRow _dbtable in _dbsources.Rows) {
 			#>   
-					exec fn_generateColumnsFF '<#= _dbtable["separator"] #>' , '<#= _dbtable["row_delimiter"] #>' , '<#= _dbtable["is_column_names_first_row"] #>' , <#= _dbtable["source_detail_id"] #> 	
+					exec sp_generateColumnsFF '<#= _dbtable["separator"] #>' , '<#= _dbtable["row_delimiter"] #>' , '<#= _dbtable["is_column_names_first_row"] #>' , <#= _dbtable["source_detail_id"] #> 	
 				<# }   #>	<!-- end foreach -->
 				
 				</DirectInput>
